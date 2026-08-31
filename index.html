@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sistem Informasi Absensi Siswa</title>
 <style>
-:root{--primary:#38bdf8;--primary2:#0284c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--info:#0891b2}
+:root{--primary:#38bdf8;--primary2:#0284c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--info:#0891b2;--th-bg:#f8fafc}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
-button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{width:255px;background:#075985;color:#fff;padding:20px 14px;position:fixed;top:0;bottom:0;overflow:auto}.brand{font-size:20px;font-weight:800;padding:8px 12px 22px}.brand small{display:block;color:#94a3b8;font-size:11px;margin-top:4px;font-weight:500}.nav-title{font-size:11px;color:#64748b;text-transform:uppercase;margin:18px 12px 7px}.nav button{display:block;width:100%;border:0;background:transparent;color:#cbd5e1;text-align:left;padding:11px 12px;border-radius:9px;margin:3px 0;cursor:pointer}.nav button:hover,.nav button.active{background:#0369a1;color:#fff}.main{margin-left:255px;width:calc(100% - 255px);padding:25px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.topbar h1{margin:0;font-size:25px}.date-now{color:var(--muted);font-size:13px}.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:18px;box-shadow:0 2px 8px #0f172a08}.stat{display:flex;justify-content:space-between;align-items:center}.stat .num{font-size:28px;font-weight:800;margin-top:5px}.stat .label{color:var(--muted);font-size:13px}.icon{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:#e0f2fe;color:var(--primary);font-weight:800}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.section-title h2{font-size:17px;margin:0}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.toolbar>*{min-height:38px}.input,.select{border:1px solid var(--border);border-radius:8px;padding:8px 10px;background:#fff}.btn{border:0;border-radius:8px;padding:9px 13px;cursor:pointer;font-weight:600}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary2)}.btn-secondary{background:#e2e8f0;color:#0f172a}.btn-success{background:var(--success);color:#fff}.btn-danger{background:var(--danger);color:#fff}.btn-warning{background:var(--warning);color:#fff}.btn-info{background:var(--info);color:#fff}.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:10px}.table{width:100%;border-collapse:collapse;min-width:700px;background:#fff}.table th,.table td{padding:10px 11px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}.table th{background:#f8fafc;color:#475569}.table tr:last-child td{border-bottom:0}.individual-report{border:1px solid var(--border);border-radius:10px;padding:20px;background:#fff}.report-head{text-align:center;border-bottom:2px solid #bae6fd;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 4px}.report-student{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 25px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.report-summary .card-mini{border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}.report-summary b{display:block;font-size:20px;margin-top:3px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #cbd5e1;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}@media(max-width:700px){.report-summary{grid-template-columns:repeat(2,1fr)}.report-student{grid-template-columns:1fr}}.attendance-percent{display:flex;align-items:center;gap:7px;min-width:115px}.percent-track{height:8px;background:#e0f2fe;border-radius:99px;overflow:hidden;width:65px}.percent-fill{height:100%;background:#38bdf8;border-radius:99px}.percent-high{color:#15803d}.percent-mid{color:#b45309}.percent-low{color:#dc2626}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:11px;font-weight:700}.hadir{background:#dcfce7;color:#166534}.sakit{background:#fef3c7;color:#92400e}.izin{background:#dbeafe;color:#1e40af}.alpa{background:#fee2e2;color:#991b1b}.bolos{background:#ffedd5;color:#9a3412}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field label{display:block;font-size:12px;color:#475569;margin-bottom:5px;font-weight:600}.field input,.field select{width:100%;padding:9px;border:1px solid var(--border);border-radius:8px}.modal{display:none;position:fixed;inset:0;background:#0f172a88;z-index:50;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-box{background:#fff;border-radius:14px;width:min(650px,100%);max-height:90vh;overflow:auto;padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h3{margin:0}.close{border:0;background:#f1f5f9;width:32px;height:32px;border-radius:50%;cursor:pointer}.actions{display:flex;gap:7px;justify-content:flex-end;margin-top:18px}.attendance-summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.summary-pill{background:#fff;border:1px solid var(--border);border-radius:9px;padding:9px 13px;font-size:13px}.summary-pill b{margin-left:5px}.radio-group{display:flex;gap:5px}.radio{border:1px solid var(--border);border-radius:7px;padding:6px 9px;cursor:pointer;font-size:12px}.radio input{display:none}.radio:has(input:checked){outline:2px solid var(--primary);background:#eff6ff}.empty{text-align:center;color:var(--muted);padding:30px}.notice{padding:12px;border-radius:9px;background:#eff6ff;color:#1e40af;font-size:13px;margin-bottom:14px}.chart{display:flex;align-items:end;gap:10px;height:180px;padding:15px 5px 0}.bar{flex:1;background:#38bdf8;border-radius:6px 6px 0 0;min-width:20px;position:relative}.bar span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}.footer-note{font-size:12px;color:var(--muted);margin-top:20px;text-align:center}.danger-zone{border:1px solid #fecaca;background:#fff1f2}.check-all{width:16px;height:16px}
+button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{width:255px;background:#075985;color:#fff;padding:20px 14px;position:fixed;top:0;bottom:0;overflow:auto}.brand{font-size:20px;font-weight:800;padding:8px 12px 22px}.brand small{display:block;color:#94a3b8;font-size:11px;margin-top:4px;font-weight:500}.nav-title{font-size:11px;color:#64748b;text-transform:uppercase;margin:18px 12px 7px}.nav button{display:block;width:100%;border:0;background:transparent;color:#cbd5e1;text-align:left;padding:11px 12px;border-radius:9px;margin:3px 0;cursor:pointer}.nav button:hover,.nav button.active{background:#0369a1;color:#fff}.main{margin-left:255px;width:calc(100% - 255px);padding:25px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.topbar h1{margin:0;font-size:25px}.date-now{color:var(--muted);font-size:13px}.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:18px;box-shadow:0 2px 8px #0f172a08}.stat{display:flex;justify-content:space-between;align-items:center}.stat .num{font-size:28px;font-weight:800;margin-top:5px}.stat .label{color:var(--muted);font-size:13px}.icon{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:#e0f2fe;color:var(--primary);font-weight:800}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.section-title h2{font-size:17px;margin:0}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.toolbar>*{min-height:38px}.input,.select{border:1px solid var(--border);border-radius:8px;padding:8px 10px;background:#fff}.btn{border:0;border-radius:8px;padding:9px 13px;cursor:pointer;font-weight:600}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary2)}.btn-secondary{background:#e2e8f0;color:#0f172a}.btn-success{background:var(--success);color:#fff}.btn-danger{background:var(--danger);color:#fff}.btn-warning{background:var(--warning);color:#fff}.btn-info{background:var(--info);color:#fff}.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:10px}.table{width:100%;border-collapse:collapse;min-width:700px;background:#fff}.table th,.table td{padding:10px 11px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}.table th{background:var(--th-bg);color:#475569}.table tr:last-child td{border-bottom:0}.individual-report{border:1px solid var(--border);border-radius:10px;padding:20px;background:#fff}.report-head{text-align:center;border-bottom:2px solid #bae6fd;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 4px}.report-student{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 25px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.report-summary .card-mini{border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}.report-summary b{display:block;font-size:20px;margin-top:3px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #cbd5e1;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}@media(max-width:700px){.report-summary{grid-template-columns:repeat(2,1fr)}.report-student{grid-template-columns:1fr}}.attendance-percent{display:flex;align-items:center;gap:7px;min-width:115px}.percent-track{height:8px;background:#e0f2fe;border-radius:99px;overflow:hidden;width:65px}.percent-fill{height:100%;background:#38bdf8;border-radius:99px}.percent-high{color:#15803d}.percent-mid{color:#b45309}.percent-low{color:#dc2626}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:11px;font-weight:700}.hadir{background:#dcfce7;color:#166534}.sakit{background:#fef3c7;color:#92400e}.izin{background:#dbeafe;color:#1e40af}.alpa{background:#fee2e2;color:#991b1b}.bolos{background:#ffedd5;color:#9a3412}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field label{display:block;font-size:12px;color:#475569;margin-bottom:5px;font-weight:600}.field input,.field select{width:100%;padding:9px;border:1px solid var(--border);border-radius:8px}.modal{display:none;position:fixed;inset:0;background:#0f172a88;z-index:50;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-box{background:#fff;border-radius:14px;width:min(650px,100%);max-height:90vh;overflow:auto;padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h3{margin:0}.close{border:0;background:#f1f5f9;width:32px;height:32px;border-radius:50%;cursor:pointer}.actions{display:flex;gap:7px;justify-content:flex-end;margin-top:18px}.attendance-summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.summary-pill{background:#fff;border:1px solid var(--border);border-radius:9px;padding:9px 13px;font-size:13px}.summary-pill b{margin-left:5px}.radio-group{display:flex;gap:5px}.radio{border:1px solid var(--border);border-radius:7px;padding:6px 9px;cursor:pointer;font-size:12px}.radio input{display:none}.radio:has(input:checked){outline:2px solid var(--primary);background:#eff6ff}.empty{text-align:center;color:var(--muted);padding:30px}.notice{padding:12px;border-radius:9px;background:#eff6ff;color:#1e40af;font-size:13px;margin-bottom:14px}.chart{display:flex;align-items:end;gap:10px;height:180px;padding:15px 5px 0}.bar{flex:1;background:#38bdf8;border-radius:6px 6px 0 0;min-width:20px;position:relative}.bar span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}.footer-note{font-size:12px;color:var(--muted);margin-top:20px;text-align:center}.danger-zone{border:1px solid #fecaca;background:#fff1f2}.check-all{width:16px;height:16px}.report-chart-box{margin:20px 0;border:1px solid #cbd5e1;border-radius:8px;padding:15px 15px 45px}.report-chart-title{font-size:13px;font-weight:700;color:#0369a1;margin-bottom:14px}.report-chart{display:flex;align-items:end;gap:14px;height:140px}.report-chart .rbar{flex:1;border-radius:6px 6px 0 0;min-width:24px;position:relative}.report-chart .rbar span{position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);font-size:11px;color:#334155;text-align:center;white-space:nowrap;line-height:1.4}.report-chart .rbar b{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:#0f172a}
 .nav button{display:flex;align-items:center;gap:0}
 .nav-icon{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;min-width:26px;border-radius:8px;margin-right:10px;font-size:13px;background:#ffffff14}
 .nav button.active .nav-icon,.nav button:hover .nav-icon{background:#ffffff2a}
@@ -87,7 +87,7 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{wid
 
 <div class="app">
 <aside class="sidebar" id="sidebar">
-  <div class="brand"><span class="brand-logo-badge" id="brandLogoBadge">📚</span><span><span id="brandName">ABSENSI SISWA</span><small>SMK NEGERI 1 SIKUR / BY SUKARNO HADI</small></span></div>
+  <div class="brand"><span class="brand-logo-badge" id="brandLogoBadge">📚</span><span><span id="brandName">ABSENSI SISWA</span><small> BY SUKARNO HADI 2026</small></span></div>
   <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="Ciutkan menu"><span id="sidebarToggleIcon">«</span><span>Ciutkan Menu</span></button>
   <div class="nav">
     <div class="nav-title">Utama</div>
@@ -120,14 +120,14 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{wid
   <div class="cards" id="statCards"></div>
   <div class="grid2">
     <div class="card"><div class="section-title"><h2>Statistik Hari Ini</h2><span id="dashDate"></span></div><div id="todayStats"></div></div>
-    <div class="card"><div class="section-title"><h2>Absensi 7 Hari Terakhir</h2></div><div class="chart" id="weekChart"></div></div>
+    <div class="card"><div class="section-title"><h2>Absensi 6 Hari Terakhir</h2></div><div class="chart" id="weekChart"></div></div>
   </div>
   <div class="card" style="margin-top:18px"><div class="section-title"><h2>Data Siswa Terbaru</h2><button class="btn btn-secondary" onclick="showPage('students')">Lihat Semua</button></div><div class="table-wrap"><table class="table"><thead><tr><th>NIS</th><th>Nama</th><th>Kelas</th><th>Jenis Kelamin</th></tr></thead><tbody id="recentStudents"></tbody></table></div></div>
 </section>
 
 <section id="students" class="page">
  <div class="card">
-  <div class="section-title"><h2>Data Siswa</h2><div><button class="btn btn-success" onclick="exportStudents()">⬇ Export CSV</button> <button class="btn btn-info" onclick="document.getElementById('excelFile').click()">⬆ Import Excel</button> <input type="file" id="excelFile" accept=".xlsx,.xls,.csv" style="display:none" onchange="importStudentsExcel(event)"> <button class="btn btn-primary" onclick="openStudentModal()">+ Tambah Siswa</button></div></div>
+  <div class="section-title"><h2>Data Siswa</h2><div><button class="btn btn-warning" onclick="saveStudentsData()">💾 Simpan Data</button> <button class="btn btn-success" onclick="exportStudents()">⬇ Export Excel</button> <button class="btn btn-info" onclick="document.getElementById('excelFile').click()">⬆ Import Excel</button> <input type="file" id="excelFile" accept=".xlsx,.xls,.csv" style="display:none" onchange="importStudentsExcel(event)"> <button class="btn btn-primary" onclick="openStudentModal()">+ Tambah Siswa</button></div></div>
   <div class="toolbar"><input id="studentSearch" class="input" placeholder="Cari NIS / nama siswa..." oninput="renderStudents()"><select id="studentClassFilter" class="select" onchange="renderStudents()"><option value="">Semua Kelas</option></select><button class="btn btn-secondary" onclick="document.getElementById('studentSearch').value='';document.getElementById('studentClassFilter').value='';renderStudents()">Reset</button></div>
   <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>L/P</th><th>Kelas</th><th>Tempat/Tgl Lahir</th><th>No. HP</th><th>Aksi</th></tr></thead><tbody id="studentTable"></tbody></table></div>
  </div>
@@ -158,7 +158,7 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{wid
 </section>
 
 <section id="classes" class="page">
- <div class="card"><div class="section-title"><h2>Data Kelas</h2><button class="btn btn-primary" onclick="openClassModal()">+ Tambah Kelas</button></div>
+ <div class="card"><div class="section-title"><h2>Data Kelas</h2><div><button class="btn btn-warning" onclick="saveClassesData()">💾 Simpan Data</button> <button class="btn btn-success" onclick="exportClasses()">⬇ Export Excel</button> <button class="btn btn-primary" onclick="openClassModal()">+ Tambah Kelas</button></div></div>
  <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>Nama Kelas</th><th>Wali Kelas</th><th>Jumlah Siswa</th><th>Aksi</th></tr></thead><tbody id="classTable"></tbody></table></div></div>
 </section>
 
@@ -272,6 +272,15 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{wid
     <div class="color-pick-row"><label style="width:150px;font-size:12px;font-weight:600;color:#475569">Warna Kustom</label><input type="color" id="customPrimaryColor" onchange="applyCustomColor()"></div>
    </div>
   </div>
+
+  <h3 style="margin:22px 0 8px">Warna Layar Kerja (Kartu, Teks, Header Tabel)</h3>
+  <p class="date-now" style="margin-top:0">Atur sendiri warna area kerja utama sesuai selera Anda.</p>
+  <div class="form-grid">
+   <div class="color-pick-row"><label style="width:150px;font-size:12px;font-weight:600;color:#475569">Warna Kartu/Panel</label><input type="color" id="customCardColor" onchange="applyThemeColor('cardBg',this.value)"></div>
+   <div class="color-pick-row"><label style="width:150px;font-size:12px;font-weight:600;color:#475569">Warna Teks</label><input type="color" id="customTextColor" onchange="applyThemeColor('textColor',this.value)"></div>
+   <div class="color-pick-row"><label style="width:150px;font-size:12px;font-weight:600;color:#475569">Warna Header Tabel</label><input type="color" id="customThColor" onchange="applyThemeColor('thBg',this.value)"></div>
+  </div>
+  <button type="button" class="btn btn-secondary" onclick="resetWorkAreaColors()">↺ Kembalikan ke Default</button>
 
   <h3 style="margin:22px 0 4px">Latar Belakang Aplikasi</h3>
   <p class="date-now" style="margin-top:0">Pilih salah satu latar polos, atau unggah gambar latar belakang sendiri.</p>
@@ -496,7 +505,7 @@ const BG_PRESETS=[
  {name:'Biru Muda',value:'#eef6ff'},
  {name:'Hijau Muda',value:'#eefdf3'}
 ];
-function ensureTheme(){if(!db.theme)db.theme=JSON.parse(JSON.stringify(THEME_PRESETS[0]));if(!db.theme.bgColor)db.theme.bgColor='#f1f5f9';if(db.theme.bgImage===undefined)db.theme.bgImage=''}
+function ensureTheme(){if(!db.theme)db.theme=JSON.parse(JSON.stringify(THEME_PRESETS[0]));if(!db.theme.bgColor)db.theme.bgColor='#f1f5f9';if(db.theme.bgImage===undefined)db.theme.bgImage='';if(!db.theme.cardBg)db.theme.cardBg='#ffffff';if(!db.theme.textColor)db.theme.textColor='#0f172a';if(!db.theme.thBg)db.theme.thBg='#f8fafc'}
 ensureTheme();
 function applyTheme(){
  ensureTheme();
@@ -505,6 +514,9 @@ function applyTheme(){
  r.setProperty('--primary',t.primary);
  r.setProperty('--primary2',t.primary2);
  r.setProperty('--bg',t.bgImage?'transparent':t.bgColor);
+ r.setProperty('--card',t.cardBg);
+ r.setProperty('--text',t.textColor);
+ r.setProperty('--th-bg',t.thBg);
  const sidebar=document.querySelector('.sidebar');
  if(sidebar)sidebar.style.background=t.sidebar;
  let styleTag=$('dynNavStyle');
@@ -521,6 +533,9 @@ function renderAppearance(){
  const t=db.theme;
  $('themeSwatches').innerHTML=THEME_PRESETS.map((p,i)=>`<div class="theme-swatch ${t.primary===p.primary&&t.sidebar===p.sidebar?'active':''}" style="background:${p.sidebar}" title="${p.name}" onclick="choosePreset(${i})"></div>`).join('');
  $('customPrimaryColor').value=t.primary;
+ $('customCardColor').value=t.cardBg;
+ $('customTextColor').value=t.textColor;
+ $('customThColor').value=t.thBg;
  $('bgOptions').innerHTML=BG_PRESETS.map(b=>`<div class="bg-option ${!t.bgImage&&t.bgColor===b.value?'active':''}" style="background:${b.value}" title="${b.name}" onclick="chooseBgColor('${b.value}')"><span>${b.name}</span></div>`).join('')+
   (t.bgImage?`<div class="bg-option active" style="background-image:url(${t.bgImage})" title="Gambar Kustom"><span>Gambar Anda</span></div>`:'');
  const logoSrc=db.school.logo;
@@ -529,6 +544,8 @@ function renderAppearance(){
 }
 function choosePreset(i){const p=THEME_PRESETS[i];ensureTheme();db.theme.primary=p.primary;db.theme.primary2=p.primary2;db.theme.sidebar=p.sidebar;db.theme.sidebarActive=p.sidebarActive;renderAppearance()}
 function applyCustomColor(){ensureTheme();const c=$('customPrimaryColor').value;db.theme.primary=c;db.theme.primary2=c;db.theme.sidebar=c;db.theme.sidebarActive=c;renderAppearance()}
+function applyThemeColor(key,value){ensureTheme();db.theme[key]=value;renderAppearance()}
+function resetWorkAreaColors(){ensureTheme();db.theme.cardBg='#ffffff';db.theme.textColor='#0f172a';db.theme.thBg='#f8fafc';renderAppearance()}
 function chooseBgColor(v){ensureTheme();db.theme.bgColor=v;db.theme.bgImage='';renderAppearance()}
 function previewBgImage(e){const f=e.target.files[0];if(!f)return;if(!f.type.startsWith('image/'))return alert('Pilih file gambar PNG, JPG, atau WEBP.');const reader=new FileReader();reader.onload=()=>{ensureTheme();db.theme.bgImage=reader.result;renderAppearance()};reader.readAsDataURL(f)}
 function removeBgImage(){ensureTheme();db.theme.bgImage='';renderAppearance()}
@@ -670,6 +687,8 @@ function renderStudents(){let q=($('studentSearch')?.value||'').toLowerCase(),c=
 function className(id){return db.classes.find(c=>c.id===id)?.name||'-'}
 function openClassModal(id=null){document.querySelector('#classModal form').reset();$('classId').value='';$('classModalTitle').textContent='Tambah Kelas';if(id){let c=db.classes.find(x=>x.id===id);$('classId').value=id;$('className').value=c.name;$('homeroom').value=c.homeroom||'';$('classModalTitle').textContent='Edit Kelas'}$('classModal').classList.add('show')}
 function saveClass(e){e.preventDefault();let id=$('classId').value,o={id:id||uid(),name:$('className').value.trim(),homeroom:$('homeroom').value.trim()};if(db.classes.some(c=>c.name.toLowerCase()===o.name.toLowerCase()&&c.id!==id))return alert('Nama kelas sudah ada.');if(id)db.classes=db.classes.map(c=>c.id===id?o:c);else db.classes.push(o);saveDB();closeModal('classModal');refreshFilters();renderClasses()}
+function saveStudentsData(){saveDB();renderStudents();refreshFilters();renderDashboard();alert('Data siswa berhasil disimpan.')}
+function saveClassesData(){saveDB();renderClasses();refreshFilters();alert('Data kelas berhasil disimpan.')}
 function deleteClass(id){if(db.students.some(s=>s.classId===id))return alert('Kelas masih memiliki siswa. Pindahkan siswa terlebih dahulu.');if(confirm('Hapus kelas?')){db.classes=db.classes.filter(c=>c.id!==id);saveDB();renderClasses();refreshFilters()}}
 function renderSchoolInfo(){
  ensureSchool();
@@ -730,6 +749,12 @@ function statusLabel(st){return {H:'Hadir',S:'Sakit',I:'Izin',A:'Alpa',B:'Bolos'
 function renderAttendance(){
  let d=$('attendanceDate').value||today();$('attendanceDate').value=d;
  let c=$('attendanceClass').value,q=($('attendanceSearch').value||'').toLowerCase();
+ if(isSunday(d)){
+   $('attendanceTable').innerHTML='<tr><td colspan="5" class="empty">Hari Minggu bukan hari efektif. Silakan pilih tanggal Senin–Sabtu.</td></tr>';
+   $('attendanceSummary').innerHTML='';
+   $('attendanceClassNotice').innerHTML='<b>Hari Minggu bukan hari efektif</b> — absensi hanya berlaku untuk hari Senin sampai Sabtu (6 hari efektif).';
+   return;
+ }
  if(!c){
    $('attendanceTable').innerHTML='<tr><td colspan="5" class="empty">Pilih kelas terlebih dahulu untuk menampilkan siswa.</td></tr>';
    $('attendanceSummary').innerHTML='';
@@ -747,6 +772,7 @@ function renderAttendance(){
 function setAttendance(d,id,v){db.attendance[d]=db.attendance[d]||{};db.attendance[d][id]=v;saveDB();renderAttendanceSummary(d)}
 function setAllAttendance(v){
  let d=$('attendanceDate').value||today(),c=$('attendanceClass').value;
+ if(isSunday(d))return alert('Hari Minggu bukan hari efektif. Silakan pilih tanggal Senin–Sabtu.');
  if(!c)return alert('Pilih kelas terlebih dahulu.');
  db.attendance[d]=db.attendance[d]||{};
  db.students.filter(s=>s.classId===c).forEach(s=>db.attendance[d][s.id]=v);
@@ -759,13 +785,14 @@ function renderAttendanceSummary(d,classId){
  let total=x.H+x.S+x.I+x.A+x.B,pct=total?Math.round(x.H/total*100):0;
  $('attendanceSummary').innerHTML=[['H','Hadir','hadir'],['S','Sakit','sakit'],['I','Izin','izin'],['A','Alpa','alpa'],['B','Bolos','bolos']].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${x[a[0]]}</b></div>`).join('')+`<div class="summary-pill">Persentase Hadir <b>${pct}%</b></div>`;
 }
-function dateRange(type,ref){let dates=[],d=new Date(ref+'T00:00:00');if(type==='weekly'){let day=d.getDay()||7;d.setDate(d.getDate()-day+1);for(let i=0;i<7;i++){dates.push(d.toISOString().slice(0,10));d.setDate(d.getDate()+1)}}else if(type==='monthly'){let y=d.getFullYear(),m=d.getMonth(),n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++)dates.push(`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`)}else{let y=d.getFullYear();for(let m=0;m<12;m++){let n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++)dates.push(`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`)}}return dates}
-function recapRows(type,ref,filter){let dates=dateRange(type,ref);return db.students.filter(s=>!filter||s.classId===filter).map(s=>{let x={H:0,S:0,I:0,A:0,B:0};dates.forEach(d=>{let st=db.attendance[d]?.[s.id]||'H';x[st]++});let total=x.H+x.S+x.I+x.A+x.B;return {...s,x,total,pct:total?Math.round(100-(x.A/total*100)):0}})}
+function isSunday(ds){return new Date(ds+'T00:00:00').getDay()===0}
+function dateRange(type,ref){let dates=[],d=new Date(ref+'T00:00:00');if(type==='weekly'){let day=d.getDay()||7;d.setDate(d.getDate()-day+1);for(let i=0;i<6;i++){dates.push(d.toISOString().slice(0,10));d.setDate(d.getDate()+1)}}else if(type==='monthly'){let y=d.getFullYear(),m=d.getMonth(),n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}else{let y=d.getFullYear();for(let m=0;m<12;m++){let n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}}return dates}
+function recapRows(type,ref,filter){let dates=dateRange(type,ref);return db.students.filter(s=>!filter||s.classId===filter).map(s=>{let x={H:0,S:0,I:0,A:0,B:0};dates.forEach(d=>{let st=db.attendance[d]?.[s.id]||'H';x[st]++});let total=x.H+x.S+x.I+x.A+x.B;return {...s,x,total,pct:total?Math.round(100-((x.A+x.B)/total*100)):0}})}
 function renderRecapTable(type,bodyId,refId,classId){
  let rows=recapRows(type,$(refId).value||today(),$(classId).value);
  let totals=rows.reduce((a,s)=>{a.H+=s.x.H;a.S+=s.x.S;a.I+=s.x.I;a.A+=s.x.A;a.B+=s.x.B;return a},{H:0,S:0,I:0,A:0,B:0});
- let total=totals.H+totals.S+totals.I+totals.A;
- let pct=total?Math.round(100-(totals.A/total*100)):0;
+ let total=totals.H+totals.S+totals.I+totals.A+totals.B;
+ let pct=total?Math.round(100-((totals.A+totals.B)/total*100)):0;
  const summaryId=type==='monthly'?'monthlySummary':'yearlySummary';
  const container=$(bodyId).closest('.card');
  let summary=$(summaryId);
@@ -781,7 +808,7 @@ function renderMonthly(){renderRecapTable('monthly','monthlyTable','monthlyDate'
 function renderYearly(){renderRecapTable('yearly','yearlyTable','yearlyDate','yearlyClass')}
 function semesterDates(year,term){
   const dates=[],start=term==='1'?new Date(year,6,1):new Date(year+1,0,1),end=term==='1'?new Date(year,11,31):new Date(year+1,5,30);
-  for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1)) dates.push(d.toISOString().slice(0,10));
+  for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1)) if(d.getDay()!==0) dates.push(d.toISOString().slice(0,10));
   return dates;
 }
 function initSemesterYears(){
@@ -802,7 +829,7 @@ function renderSemester(){
     const x={H:0,S:0,I:0,A:0,B:0};
     dates.forEach(d=>{const st=db.attendance[d]?.[s.id]||'H';x[st]++});
     const total=x.H+x.S+x.I+x.A+x.B;
-    return {...s,x,total,pct:total?Math.round(100-(x.A/total*100)):0};
+    return {...s,x,total,pct:total?Math.round(100-((x.A+x.B)/total*100)):0};
   });
   const totals=rows.reduce((a,s)=>{a.H+=s.x.H;a.S+=s.x.S;a.I+=s.x.I;a.A+=s.x.A;a.B+=s.x.B;return a},{H:0,S:0,I:0,A:0,B:0});
   const total=totals.H+totals.S+totals.I+totals.A+totals.B;
@@ -810,7 +837,7 @@ function renderSemester(){
     ['H','Hadir','hadir',totals.H],['S','Sakit','sakit',totals.S],
     ['I','Izin','izin',totals.I],['A','Alpa','alpa',totals.A],['B','Bolos','bolos',totals.B]
   ].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${a[3]}</b></div>`).join('')+
-  `<div class="summary-pill">Persentase Hadir <b>${total?Math.round(100-(totals.A/total*100)):0}%</b></div>`;
+  `<div class="summary-pill">Persentase Hadir <b>${total?Math.round(100-((totals.A+totals.B)/total*100)):0}%</b></div>`;
   $('semesterTable').innerHTML=rows.length?rows.map((s,i)=>`<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${esc(className(s.classId))}</td><td>${s.x.H}</td><td>${s.x.S}</td><td>${s.x.I}</td><td>${s.x.A}</td><td>${s.x.B}</td><td>${s.total}</td><td><b>${s.pct}%</b></td></tr>`).join(''):'<tr><td colspan="11" class="empty">Belum ada data siswa.</td></tr>';
 }
 function semesterRowsForExport(){
@@ -819,7 +846,7 @@ function semesterRowsForExport(){
   return db.students.filter(s=>!filter||s.classId===filter).map(s=>{
     const x={H:0,S:0,I:0,A:0,B:0};dates.forEach(d=>{const st=db.attendance[d]?.[s.id];if(st)x[st]++});
     const total=x.H+x.S+x.I+x.A+x.B;
-    return [s.nis,s.nama,className(s.classId),x.H,x.S,x.I,x.A,x.B,total,(total?Math.round(100-(x.A/total*100)):0)+'%'];
+    return [s.nis,s.nama,className(s.classId),x.H,x.S,x.I,x.A,x.B,total,(total?Math.round(100-((x.A+x.B)/total*100)):0)+'%'];
   });
 }
 function exportSemester(){
@@ -832,7 +859,7 @@ function getWeekDates(ref){
   let day=d.getDay()||7;
   d.setDate(d.getDate()-day+1);
   const out=[];
-  for(let i=0;i<7;i++){
+  for(let i=0;i<6;i++){
     out.push(d.toISOString().slice(0,10));
     d.setDate(d.getDate()+1);
   }
@@ -844,14 +871,14 @@ function individualDates(){
   if(p==='weekly') return getWeekDates($('individualDate').value||today());
   if(p==='monthly'){
     const ref=$('individualMonth').value||today(), [y,m]=ref.split('-').map(Number), n=new Date(y,m,0).getDate();
-    return Array.from({length:n},(_,i)=>`${y}-${String(m).padStart(2,'0')}-${String(i+1).padStart(2,'0')}`);
+    return Array.from({length:n},(_,i)=>`${y}-${String(m).padStart(2,'0')}-${String(i+1).padStart(2,'0')}`).filter(ds=>!isSunday(ds));
   }
   if(p==='semester') return semesterDates(Number($('individualYear').value),$('individualTerm').value);
   const y=Number($('individualYear').value);
   const out=[];
   for(let m=0;m<12;m++){
     const days=new Date(y,m+1,0).getDate();
-    for(let d=1;d<=days;d++) out.push(`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`);
+    for(let d=1;d<=days;d++){const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;if(!isSunday(ds))out.push(ds);}
   }
   return out;
 }
@@ -883,15 +910,15 @@ function renderIndividualReport(){
     $('individualReport').innerHTML='<div class="empty">Pilih siswa untuk melihat laporan kehadiran.</div>';
     return;
   }
-  const dates=individualDates(), x={H:0,S:0,I:0,A:0};
+  const dates=individualDates(), x={H:0,S:0,I:0,A:0,B:0};
   dates.forEach(d=>{const st=db.attendance[d]?.[s.id]||'H';x[st]++});
-  const total=x.H+x.S+x.I+x.A, pct=total?Math.round(100-(x.A/total*100)):0;
+  const total=x.H+x.S+x.I+x.A+x.B, pct=total?Math.round(100-((x.A+x.B)/total*100)):0;
   const period=$('individualPeriod').value;
   let periodName='';
   if(period==='daily'){
-    periodName=`Harian — ${formatDate(dates[0])}`;
+    periodName=`Harian — ${formatDate(dates[0])}${isSunday(dates[0])?' (Hari Minggu — bukan hari efektif)':''}`;
   }else if(period==='weekly'){
-    periodName=`Mingguan — ${formatDate(dates[0])} s.d. ${formatDate(dates[6])}`;
+    periodName=`Mingguan — ${formatDate(dates[0])} s.d. ${formatDate(dates[5])}`;
   }else if(period==='monthly'){
     periodName=new Date(($('individualMonth').value||today())+'-01').toLocaleDateString('id-ID',{month:'long',year:'numeric'});
   }else if(period==='semester'){
@@ -909,11 +936,20 @@ function renderIndividualReport(){
     <div class="report-summary">
       <div class="card-mini"><span>Hadir</span><b>${x.H}</b></div><div class="card-mini"><span>Sakit</span><b>${x.S}</b></div>
       <div class="card-mini"><span>Izin</span><b>${x.I}</b></div><div class="card-mini"><span>Alpa</span><b>${x.A}</b></div>
-      <div class="card-mini"><span>% Hadir</span><b>${pct}%</b></div>
+      <div class="card-mini"><span>Bolos</span><b>${x.B}</b></div><div class="card-mini"><span>% Hadir</span><b>${pct}%</b></div>
+    </div>
+    <div class="report-chart-box">
+      <div class="report-chart-title">Grafik Kehadiran</div>
+      <div class="report-chart">${individualChartBars(x)}</div>
     </div>
     <div class="table-wrap"><table class="report-table"><thead><tr><th>No</th><th>Tanggal</th><th>Status</th><th>Keterangan</th></tr></thead><tbody>${rows}</tbody></table></div>
     <div class="report-footer"><span>Dicetak: ${new Date().toLocaleDateString('id-ID')}</span><span>${esc(db.school?.name||'SMK NEGERI 1 SIKUR')}</span></div>
   </div>`;
+}
+function individualChartBars(x){
+  const items=[['Hadir',x.H,'#22c55e'],['Sakit',x.S,'#f59e0b'],['Izin',x.I,'#3b82f6'],['Alpa',x.A,'#ef4444'],['Bolos',x.B,'#f97316']];
+  const max=Math.max(1,x.H,x.S,x.I,x.A,x.B);
+  return items.map(([label,val,color])=>`<div class="rbar" style="height:${Math.max(4,val/max*100)}px;background:${color}"><b>${val}</b><span>${label}</span></div>`).join('');
 }
 function onIndividualStudentSearch(){
   const q=$('individualStudentSearch').value.trim().toLowerCase();
@@ -941,7 +977,7 @@ function printIndividualReport(){
   if(!$('individualStudent').value)return alert('Pilih siswa terlebih dahulu.');
   const content=$('printableIndividual').outerHTML;
   const w=window.open('','_blank','width=1000,height=800');
-  w.document.write(`<html><head><title>Laporan Kehadiran Individu</title><style>body{font-family:Arial,sans-serif;padding:25px;color:#111}.individual-report{border:1px solid #ddd;padding:20px}.report-head{text-align:center;border-bottom:2px solid #38bdf8;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 5px}.report-student{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.card-mini{border:1px solid #ddd;padding:10px;text-align:center}.card-mini b{display:block;font-size:20px;margin-top:4px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #bbb;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}@media print{button{display:none}}</style></head><body>${content}</body></html>`);
+  w.document.write(`<html><head><title>Laporan Kehadiran Individu</title><style>body{font-family:Arial,sans-serif;padding:25px;color:#111}.individual-report{border:1px solid #ddd;padding:20px}.report-head{text-align:center;border-bottom:2px solid #38bdf8;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 5px}.report-student{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.card-mini{border:1px solid #ddd;padding:10px;text-align:center}.card-mini b{display:block;font-size:20px;margin-top:4px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #bbb;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}.report-chart-box{margin:20px 0;border:1px solid #ccc;border-radius:8px;padding:15px 15px 45px;page-break-inside:avoid}.report-chart-title{font-size:13px;font-weight:700;color:#0369a1;margin-bottom:14px}.report-chart{display:flex;align-items:end;gap:14px;height:140px}.report-chart .rbar{flex:1;border-radius:6px 6px 0 0;min-width:24px;position:relative}.report-chart .rbar span{position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);font-size:11px;color:#334155;text-align:center;white-space:nowrap;line-height:1.4}.report-chart .rbar b{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:#0f172a}@media print{button{display:none}.report-chart-box{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>${content}</body></html>`);
   w.document.close();w.focus();setTimeout(()=>w.print(),300);
 }
 function exportIndividualReport(){
@@ -968,16 +1004,49 @@ function exportIndividualReport(){
   ];
   const wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,ws,'Laporan Individu');
+
+  // Sheet Grafik Kehadiran: rekap jumlah per status + bar visual (blok karakter) & native Excel bar chart
+  const x={H:0,S:0,I:0,A:0,B:0};
+  dates.forEach(d=>{const st=db.attendance[d]?.[s.id]||'H';x[st]++});
+  const statLabels=[['Hadir',x.H],['Sakit',x.S],['Izin',x.I],['Alpa',x.A],['Bolos',x.B]];
+  const maxVal=Math.max(1,x.H,x.S,x.I,x.A,x.B);
+  const barWidth=30;
+  const chartAoa=[
+    ['Grafik Kehadiran',`${s.nis} - ${s.nama}`],
+    [],
+    ['Status','Jumlah','Grafik']
+  ];
+  statLabels.forEach(([label,val])=>{
+    const filled=Math.round((val/maxVal)*barWidth);
+    chartAoa.push([label,val,'█'.repeat(Math.max(filled,val>0?1:0))]);
+  });
+  const wsChart=XLSX.utils.aoa_to_sheet(chartAoa);
+  wsChart['!cols']=[{wch:12},{wch:10},{wch:barWidth+5}];
+  wsChart['!merges']=[{s:{r:0,c:0},e:{r:0,c:2}}];
+  XLSX.utils.book_append_sheet(wb,wsChart,'Grafik');
   XLSX.writeFile(wb,filename);
 }
-function renderDashboard(){let d=today(),x={H:0,S:0,I:0,A:0};db.students.forEach(s=>{let st=db.attendance[d]?.[s.id];if(st)x[st]++});$('statCards').innerHTML=[['👨‍🎓','Total Siswa',db.students.length],['🏫','Total Kelas',db.classes.length],['✅','Hadir Hari Ini',x.H],['❌','Alpa Hari Ini',x.A]].map(a=>`<div class="card stat"><div><div class="label">${a[1]}</div><div class="num">${a[2]}</div></div><div class="icon">${a[0]}</div></div>`).join('');$('dashDate').textContent=formatDate(d);$('todayStats').innerHTML=`<div class="attendance-summary">${[['H','Hadir','hadir'],['S','Sakit','sakit'],['I','Izin','izin'],['A','Alpa','alpa'],['B','Bolos','bolos']].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${x[a[0]]}</b></div>`).join('')}</div>`;let days=[];for(let i=6;i>=0;i--){let z=new Date();z.setDate(z.getDate()-i);days.push(z.toISOString().slice(0,10))}let vals=days.map(d=>db.students.filter(s=>db.attendance[d]?.[s.id]==='H').length);let max=Math.max(1,...vals);$('weekChart').innerHTML=vals.map((v,i)=>`<div class="bar" style="height:${Math.max(5,v/max*140)}px" title="${v} siswa hadir"><span>${days[i].slice(8)}</span></div>`).join('');$('recentStudents').innerHTML=db.students.slice(-5).reverse().map(s=>`<tr><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${esc(className(s.classId))}</td><td>${s.gender}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Belum ada data.</td></tr>'}
+function renderDashboard(){let d=today(),x={H:0,S:0,I:0,A:0};db.students.forEach(s=>{let st=db.attendance[d]?.[s.id];if(st)x[st]++});$('statCards').innerHTML=[['👨‍🎓','Total Siswa',db.students.length],['🏫','Total Kelas',db.classes.length],['✅','Hadir Hari Ini',x.H],['❌','Alpa Hari Ini',x.A]].map(a=>`<div class="card stat"><div><div class="label">${a[1]}</div><div class="num">${a[2]}</div></div><div class="icon">${a[0]}</div></div>`).join('');$('dashDate').textContent=formatDate(d);$('todayStats').innerHTML=`<div class="attendance-summary">${[['H','Hadir','hadir'],['S','Sakit','sakit'],['I','Izin','izin'],['A','Alpa','alpa'],['B','Bolos','bolos']].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${x[a[0]]}</b></div>`).join('')}</div>`;let days=[];{let z=new Date();while(days.length<6){if(z.getDay()!==0)days.unshift(z.toISOString().slice(0,10));z.setDate(z.getDate()-1)}}let vals=days.map(d=>db.students.filter(s=>db.attendance[d]?.[s.id]==='H').length);let max=Math.max(1,...vals);$('weekChart').innerHTML=vals.map((v,i)=>`<div class="bar" style="height:${Math.max(5,v/max*140)}px" title="${v} siswa hadir"><span>${days[i].slice(8)}</span></div>`).join('');$('recentStudents').innerHTML=db.students.slice(-5).reverse().map(s=>`<tr><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${esc(className(s.classId))}</td><td>${s.gender}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Belum ada data.</td></tr>'}
 function normalizeHeader(v){return String(v??'').trim().toLowerCase().replace(/[^a-z0-9]+/g,'')}
 function excelValue(row,aliases){const keys=Object.keys(row);for(const a of aliases){const t=normalizeHeader(a);const k=keys.find(x=>normalizeHeader(x)===t);if(k!==undefined&&row[k]!==undefined&&row[k]!==null&&String(row[k]).trim()!=='')return row[k]}return ''}
 function excelDateValue(v){if(v===null||v===undefined||v==='')return '';if(v instanceof Date&&!isNaN(v))return v.toISOString().slice(0,10);if(typeof v==='number'&&window.XLSX){const d=XLSX.SSF.parse_date_code(v);if(d)return `${d.y}-${String(d.m).padStart(2,'0')}-${String(d.d).padStart(2,'0')}`}let s=String(v).trim();let m=s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);if(m)return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;return s}
 function findOrCreateClass(name){name=String(name??'').trim();if(!name)return '';let c=db.classes.find(x=>x.name.toLowerCase()===name.toLowerCase());if(c)return c.id;c={id:uid(),name,homeroom:''};db.classes.push(c);return c.id}
 function importStudentsExcel(event){const file=event.target.files[0];event.target.value='';if(!file)return;if(!window.XLSX)return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');const reader=new FileReader();reader.onload=function(e){try{const wb=XLSX.read(e.target.result,{type:'array',cellDates:true});const sheet=wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(sheet,{defval:''});if(!rows.length)return alert('File Excel tidak memiliki data.');let added=0,updated=0,skipped=0;rows.forEach(row=>{const nis=String(excelValue(row,['NIS','NISN','Nomor Induk','Nomor Induk Siswa'])).trim();const nama=String(excelValue(row,['Nama','Nama Lengkap','Nama Siswa'])).trim();if(!nis||!nama){skipped++;return}const g=String(excelValue(row,['Jenis Kelamin','JK','Gender'])).trim().toUpperCase();const gender=g==='P'||g.includes('PEREMPUAN')||g.includes('WANITA')?'P':'L';const kelas=String(excelValue(row,['Kelas','Nama Kelas','Rombel'])).trim();const obj={id:'',nis,nama,gender,classId:findOrCreateClass(kelas),birthPlace:String(excelValue(row,['Tempat Lahir','TempatLahir'])).trim(),birthDate:excelDateValue(excelValue(row,['Tanggal Lahir','Tgl Lahir','TanggalLahir'])),phone:String(excelValue(row,['No HP','Nomor HP','HP','Telepon','No Telepon'])).trim(),address:String(excelValue(row,['Alamat'])).trim()};const existing=db.students.find(s=>String(s.nis).trim()===nis);if(existing){obj.id=existing.id;db.students=db.students.map(s=>s.id===existing.id?obj:s);updated++}else{obj.id=uid();db.students.push(obj);added++}});saveDB();refreshFilters();renderStudents();renderInfoData();renderClasses();renderDashboard();alert(`Import selesai!\nDitambahkan: ${added}\nDiperbarui: ${updated}\nDilewati: ${skipped}`)}catch(err){console.error(err);alert('Gagal membaca file Excel. Pastikan file .xlsx, .xls, atau .csv valid.')}};reader.readAsArrayBuffer(file)}
 function downloadExcelTemplate(){if(!window.XLSX)return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');const rows=[{'NIS':'1001','Nama':'Contoh Siswa','Jenis Kelamin':'L','Kelas':'VII A','Tempat Lahir':'Denpasar','Tanggal Lahir':'2013-01-15','No HP':'08123456789','Alamat':'Jl. Contoh'}];const ws=XLSX.utils.json_to_sheet(rows);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Data Siswa');XLSX.writeFile(wb,'Template_Import_Data_Siswa.xlsx')}
-function exportStudents(){let rows=[['NIS','Nama','Jenis Kelamin','Kelas','Tempat Lahir','Tanggal Lahir','No HP','Alamat'],...db.students.map(s=>[s.nis,s.nama,s.gender,className(s.classId),s.birthPlace,s.birthDate,s.phone,s.address])];downloadCSV('data_siswa.csv',rows)}
+function exportStudents(){
+  let filter=$('studentClassFilter')?.value||'';
+  let list=db.students.filter(s=>!filter||s.classId===filter);
+  let rows=[['No','NIS','Nama','Jenis Kelamin','Kelas','Tempat Lahir','Tanggal Lahir','No HP','Alamat'],
+    ...list.map((s,i)=>[i+1,s.nis,s.nama,s.gender==='P'?'Perempuan':'Laki-laki',className(s.classId),s.birthPlace||'',s.birthDate?formatDate(s.birthDate):'',s.phone||'',s.address||''])];
+  const widths=[5,12,28,14,14,18,14,16,30];
+  downloadExcelWorkbook('data_siswa.xlsx','Data Siswa',rows,widths);
+}
+function exportClasses(){
+  let rows=[['No','Nama Kelas','Wali Kelas','Jumlah Siswa'],
+    ...db.classes.map((c,i)=>[i+1,c.name,c.homeroom||'-',db.students.filter(s=>s.classId===c.id).length])];
+  const widths=[5,16,24,14];
+  downloadExcelWorkbook('data_kelas.xlsx','Data Kelas',rows,widths);
+}
 function sideBySideRows(header,dataRows,blocks=2){
   const n=dataRows.length;
   if(!n) return [header];
@@ -1004,7 +1073,36 @@ function sideBySideWidths(widths,blocks=2,gap=3){
   for(let i=0;i<blocks;i++){if(i>0)out.push(gap);out=out.concat(widths)}
   return out;
 }
-function downloadExcelWorkbook(filename,sheetName,rows,widths=[]){if(!window.XLSX)return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');const ws=XLSX.utils.aoa_to_sheet(rows);if(widths.length)ws['!cols']=widths.map(w=>({wch:w}));const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,sheetName);XLSX.writeFile(wb,filename)}
+function kopSuratRows(numCols,title){
+  ensureSchool();
+  const s=db.school||{};
+  const lines=[s.name||'SMK NEGERI 1 SIKUR'];
+  const addr=[s.address,s.village,s.district,s.regency,s.province].filter(Boolean).join(', ');
+  if(addr)lines.push(addr);
+  const contact=[];
+  if(s.npsn)contact.push('NPSN: '+s.npsn);
+  if(s.nss)contact.push('NSS: '+s.nss);
+  if(s.phone)contact.push('Telp: '+s.phone);
+  if(s.email)contact.push('Email: '+s.email);
+  if(contact.length)lines.push(contact.join('  |  '));
+  if(title)lines.push(String(title).toUpperCase());
+  const rows=lines.map(line=>{const r=new Array(numCols).fill('');r[0]=line;return r});
+  rows.push(new Array(numCols).fill(''));
+  const merges=lines.map((_,i)=>({s:{r:i,c:0},e:{r:i,c:numCols-1}}));
+  return {rows,merges,offset:rows.length};
+}
+function downloadExcelWorkbook(filename,sheetName,rows,widths=[]){
+  if(!window.XLSX)return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');
+  const numCols=Math.max(...rows.map(r=>r.length),widths.length,1);
+  const kop=kopSuratRows(numCols,sheetName);
+  const aoa=[...kop.rows,...rows];
+  const ws=XLSX.utils.aoa_to_sheet(aoa);
+  if(widths.length)ws['!cols']=widths.map(w=>({wch:w}));
+  ws['!merges']=kop.merges;
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,sheetName);
+  XLSX.writeFile(wb,filename);
+}
 function dailyRows(){const d=$('attendanceDate').value||today(),c=$('attendanceClass').value||'';const students=db.students.filter(s=>!c||s.classId===c);return [['No','Tanggal','NIS','Nama','Kelas','Status','Keterangan'],...students.map((s,i)=>{const st=db.attendance[d]?.[s.id]||'H';return [i+1,d,s.nis,s.nama,className(s.classId),st,statusLabel(st)]})]}
 function recapExcelRows(type){const ref={monthly:'monthlyDate',yearly:'yearlyDate'}[type];const filter=$(type+'Class').value;const rows=recapRows(type,$(ref).value||today(),filter);return [['No','NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Persentase Hadir'],...rows.map((s,i)=>[i+1,s.nis,s.nama,className(s.classId),s.x.H,s.x.S,s.x.I,s.x.A,s.x.B,s.total,s.pct+'%'])]}
 function weeklyExcelRows(){
@@ -1019,23 +1117,27 @@ function exportMatrixExcel(dates,students,filename,sheetName){
   if(!window.XLSX) return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');
   const statusText=statusTextMap();
   const firstCol=4,n=dates.length,pctCol=firstCol+n;
-  const aoa=[];
-  let row1=new Array(pctCol+1).fill('');row1[firstCol]='Tanggal';row1[pctCol]='%';aoa.push(row1);
-  let row2=['No','NIS','Nama','Kelas'];for(let i=1;i<=n;i++)row2.push(i);row2.push('');aoa.push(row2);
+  const numCols=pctCol+1;
+  const kop=kopSuratRows(numCols,sheetName);
+  const aoa=[...kop.rows];
+  let row1=new Array(numCols).fill('');row1[firstCol]='Tanggal';row1[pctCol]='%';aoa.push(row1);
+  let row2=['No','NIS','Nama','Kelas'];dates.forEach(d=>{const p=d.split('-');row2.push(`${p[2]}/${p[1]}`)});row2.push('');aoa.push(row2);
   students.forEach((s,idx)=>{
     let row=[idx+1,s.nis,s.nama,className(s.classId)];
     dates.forEach(d=>{const st=db.attendance[d]?.[s.id]||'H';row.push(statusText[st])});
     row.push('');aoa.push(row);
   });
   const ws=XLSX.utils.aoa_to_sheet(aoa);
-  if(n>0)ws['!merges']=[{s:{r:0,c:firstCol},e:{r:0,c:firstCol+n-1}}];
-  const cols=[{wch:6},{wch:10},{wch:30},{wch:18}];for(let i=0;i<n;i++)cols.push({wch:5});cols.push({wch:8});
+  const merges=[...kop.merges];
+  if(n>0)merges.push({s:{r:kop.offset,c:firstCol},e:{r:kop.offset,c:firstCol+n-1}});
+  ws['!merges']=merges;
+  const cols=[{wch:6},{wch:10},{wch:30},{wch:18}];for(let i=0;i<n;i++)cols.push({wch:7});cols.push({wch:8});
   ws['!cols']=cols;
   if(n>0){
     const startL=XLSX.utils.encode_col(firstCol),endL=XLSX.utils.encode_col(firstCol+n-1);
     students.forEach((s,idx)=>{
-      const r=2+idx,rowNum=r+1;
-      const formula=`IF(COUNTA(${startL}${rowNum}:${endL}${rowNum})=0,0,ROUND(100-(COUNTIF(${startL}${rowNum}:${endL}${rowNum},"alfa")/COUNTA(${startL}${rowNum}:${endL}${rowNum})*100),0))`;
+      const r=kop.offset+2+idx,rowNum=r+1;
+      const formula=`IF(COUNTA(${startL}${rowNum}:${endL}${rowNum})=0,0,ROUND(100-((COUNTIF(${startL}${rowNum}:${endL}${rowNum},"alfa")+COUNTIF(${startL}${rowNum}:${endL}${rowNum},"bolos"))/COUNTA(${startL}${rowNum}:${endL}${rowNum})*100),0))`;
       ws[XLSX.utils.encode_cell({r,c:pctCol})]={t:'n',f:formula,z:'0"%"'};
     });
   }
@@ -1078,7 +1180,7 @@ function printRecapReport(type){
     title='LAPORAN REKAP MINGGUAN';
     rows=weeklyExcelRows();
     const dates=getWeekDates($('weeklyDate').value||today());
-    period=`${formatDate(dates[0])} s.d. ${formatDate(dates[6])}`;
+    period=`${formatDate(dates[0])} s.d. ${formatDate(dates[5])}`;
   }else if(type==='monthly'){
     title='LAPORAN REKAP BULANAN';rows=recapExcelRows('monthly');period=$('monthlyDate').value||today().slice(0,7);
   }else if(type==='yearly'){
@@ -1097,7 +1199,7 @@ function printRecapReport(type){
   w.document.write(html);w.document.close();
 }
 function exportRecap(type){let ref={weekly:'weeklyDate',monthly:'monthlyDate',yearly:'yearlyDate'}[type],filter=$(type+'Class').value,rows=recapRows(type,$(ref).value||today(),filter);downloadCSV('rekap_'+type+'.csv',[['NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Persentase Hadir'],...rows.map(s=>[s.nis,s.nama,className(s.classId),s.x.H,s.x.S,s.x.I,s.x.A,s.x.B,s.pct+'%'])])}
-function downloadCSV(name,rows){let csv=rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\\r\\n');let blob=new Blob(['\\ufeff'+csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
+function downloadCSV(name,rows){let csv=rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
 function backupData(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup_sias_'+today()+'.json';a.click()}
 function restoreData(){let f=$('restoreFile').files[0];if(!f)return alert('Pilih file backup JSON.');let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.students||!x.classes||!x.attendance)throw 0;if(confirm('Restore akan mengganti data saat ini. Lanjutkan?')){db=x;saveDB();location.reload()}}catch(e){alert('File backup tidak valid.')}};r.readAsText(f)}
 function clearAllData(){if(confirm('Hapus SEMUA data?')){localStorage.removeItem(KEY);location.reload()}}
