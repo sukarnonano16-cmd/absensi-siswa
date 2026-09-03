@@ -4,13 +4,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sistem Informasi Absensi Siswa</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%9A%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#38bdf8;--primary2:#0284c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--info:#0891b2;--th-bg:#f8fafc}
-*{box-sizing:border-box}html,body{overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:pan-y}
-button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{width:255px;background:#075985;color:#fff;padding:20px 14px;position:fixed;top:0;bottom:0;overflow:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}.brand{font-size:20px;font-weight:800;padding:8px 12px 22px}.brand small{display:block;color:#94a3b8;font-size:11px;margin-top:4px;font-weight:500}.nav-title{font-size:11px;color:#64748b;text-transform:uppercase;margin:18px 12px 7px}.nav button{display:block;width:100%;border:0;background:transparent;color:#cbd5e1;text-align:left;padding:11px 12px;border-radius:9px;margin:3px 0;cursor:pointer}.nav button:hover,.nav button.active{background:#0369a1;color:#fff}.main{margin-left:255px;width:calc(100% - 255px);padding:25px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.topbar h1{margin:0;font-size:25px}.date-now{color:var(--muted);font-size:13px}.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:18px;box-shadow:0 2px 8px #0f172a08}.stat{display:flex;justify-content:space-between;align-items:center}.stat .num{font-size:28px;font-weight:800;margin-top:5px}.stat .label{color:var(--muted);font-size:13px}.icon{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:#e0f2fe;color:var(--primary);font-weight:800}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.section-title h2{font-size:17px;margin:0}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.toolbar>*{min-height:38px}.input,.select{border:1px solid var(--border);border-radius:8px;padding:8px 10px;background:#fff}.btn{border:0;border-radius:8px;padding:9px 13px;cursor:pointer;font-weight:600}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary2)}.btn-secondary{background:#e2e8f0;color:#0f172a}.btn-success{background:var(--success);color:#fff}.btn-danger{background:var(--danger);color:#fff}.btn-warning{background:var(--warning);color:#fff}.btn-info{background:var(--info);color:#fff}.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;border:1px solid var(--border);border-radius:10px}.table{width:100%;border-collapse:collapse;min-width:700px;background:#fff}.table th,.table td{padding:10px 11px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}.table th{background:var(--th-bg);color:#475569}.table tr:last-child td{border-bottom:0}.individual-report{border:1px solid var(--border);border-radius:10px;padding:20px;background:#fff}.report-head{text-align:center;border-bottom:2px solid #bae6fd;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 4px}.report-student{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 25px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.report-summary .card-mini{border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}.report-summary b{display:block;font-size:20px;margin-top:3px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #cbd5e1;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}@media(max-width:700px){.report-summary{grid-template-columns:repeat(2,1fr)}.report-student{grid-template-columns:1fr}}.attendance-percent{display:flex;align-items:center;gap:7px;min-width:115px}.percent-track{height:8px;background:#e0f2fe;border-radius:99px;overflow:hidden;width:65px}.percent-fill{height:100%;background:#38bdf8;border-radius:99px}.percent-high{color:#15803d}.percent-mid{color:#b45309}.percent-low{color:#dc2626}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:11px;font-weight:700}.hadir{background:#dcfce7;color:#166534}.sakit{background:#fef3c7;color:#92400e}.izin{background:#dbeafe;color:#1e40af}.alpa{background:#fee2e2;color:#991b1b}.bolos{background:#ffedd5;color:#9a3412}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field label{display:block;font-size:12px;color:#475569;margin-bottom:5px;font-weight:600}.field input,.field select{width:100%;padding:9px;border:1px solid var(--border);border-radius:8px}.modal{display:none;position:fixed;inset:0;background:#0f172a88;z-index:50;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal-box{background:#fff;border-radius:14px;width:min(650px,100%);max-height:90vh;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h3{margin:0}.close{border:0;background:#f1f5f9;width:32px;height:32px;border-radius:50%;cursor:pointer}.actions{display:flex;gap:7px;justify-content:flex-end;margin-top:18px}.attendance-summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.summary-pill{background:#fff;border:1px solid var(--border);border-radius:9px;padding:9px 13px;font-size:13px}.summary-pill b{margin-left:5px}.radio-group{display:flex;gap:5px}.radio{border:1px solid var(--border);border-radius:7px;padding:6px 9px;cursor:pointer;font-size:12px}.radio input{display:none}.radio:has(input:checked){outline:2px solid var(--primary);background:#eff6ff}.empty{text-align:center;color:var(--muted);padding:30px}.notice{padding:12px;border-radius:9px;background:#eff6ff;color:#1e40af;font-size:13px;margin-bottom:14px}.chart{display:flex;align-items:end;gap:10px;height:180px;padding:15px 5px 0}.bar{flex:1;background:#38bdf8;border-radius:6px 6px 0 0;min-width:20px;position:relative}.bar span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}.footer-note{font-size:12px;color:var(--muted);margin-top:20px;text-align:center}.danger-zone{border:1px solid #fecaca;background:#fff1f2}.check-all{width:16px;height:16px}.report-chart-box{margin:20px 0;border:1px solid #cbd5e1;border-radius:8px;padding:15px 15px 45px}.report-chart-title{font-size:13px;font-weight:700;color:#0369a1;margin-bottom:14px}.report-chart{display:flex;align-items:end;gap:14px;height:140px}.report-chart .rbar{flex:1;border-radius:6px 6px 0 0;min-width:24px;position:relative}.report-chart .rbar span{position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);font-size:11px;color:#334155;text-align:center;white-space:nowrap;line-height:1.4}.report-chart .rbar b{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:#0f172a}
+:root{--primary:#38bdf8;--primary2:#0284c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--info:#0891b2;--th-bg:#f8fafc;--radius:16px;--radius-sm:10px;--radius-lg:22px;--shadow-sm:0 1px 2px rgba(15,23,42,.06),0 1px 1px rgba(15,23,42,.04);--shadow-md:0 8px 24px -6px rgba(15,23,42,.12),0 2px 6px rgba(15,23,42,.06);--shadow-lg:0 24px 48px -12px rgba(15,23,42,.22),0 8px 16px -4px rgba(15,23,42,.08);--ease:cubic-bezier(.4,0,.2,1)}
+*{box-sizing:border-box}html,body{overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;scroll-behavior:smooth}body{margin:0;font-family:'Plus Jakarta Sans',Manrope,Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:pan-y;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+::selection{background:var(--primary);color:#fff}
+html[data-mode="dark"]{--bg:#0b1220;--card:#131b2c;--text:#e7ecf5;--muted:#8b96ab;--border:#243046;--th-bg:#16203350}
+html[data-mode="dark"] body{background:var(--bg)}
+html[data-mode="dark"] .table,html[data-mode="dark"] .individual-report,html[data-mode="dark"] .login-box,html[data-mode="dark"] .modal-box{background:var(--card);color:var(--text)}
+html[data-mode="dark"] .input,html[data-mode="dark"] .select,html[data-mode="dark"] .field input,html[data-mode="dark"] .field select,html[data-mode="dark"] .login-field input{background:#0e1626;border-color:var(--border);color:var(--text)}
+html[data-mode="dark"] .btn-secondary{background:#243046;color:#e7ecf5}
+html[data-mode="dark"] .table th{color:#aab4c7}
+html[data-mode="dark"] .close{background:#1a2438;color:#e7ecf5}
+html[data-mode="dark"] .student-search-list,html[data-mode="dark"] .status-picker{background:var(--card);border-color:var(--border)}
+html[data-mode="dark"] .grid-table td.col-no,html[data-mode="dark"] .grid-table td.col-nis,html[data-mode="dark"] .grid-table td.col-nama{background:var(--card)}
+button,input,select{font:inherit}.app{display:flex;min-height:100vh}
+.sidebar{width:265px;background:linear-gradient(180deg,#075985,#064766);color:#fff;padding:20px 14px;position:fixed;top:0;bottom:0;overflow:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;box-shadow:var(--shadow-lg)}
+.brand{font-size:19px;font-weight:800;padding:8px 12px 22px;letter-spacing:-.01em}.brand small{display:block;color:#93c5fd;font-size:11px;margin-top:4px;font-weight:500;opacity:.75}
+.nav-title{font-size:10.5px;color:#7dd3fc;text-transform:uppercase;margin:18px 12px 7px;font-weight:700;letter-spacing:.06em;opacity:.7}
+.nav button{display:block;width:100%;border:0;background:transparent;color:#cbd5e1;text-align:left;padding:11px 12px;border-radius:11px;margin:3px 0;cursor:pointer;transition:background .18s var(--ease),color .18s var(--ease),transform .15s var(--ease);font-weight:600;font-size:13.5px}
+.nav button:hover{background:rgba(255,255,255,.08);color:#fff;transform:translateX(2px)}
+.nav button.active{background:linear-gradient(90deg,rgba(255,255,255,.16),rgba(255,255,255,.05));color:#fff;box-shadow:inset 3px 0 0 var(--primary)}
+.main{margin-left:265px;width:calc(100% - 265px);padding:26px 28px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:14px;flex-wrap:wrap}
+.topbar h1{margin:0;font-size:24px;font-weight:800;letter-spacing:-.02em}
+.date-now{color:var(--muted);font-size:13px}.page{display:none}.page.active{display:block;animation:pageIn .38s var(--ease)}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-sm);transition:box-shadow .25s var(--ease),transform .25s var(--ease)}
+.card:hover{box-shadow:var(--shadow-md)}
+.stat{display:flex;justify-content:space-between;align-items:center;position:relative;overflow:hidden}
+.stat .num{font-size:30px;font-weight:800;margin-top:6px;letter-spacing:-.03em}
+.stat .label{color:var(--muted);font-size:12.5px;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,var(--primary),var(--primary2));color:#fff;font-weight:800;font-size:20px;box-shadow:0 6px 14px -4px color-mix(in srgb,var(--primary2) 60%,transparent)}
+.cards .card.stat:nth-child(2) .icon{background:linear-gradient(145deg,#34d399,#059669);box-shadow:0 6px 14px -4px #05966955}
+.cards .card.stat:nth-child(3) .icon{background:linear-gradient(145deg,#818cf8,#4f46e5);box-shadow:0 6px 14px -4px #4f46e555}
+.cards .card.stat:nth-child(4) .icon{background:linear-gradient(145deg,#fb7185,#e11d48);box-shadow:0 6px 14px -4px #e11d4855}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.section-title h2{font-size:16.5px;margin:0;font-weight:700;letter-spacing:-.01em}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+.toolbar>*{min-height:40px}
+.input,.select{border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;background:#fff;transition:border-color .18s,box-shadow .18s;font-size:13.5px}
+.input:focus,.select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3.5px color-mix(in srgb,var(--primary) 18%,transparent)}
+.btn{border:0;border-radius:var(--radius-sm);padding:10px 15px;cursor:pointer;font-weight:700;font-size:13.5px;transition:transform .15s var(--ease),box-shadow .15s var(--ease),filter .15s var(--ease);letter-spacing:-.005em}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn:hover{filter:brightness(1.06)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 4px 12px -2px color-mix(in srgb,var(--primary2) 45%,transparent)}
+.btn-primary:hover{background:linear-gradient(135deg,var(--primary),var(--primary2));filter:brightness(1.08)}
+.btn-secondary{background:#eef1f6;color:#0f172a}
+.btn-success{background:linear-gradient(135deg,#22c55e,var(--success));color:#fff;box-shadow:0 4px 12px -2px #16a34a45}
+.btn-danger{background:linear-gradient(135deg,#f87171,var(--danger));color:#fff;box-shadow:0 4px 12px -2px #dc262645}
+.btn-warning{background:linear-gradient(135deg,#fbbf24,var(--warning));color:#fff;box-shadow:0 4px 12px -2px #d9770645}
+.btn-info{background:linear-gradient(135deg,#22d3ee,var(--info));color:#fff;box-shadow:0 4px 12px -2px #0891b245}
+.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;border:1px solid var(--border);border-radius:var(--radius-sm)}
+.table{width:100%;border-collapse:collapse;min-width:700px;background:var(--card)}
+.table th,.table td{padding:11px 12px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}
+.table th{background:var(--th-bg);color:#475569;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em}
+.table tbody tr{transition:background .15s}
+.table tbody tr:hover{background:color-mix(in srgb,var(--primary) 6%,transparent)}
+.table tr:last-child td{border-bottom:0}.individual-report{border:1px solid var(--border);border-radius:10px;padding:20px;background:#fff}.report-head{text-align:center;border-bottom:2px solid #bae6fd;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 4px}.report-student{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 25px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.report-summary .card-mini{border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}.report-summary b{display:block;font-size:20px;margin-top:3px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #cbd5e1;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}@media(max-width:700px){.report-summary{grid-template-columns:repeat(2,1fr)}.report-student{grid-template-columns:1fr}}.attendance-percent{display:flex;align-items:center;gap:7px;min-width:115px}.percent-track{height:8px;background:#e0f2fe;border-radius:99px;overflow:hidden;width:65px}.percent-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px;transition:width .5s var(--ease)}.percent-high{color:#15803d}.percent-mid{color:#b45309}.percent-low{color:#dc2626}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.01em}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.75}
+.hadir{background:#dcfce7;color:#166534}.sakit{background:#fef3c7;color:#92400e}.izin{background:#dbeafe;color:#1e40af}.alpa{background:#fee2e2;color:#991b1b}.bolos{background:#ffedd5;color:#9a3412}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field label{display:block;font-size:12px;color:#475569;margin-bottom:5px;font-weight:700}.field input,.field select{width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);transition:border-color .18s,box-shadow .18s}.field input:focus,.field select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3.5px color-mix(in srgb,var(--primary) 18%,transparent)}
+.modal{display:none;position:fixed;inset:0;background:rgba(9,14,23,.6);backdrop-filter:blur(3px);z-index:50;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex;animation:modalBg .2s var(--ease)}
+@keyframes modalBg{from{opacity:0}to{opacity:1}}
+.modal-box{background:var(--card);color:var(--text);border-radius:var(--radius-lg);width:min(650px,100%);max-height:90vh;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding:22px;box-shadow:var(--shadow-lg);animation:modalIn .25s var(--ease)}
+@keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h3{margin:0;font-weight:800}.close{border:0;background:#f1f5f9;width:32px;height:32px;border-radius:50%;cursor:pointer;transition:background .15s,transform .15s}.close:hover{background:#e2e8f0;transform:rotate(90deg)}.actions{display:flex;gap:7px;justify-content:flex-end;margin-top:18px}
+.attendance-summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.summary-pill{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 13px;font-size:13px;box-shadow:var(--shadow-sm)}.summary-pill b{margin-left:5px}
+.radio-group{display:flex;gap:5px}.radio{border:1.5px solid var(--border);border-radius:8px;padding:6px 9px;cursor:pointer;font-size:12px;transition:all .15s}.radio input{display:none}.radio:has(input:checked){outline:2px solid var(--primary);background:color-mix(in srgb,var(--primary) 12%,transparent);border-color:var(--primary)}
+.empty{text-align:center;color:var(--muted);padding:36px 20px}
+.notice{padding:12px 14px;border-radius:var(--radius-sm);background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;font-size:13px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.chart{display:flex;align-items:end;gap:10px;height:180px;padding:15px 5px 0}.bar{flex:1;background:linear-gradient(180deg,var(--primary),var(--primary2));border-radius:8px 8px 0 0;min-width:20px;position:relative;transition:transform .2s var(--ease);box-shadow:0 6px 14px -6px color-mix(in srgb,var(--primary2) 60%,transparent)}.bar:hover{transform:scaleY(1.02)}.bar span{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);font-weight:600}
+.footer-note{font-size:12px;color:var(--muted);margin-top:20px;text-align:center}.danger-zone{border:1px solid #fecaca;background:#fff1f2}.check-all{width:16px;height:16px}.report-chart-box{margin:20px 0;border:1px solid #cbd5e1;border-radius:8px;padding:15px 15px 45px}.report-chart-title{font-size:13px;font-weight:700;color:#0369a1;margin-bottom:14px}.report-chart{display:flex;align-items:end;gap:14px;height:140px}.report-chart .rbar{flex:1;border-radius:6px 6px 0 0;min-width:24px;position:relative}.report-chart .rbar span{position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);font-size:11px;color:#334155;text-align:center;white-space:nowrap;line-height:1.4}.report-chart .rbar b{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:#0f172a}
 .nav button{display:flex;align-items:center;gap:0}
-.nav-icon{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;min-width:26px;border-radius:8px;margin-right:10px;font-size:13px;background:#ffffff14}
-.nav button.active .nav-icon,.nav button:hover .nav-icon{background:#ffffff2a}
+.nav-icon{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;min-width:27px;border-radius:9px;margin-right:10px;font-size:13px;background:rgba(255,255,255,.08);transition:background .18s}
+.nav button.active .nav-icon,.nav button:hover .nav-icon{background:rgba(255,255,255,.18)}
 .sidebar{transition:width .2s}
 .main{transition:margin-left .2s,width .2s}
 .sidebar-toggle span:last-child{white-space:nowrap;overflow:hidden}
@@ -58,20 +133,20 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{wid
 @media(max-width:650px){
   .bottom-nav{
     display:flex;position:fixed;bottom:0;left:0;right:0;z-index:170;
-    background:#fff;border-top:1px solid var(--border);
+    background:var(--card);border-top:1px solid var(--border);
     align-items:stretch;height:64px;
-    box-shadow:0 -4px 20px rgba(15,23,42,.14);
+    box-shadow:0 -8px 24px rgba(15,23,42,.1);
     padding-bottom:env(safe-area-inset-bottom,0px);
   }
   .bnav-item{
     flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
     gap:3px;border:0;background:transparent;color:var(--muted);
-    font-size:10px;font-weight:600;cursor:pointer;padding:6px 2px;
-    transition:color .15s;position:relative;-webkit-tap-highlight-color:transparent;
+    font-size:10px;font-weight:700;cursor:pointer;padding:6px 2px;
+    transition:color .2s,transform .2s var(--ease);position:relative;-webkit-tap-highlight-color:transparent;
   }
-  .bnav-item .bico{font-size:20px;line-height:1;transition:transform .15s}
+  .bnav-item .bico{font-size:20px;line-height:1;transition:transform .25s var(--ease)}
   .bnav-item.active{color:var(--primary2,#0284c7)}
-  .bnav-item.active .bico{transform:scale(1.15)}
+  .bnav-item.active .bico{transform:scale(1.18) translateY(-1px)}
   .bnav-item::after{content:'';position:absolute;top:0;left:20%;right:20%;height:3px;border-radius:0 0 3px 3px;background:transparent;transition:background .15s}
   .bnav-item.active::after{background:var(--primary,#38bdf8)}
 }
@@ -81,17 +156,19 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{wid
 
 
 /* LOGIN */
-#loginScreen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#075985,#0284c7 55%,#38bdf8)}
-.login-box{width:min(420px,100%);background:#fff;border-radius:20px;padding:30px;box-shadow:0 20px 60px #0f172a55;text-align:center}
-.login-logo{width:72px;height:72px;margin:0 auto 15px;border-radius:18px;display:grid;place-items:center;background:#e0f2fe;font-size:36px}
-.login-box h2{margin:0;color:#0f172a;font-size:24px}.login-box p{margin:7px 0 22px;color:#64748b;font-size:13px}
+#loginScreen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 15% 15%,#0ea5e9 0%,transparent 45%),radial-gradient(circle at 85% 85%,#4f46e5 0%,transparent 45%),linear-gradient(135deg,#075985,#0284c7 55%,#38bdf8);overflow:hidden}
+.login-box{width:min(420px,100%);background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.5);border-radius:var(--radius-lg);padding:34px 30px;box-shadow:var(--shadow-lg);text-align:center;animation:loginIn .5s var(--ease)}
+@keyframes loginIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.login-logo{width:72px;height:72px;margin:0 auto 15px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(145deg,#38bdf8,#0284c7);font-size:34px;box-shadow:0 10px 24px -6px #0284c766}
+.login-box h2{margin:0;color:#0f172a;font-size:23px;font-weight:800;letter-spacing:-.02em}.login-box p{margin:7px 0 24px;color:#64748b;font-size:13px}
 .login-field{text-align:left;margin-bottom:14px}.login-field label{display:block;font-size:12px;font-weight:700;color:#475569;margin-bottom:6px}
-.login-field input{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;outline:none}
-.login-field input:focus{border-color:#38bdf8;box-shadow:0 0 0 3px #38bdf822}
-.login-btn{width:100%;padding:12px;border:0;border-radius:10px;background:#0284c7;color:#fff;font-weight:800;cursor:pointer}
-.login-btn:hover{background:#075985}.login-error{display:none;margin:0 0 14px;padding:10px;border-radius:9px;background:#fee2e2;color:#991b1b;font-size:12px}
-.login-help{margin-top:16px;font-size:11px;color:#94a3b8}.logout-btn{margin-top:12px;width:100%}
-@media(max-width:500px){.login-box{padding:24px}}
+.login-field input{width:100%;padding:12px 13px;border:1.5px solid #cbd5e1;border-radius:var(--radius-sm);outline:none;transition:border-color .18s,box-shadow .18s}
+.login-field input:focus{border-color:#38bdf8;box-shadow:0 0 0 4px #38bdf826}
+.login-btn{width:100%;padding:13px;border:0;border-radius:var(--radius-sm);background:linear-gradient(135deg,#38bdf8,#0284c7);color:#fff;font-weight:800;cursor:pointer;box-shadow:0 8px 18px -4px #0284c755;transition:filter .15s,transform .15s;letter-spacing:.01em}
+.login-btn:hover{filter:brightness(1.08)}.login-btn:active{transform:scale(.98)}
+.login-error{display:none;margin:0 0 14px;padding:10px;border-radius:9px;background:#fee2e2;color:#991b1b;font-size:12px;font-weight:600}
+.login-help{margin-top:18px;font-size:11px;color:#94a3b8}.logout-btn{margin-top:12px;width:100%}
+@media(max-width:500px){.login-box{padding:26px 22px}}
 
 /* STUDENT SEARCH (Laporan Individu) */
 .student-search-wrap{position:relative;min-width:240px}
@@ -126,7 +203,8 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}.sidebar{wid
 #monthlyGrid .grid-table td.col-no{position:sticky;left:0;background:var(--card);z-index:1;padding:4px 5px;font-size:11px;min-width:32px;max-width:36px}
 #monthlyGrid .grid-table td.col-nis{position:sticky;left:36px;background:var(--card);z-index:1;padding:4px 5px;font-size:11px;min-width:68px}
 #monthlyGrid .grid-table td.col-nama{position:sticky;left:108px;background:var(--card);z-index:1;text-align:left;padding:4px 8px;font-size:12px;min-width:145px;border-right:2px solid #cbd5e1}
-.grid-cell{display:block;width:28px;height:26px;border:0;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;margin:2px auto;transition:background .1s}
+.grid-cell{display:block;width:28px;height:26px;border:0;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;margin:2px auto;transition:transform .12s,filter .12s}
+.grid-cell:hover{transform:scale(1.12);filter:brightness(.96)}
 .grid-cell.H{background:#dcfce7;color:#166534}
 .grid-cell.S{background:#fef3c7;color:#92400e}
 .grid-cell.I{background:#dbeafe;color:#1e40af}
@@ -150,7 +228,7 @@ td.col-sum-A{color:#991b1b;background:#fff1f2}
 td.col-sum-B{color:#9a3412;background:#fff7ed}
 
 /* ===== STATUS PICKER POPUP ===== */
-.status-picker{position:fixed;z-index:9000;background:#fff;border:1px solid #cbd5e1;border-radius:14px;box-shadow:0 8px 32px #0f172a28;padding:10px 10px 8px;min-width:210px;display:none;flex-direction:column;gap:6px;animation:pickerIn .12s ease}
+.status-picker{position:fixed;z-index:9000;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-lg);padding:10px 10px 8px;min-width:210px;display:none;flex-direction:column;gap:6px;animation:pickerIn .16s var(--ease)}
 @keyframes pickerIn{from{opacity:0;transform:scale(.92) translateY(-4px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .status-picker.show{display:flex}
 .picker-title{font-size:11px;color:#64748b;font-weight:700;padding:0 2px 2px;border-bottom:1px solid #f1f5f9;margin-bottom:2px}
@@ -165,6 +243,51 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
 .picker-btn.pk-A{background:#fee2e2;color:#991b1b}
 .picker-btn.pk-B{background:#ffedd5;color:#9a3412}
 .picker-close{align-self:flex-end;background:none;border:0;color:#94a3b8;font-size:16px;cursor:pointer;line-height:1;padding:0 2px;margin-top:-4px}
+
+/* ===== POLISH TAMBAHAN: scrollbar, fokus, mode gelap, FAB, badge live ===== */
+*:focus-visible{outline:2.5px solid var(--primary);outline-offset:2px;border-radius:4px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:99px;border:2px solid var(--bg)}
+html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color:var(--bg)}
+.mode-toggle{width:100%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#e2e8f0;border-radius:11px;padding:9px;cursor:pointer;margin:4px 0;font-size:12px;display:flex;align-items:center;justify-content:center;gap:7px;font-weight:600;transition:background .18s}
+.mode-toggle:hover{background:rgba(255,255,255,.14)}
+.sidebar.collapsed .mode-toggle span:last-child{display:none}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px #22c55e33;animation:pulseDot 1.8s infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+.fab-mobile{display:none}
+@media(max-width:650px){
+  .fab-mobile{display:flex;position:fixed;right:16px;bottom:calc(64px + env(safe-area-inset-bottom,0px) + 14px);z-index:160;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;border:0;align-items:center;justify-content:center;font-size:24px;box-shadow:0 10px 26px -6px color-mix(in srgb,var(--primary2) 70%,transparent);cursor:pointer;transition:transform .15s var(--ease)}
+  .fab-mobile:active{transform:scale(.92)}
+  header.topbar>div:last-child .btn-primary{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+.avatar{width:28px;height:28px;min-width:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff;vertical-align:middle;box-shadow:0 2px 6px rgba(15,23,42,.18)}
+.name-cell{display:inline-flex;align-items:center;gap:9px;font-weight:600}
+.gender-badge{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:800;background:#f1f5f9;color:#475569}
+.gender-badge.male{background:#dbeafe;color:#1d4ed8}
+.gender-badge.female{background:#fce7f3;color:#be185d}
+.empty{position:relative}
+.empty::before{content:'📭';display:block;font-size:30px;margin-bottom:8px;opacity:.6}
+.notice{position:relative}
+
+/* ===== ANIMASI ICON MENU SIDEBAR & BOTTOM NAV (gaya app profesional) ===== */
+.nav-icon{transform-origin:center;will-change:transform}
+.nav button:hover .nav-icon{animation:iconWiggle .55s var(--ease)}
+.nav button.active .nav-icon{animation:iconSettle .45s var(--ease);position:relative}
+.nav button.active .nav-icon{background:linear-gradient(145deg,var(--primary,#38bdf8),var(--primary2,#0284c7));box-shadow:0 4px 12px -2px color-mix(in srgb,var(--primary2,#0284c7) 65%,transparent)}
+.nav-icon.pop,.bico.pop{animation:iconPop .5s var(--ease)!important}
+@keyframes iconWiggle{0%,100%{transform:rotate(0) scale(1)}25%{transform:rotate(-12deg) scale(1.12)}55%{transform:rotate(10deg) scale(1.12)}80%{transform:rotate(-4deg) scale(1.05)}}
+@keyframes iconSettle{0%{transform:scale(.6) rotate(-15deg)}55%{transform:scale(1.22) rotate(6deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes iconPop{0%{transform:scale(1)}30%{transform:scale(1.4) rotate(-10deg)}58%{transform:scale(.88) rotate(6deg)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
+.sidebar-toggle{overflow:hidden}
+#sidebarToggleIcon{display:inline-block;transition:transform .35s var(--ease)}
+.sidebar.collapsed #sidebarToggleIcon{transform:rotate(180deg)}
+.bnav-item .bico{will-change:transform}
+.bnav-item:active .bico{animation:iconTap .3s var(--ease)}
+@keyframes iconTap{0%{transform:scale(1)}40%{transform:scale(.72)}100%{transform:scale(1)}}
+.app-topbar .hamburger:hover span{background:#fffdf5}
+@media(hover:none){.nav button:hover .nav-icon{animation:none}}
 </style>
 </head>
 <body>
@@ -215,30 +338,31 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
     <button data-page="backup" data-label="Backup &amp; Data"><span class="nav-icon">💾</span><span>Backup &amp; Data</span></button>
     <button data-page="cloudSync" data-label="Sinkron Cloud"><span class="nav-icon">☁️</span><span>Sinkron Cloud</span></button>
   </div>
+  <button class="mode-toggle" id="modeToggleBtn" onclick="toggleDarkMode()" title="Ganti mode terang/gelap"><span id="modeToggleIcon">🌙</span><span id="modeToggleLabel">Mode Gelap</span></button>
   <button class="btn btn-danger logout-btn" onclick="logoutApp()">🚪<span> Keluar</span></button>
 </aside>
 
 <main class="main">
-<header class="topbar"><div><h1 id="pageTitle">ABSENSI SISWA</h1><div id="schoolHeaderName" style="font-weight:700;color:#334155;margin-top:3px">SMK NEGERI 1 SIKUR</div><div class="date-now" id="clock"></div></div>
-<div><button class="btn btn-primary" onclick="openDailyToday()">+ Isi Absensi Hari Ini</button></div></header>
+<header class="topbar"><div><h1 id="pageTitle">ABSENSI SISWA</h1><div id="schoolHeaderName" style="font-weight:700;color:var(--text);margin-top:3px">SMK NEGERI 1 SIKUR</div><div class="date-now"><span class="live-dot" style="margin-right:6px"></span><span id="clock"></span></div></div>
+<div><button class="btn btn-primary" onclick="openDailyToday()">📝 Isi Absensi Hari Ini</button></div></header>
 
 <section id="dashboard" class="page active">
   <div class="cards" id="statCards"></div>
   <div class="grid2">
-    <div class="card"><div class="section-title"><h2>Statistik Hari Ini</h2><span id="dashDate"></span></div><div id="todayStats"></div></div>
-    <div class="card"><div class="section-title"><h2>Absensi 6 Hari Terakhir</h2></div><div class="chart" id="weekChart"></div></div>
+    <div class="card"><div class="section-title"><h2>📊 Statistik Hari Ini</h2><span id="dashDate"></span></div><div id="todayStats"></div></div>
+    <div class="card"><div class="section-title"><h2>📈 Absensi 6 Hari Terakhir</h2></div><div class="chart" id="weekChart"></div></div>
   </div>
-  <div class="card" style="margin-top:18px"><div class="section-title"><h2>Data Siswa Terbaru</h2><button class="btn btn-secondary" onclick="showPage('students')">Lihat Semua</button></div><div class="table-wrap"><table class="table"><thead><tr><th>NIS</th><th>Nama</th><th>Kelas</th><th>Jenis Kelamin</th></tr></thead><tbody id="recentStudents"></tbody></table></div></div>
+  <div class="card" style="margin-top:18px"><div class="section-title"><h2>🆕 Data Siswa Terbaru</h2><button class="btn btn-secondary" onclick="showPage('students')">Lihat Semua</button></div><div class="table-wrap"><table class="table"><thead><tr><th>NIS</th><th>Nama</th><th>Kelas</th><th>Jenis Kelamin</th></tr></thead><tbody id="recentStudents"></tbody></table></div></div>
 </section>
 
 <section id="students" class="page">
  <div class="card">
-  <div class="section-title"><h2>Data Siswa</h2><div><button class="btn btn-warning" onclick="saveStudentsData()">💾 Simpan Data</button> <button class="btn btn-success" onclick="exportStudents()">⬇ Export Excel</button> <button class="btn btn-info" onclick="document.getElementById('excelFile').click()">⬆ Import Excel</button> <input type="file" id="excelFile" accept=".xlsx,.xls,.csv" style="display:none" onchange="importStudentsExcel(event)"> <button class="btn btn-primary" onclick="openStudentModal()">+ Tambah Siswa</button></div></div>
+  <div class="section-title"><h2>🎓 Data Siswa</h2><div><button class="btn btn-warning" onclick="saveStudentsData()">💾 Simpan Data</button> <button class="btn btn-success" onclick="exportStudents()">⬇ Export Excel</button> <button class="btn btn-info" onclick="document.getElementById('excelFile').click()">⬆ Import Excel</button> <input type="file" id="excelFile" accept=".xlsx,.xls,.csv" style="display:none" onchange="importStudentsExcel(event)"> <button class="btn btn-primary" onclick="openStudentModal()">+ Tambah Siswa</button></div></div>
   <div class="toolbar"><input id="studentSearch" class="input" placeholder="Cari NIS / nama siswa..." oninput="renderStudents()"><select id="studentClassFilter" class="select" onchange="renderStudents()"><option value="">Semua Kelas</option></select><button class="btn btn-secondary" onclick="document.getElementById('studentSearch').value='';document.getElementById('studentClassFilter').value='';renderStudents()">Reset</button></div>
   <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>L/P</th><th>Kelas</th><th>Tempat/Tgl Lahir</th><th>No. HP</th><th>Aksi</th></tr></thead><tbody id="studentTable"></tbody></table></div>
  </div>
 <div class="card" style="margin-top:18px">
-<div class="section-title"><h2>Import Data Siswa dari Excel</h2></div>
+<div class="section-title"><h2>📥 Import Data Siswa dari Excel</h2></div>
 <div class="notice">Kolom yang disarankan: <b>NIS, Nama, Jenis Kelamin, Kelas, Tempat Lahir, Tanggal Lahir, No HP, Alamat</b>. NIS yang sudah ada akan diperbarui.</div>
 <button class="btn btn-secondary" onclick="downloadExcelTemplate()">⬇ Download Template Excel</button>
 </div></section>
@@ -247,29 +371,29 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
  <div class="cards" id="infoCards"></div>
  <div class="grid2">
   <div class="card">
-   <div class="section-title"><h2>Informasi Data Siswa</h2><button class="btn btn-success" onclick="exportStudents()">⬇ Export Siswa</button></div>
+   <div class="section-title"><h2>📋 Informasi Data Siswa</h2><button class="btn btn-success" onclick="exportStudents()">⬇ Export Siswa</button></div>
    <div class="table-wrap"><table class="table"><thead><tr><th>Informasi</th><th>Jumlah</th></tr></thead>
    <tbody id="infoStudentStats"></tbody></table></div>
   </div>
   <div class="card">
-   <div class="section-title"><h2>Informasi Data Kelas</h2><button class="btn btn-primary" onclick="showPage('classes')">Kelola Kelas</button></div>
+   <div class="section-title"><h2>🏫 Informasi Data Kelas</h2><button class="btn btn-primary" onclick="showPage('classes')">Kelola Kelas</button></div>
    <div class="table-wrap"><table class="table"><thead><tr><th>Kelas</th><th>Wali Kelas</th><th>Jumlah Siswa</th></tr></thead>
    <tbody id="infoClassStats"></tbody></table></div>
   </div>
  </div>
  <div class="card" style="margin-top:18px">
-  <div class="section-title"><h2>Data Jenis Kelamin</h2></div>
+  <div class="section-title"><h2>🚻 Data Jenis Kelamin</h2></div>
   <div class="attendance-summary" id="genderStats"></div>
  </div>
 </section>
 
 <section id="classes" class="page">
- <div class="card"><div class="section-title"><h2>Data Kelas</h2><div><button class="btn btn-warning" onclick="saveClassesData()">💾 Simpan Data</button> <button class="btn btn-success" onclick="exportClasses()">⬇ Export Excel</button> <button class="btn btn-primary" onclick="openClassModal()">+ Tambah Kelas</button></div></div>
+ <div class="card"><div class="section-title"><h2>🏫 Data Kelas</h2><div><button class="btn btn-warning" onclick="saveClassesData()">💾 Simpan Data</button> <button class="btn btn-success" onclick="exportClasses()">⬇ Export Excel</button> <button class="btn btn-primary" onclick="openClassModal()">+ Tambah Kelas</button></div></div>
  <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>Nama Kelas</th><th>Wali Kelas</th><th>Jumlah Siswa</th><th>Aksi</th></tr></thead><tbody id="classTable"></tbody></table></div></div>
 </section>
 
 <section id="daily" class="page">
- <div class="card"><div class="section-title"><h2>Absensi Harian</h2><div><button class="btn btn-success" onclick="saveAttendance()">💾 Simpan Absensi</button> <button class="btn btn-info" onclick="exportDailyExcel()">⬇ Excel</button> <button class="btn btn-secondary" onclick="printRecapReport('daily')">🖨 PDF</button></div></div>
+ <div class="card"><div class="section-title"><h2>📝 Absensi Harian</h2><div><button class="btn btn-success" onclick="saveAttendance()">💾 Simpan Absensi</button> <button class="btn btn-info" onclick="exportDailyExcel()">⬇ Excel</button> <button class="btn btn-secondary" onclick="printRecapReport('daily')">🖨 PDF</button></div></div>
  <div class="toolbar">
 <label style="display:flex;align-items:center;gap:7px">Tanggal <input type="date" id="attendanceDate" class="input" onchange="renderAttendance()"></label>
 <select id="attendanceClass" class="select" onchange="renderAttendance()" style="min-width:190px"><option value="">Pilih Kelas</option></select>
@@ -335,7 +459,7 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
 </section>
 
 <section id="weekly" class="page">
-  <div class="card"><div class="section-title"><h2>Rekap Mingguan</h2><div>
+  <div class="card"><div class="section-title"><h2>📊 Rekap Mingguan</h2><div>
     <button class="btn btn-success" onclick="exportRecapExcel('weekly')">⬇ Excel</button>
     <button class="btn btn-secondary" onclick="printRecapReport('weekly')">🖨 PDF</button>
   </div></div>
@@ -344,13 +468,13 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
 </section>
 
 <section id="monthly" class="page">
- <div class="card"><div class="section-title"><h2>Rekap Bulanan</h2><div><button class="btn btn-success" onclick="exportRecapExcel('monthly')">⬇ Excel</button> <button class="btn btn-secondary" onclick="printRecapReport('monthly')">🖨 PDF</button></div></div>
+ <div class="card"><div class="section-title"><h2>🗓️ Rekap Bulanan</h2><div><button class="btn btn-success" onclick="exportRecapExcel('monthly')">⬇ Excel</button> <button class="btn btn-secondary" onclick="printRecapReport('monthly')">🖨 PDF</button></div></div>
  <div class="toolbar"><input type="month" id="monthlyDate" class="input" onchange="renderMonthly()"><select id="monthlyClass" class="select" onchange="renderMonthly()"><option value="">Semua Kelas</option></select></div>
  <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>Total</th><th>Persentase Kehadiran</th></tr></thead><tbody id="monthlyTable"></tbody></table></div></div>
 </section>
 
 <section id="yearly" class="page">
- <div class="card"><div class="section-title"><h2>Rekap Tahunan</h2><div><button class="btn btn-success" onclick="exportRecapExcel('yearly')">⬇ Excel</button> <button class="btn btn-secondary" onclick="printRecapReport('yearly')">🖨 PDF</button></div></div>
+ <div class="card"><div class="section-title"><h2>📈 Rekap Tahunan</h2><div><button class="btn btn-success" onclick="exportRecapExcel('yearly')">⬇ Excel</button> <button class="btn btn-secondary" onclick="printRecapReport('yearly')">🖨 PDF</button></div></div>
  <div class="toolbar"><input type="number" id="yearlyDate" class="input" min="2000" max="2100" onchange="renderYearly()"><select id="yearlyClass" class="select" onchange="renderYearly()"><option value="">Semua Kelas</option></select></div>
  <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>Total</th><th>Persentase Kehadiran</th></tr></thead><tbody id="yearlyTable"></tbody></table></div></div>
 </section>
@@ -358,7 +482,7 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
 <section id="semester" class="page">
  <div class="card">
   <div class="section-title">
-   <div><h2>Rekap Semester</h2><div class="date-now">SMK NEGERI 1 SIKUR</div></div>
+   <div><h2>🎓 Rekap Semester</h2><div class="date-now">SMK NEGERI 1 SIKUR</div></div>
    <div><button class="btn btn-success" onclick="exportSemesterExcel()">⬇ Excel</button> <button class="btn btn-secondary" onclick="printRecapReport('semester')">🖨 PDF</button></div>
   </div>
   <div class="toolbar">
@@ -380,7 +504,7 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
 <section id="individual" class="page">
  <div class="card">
   <div class="section-title">
-   <div><h2>Laporan Kehadiran Individu</h2><div class="date-now" id="individualSchoolName">SMK NEGERI 1 SIKUR</div></div>
+   <div><h2>🧑‍🎓 Laporan Kehadiran Individu</h2><div class="date-now" id="individualSchoolName">SMK NEGERI 1 SIKUR</div></div>
    <button class="btn btn-success" onclick="printIndividualReport()">🖨 Cetak / Simpan PDF</button> <button class="btn btn-info" onclick="exportIndividualReport()">⬇ Export CSV</button>
   </div>
   <div class="toolbar">
@@ -461,7 +585,7 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
 
 <section id="schoolInfo" class="page">
  <div class="card">
-  <div class="section-title"><div><h2>Informasi Sekolah</h2><div class="date-now">Profil sekolah dan logo</div></div><button class="btn btn-primary" onclick="saveSchoolInfo()">💾 Simpan</button></div>
+  <div class="section-title"><div><h2>🏫 Informasi Sekolah</h2><div class="date-now">Profil sekolah dan logo</div></div><button class="btn btn-primary" onclick="saveSchoolInfo()">💾 Simpan</button></div>
   <div class="grid2">
    <div>
     <div style="text-align:center;margin-bottom:15px">
@@ -510,11 +634,11 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
 
 <section id="backup" class="page">
  <div class="grid2">
-  <div class="card"><h2>Backup Data</h2><p class="date-now">Simpan seluruh data siswa, kelas, dan absensi ke file JSON.</p><button class="btn btn-primary" onclick="backupData()">⬇ Download Backup JSON</button><p class="date-now" style="margin-top:8px">💡 File ini juga bisa diimpor di <b>Aplikasi BK</b> (menu Laporan Individu → Hubungkan Data Siswa &amp; Kehadiran) agar data siswa tergabung dan kehadiran tampil di laporan individu BK.</p></div>
-  <div class="card"><h2>Restore Data</h2><p class="date-now">Masukkan kembali data dari file backup JSON.</p><input type="file" id="restoreFile" accept=".json" class="input"><button class="btn btn-warning" style="margin-top:10px" onclick="restoreData()">↥ Restore Data</button></div>
-  <div class="card danger-zone"><h2>Hapus Semua Data</h2><p class="date-now">Gunakan dengan hati-hati. Tindakan ini tidak dapat dibatalkan kecuali Anda memiliki backup.</p><button class="btn btn-danger" onclick="clearAllData()">Hapus Semua Data</button></div>
+  <div class="card"><h2>💾 Backup Data</h2><p class="date-now">Simpan seluruh data siswa, kelas, dan absensi ke file JSON.</p><button class="btn btn-primary" onclick="backupData()">⬇ Download Backup JSON</button><p class="date-now" style="margin-top:8px">💡 File ini juga bisa diimpor di <b>Aplikasi BK</b> (menu Laporan Individu → Hubungkan Data Siswa &amp; Kehadiran) agar data siswa tergabung dan kehadiran tampil di laporan individu BK.</p></div>
+  <div class="card"><h2>♻️ Restore Data</h2><p class="date-now">Masukkan kembali data dari file backup JSON.</p><input type="file" id="restoreFile" accept=".json" class="input"><button class="btn btn-warning" style="margin-top:10px" onclick="restoreData()">↥ Restore Data</button></div>
+  <div class="card danger-zone"><h2>⚠️ Hapus Semua Data</h2><p class="date-now">Gunakan dengan hati-hati. Tindakan ini tidak dapat dibatalkan kecuali Anda memiliki backup.</p><button class="btn btn-danger" onclick="clearAllData()">Hapus Semua Data</button></div>
  </div>
- <div class="card" style="margin-top:18px"><h2>Informasi Sistem</h2><p>Versi: SIAS 1.0 • Penyimpanan: browser localStorage (offline) + Sinkron Cloud opsional via Firebase Firestore (multi perangkat, saat online). Atur di menu ☁️ Sinkron Cloud.</p></div>
+ <div class="card" style="margin-top:18px"><h2>ℹ️ Informasi Sistem</h2><p>Versi: SIAS 1.0 • Penyimpanan: browser localStorage (offline) + Sinkron Cloud opsional via Firebase Firestore (multi perangkat, saat online). Atur di menu ☁️ Sinkron Cloud.</p></div>
 </section>
 
 <section id="cloudSync" class="page">
@@ -543,7 +667,7 @@ td.col-sum-B{color:#9a3412;background:#fff7ed}
   </div>
  </div>
  <div class="card" style="margin-top:18px">
-  <h2>Cara Mendapatkan Konfigurasi Firebase (Gratis, ±5 menit)</h2>
+  <h2>🔧 Cara Mendapatkan Konfigurasi Firebase (Gratis, ±5 menit)</h2>
   <ol style="font-size:13px;line-height:1.9;color:#334155;padding-left:18px">
    <li>Buka <a href="https://console.firebase.google.com" target="_blank" rel="noopener">console.firebase.google.com</a>, login dengan akun Google, lalu klik <b>Add project / Tambah proyek</b>.</li>
    <li>Setelah proyek dibuat, di halaman utama klik ikon <b>&lt;/&gt; (Web)</b> untuk mendaftarkan aplikasi web, beri nama bebas, klik <b>Register app</b>.</li>
@@ -696,7 +820,7 @@ function renderAppearance(){
   (t.bgImage?`<div class="bg-option active" style="background-image:url(${t.bgImage})" title="Gambar Kustom"><span>Gambar Anda</span></div>`:'');
  const logoSrc=db.school.logo;
  $('appLogoPreview').innerHTML=logoSrc?`<img src="${logoSrc}" style="width:100%;height:100%;object-fit:contain">`:'📚';
- applyTheme();
+ if(typeof applyDarkMode==='function')applyDarkMode();else applyTheme();
 }
 function choosePreset(i){const p=THEME_PRESETS[i];ensureTheme();db.theme.primary=p.primary;db.theme.primary2=p.primary2;db.theme.sidebar=p.sidebar;db.theme.sidebarActive=p.sidebarActive;renderAppearance()}
 function applyCustomColor(){ensureTheme();const c=$('customPrimaryColor').value;db.theme.primary=c;db.theme.primary2=c;db.theme.sidebar=c;db.theme.sidebarActive=c;renderAppearance()}
@@ -833,8 +957,14 @@ function renderCurrentPage(){
 window.addEventListener('online',()=>{const cfg=loadCloudConfig();if(cfg)startCloudSync(cfg)});
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+const AVATAR_COLORS=['#6366f1','#ec4899','#06b6d4','#f59e0b','#22c55e','#ef4444','#8b5cf6','#0ea5e9','#14b8a6','#f97316'];
+function avatarColor(str){let h=0;str=String(str||'?');for(let i=0;i<str.length;i++)h=str.charCodeAt(i)+((h<<5)-h);return AVATAR_COLORS[Math.abs(h)%AVATAR_COLORS.length]}
+function avatarHTML(name){const initials=(String(name||'?').trim().split(/\s+/).map(w=>w[0]||'').slice(0,2).join('')||'?').toUpperCase();return `<span class="avatar" style="background:${avatarColor(name)}">${esc(initials)}</span>`}
+function nameCellHTML(name){return `<span class="name-cell">${avatarHTML(name)}<span>${esc(name)}</span></span>`}
+function genderBadge(g){return g==='L'?'<span class="gender-badge male">♂ L</span>':g==='P'?'<span class="gender-badge female">♀ P</span>':`<span class="gender-badge">${esc(g||'-')}</span>`}
 function formatDate(d){return new Date(d+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'2-digit',year:'numeric'})}
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));document.querySelectorAll('.bnav-item[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));const btn=document.querySelector(`button[data-page="${id}"]`);$('pageTitle').textContent=btn.dataset.label||btn.textContent.trim();if($('topbarTitleMobile'))$('topbarTitleMobile').textContent=btn.dataset.label||btn.textContent.trim();if(id==='dashboard')renderDashboard();if(id==='students')renderStudents();if(id==='infoData')renderInfoData();if(id==='schoolInfo')renderSchoolInfo();if(id==='appearance')renderAppearance();if(id==='individual')initIndividualReport();if(id==='classes')renderClasses();if(id==='daily')renderAttendance();if(id==='weekly')renderWeekly();if(id==='monthly')renderMonthly();if(id==='yearly')renderYearly();if(id==='semester'){initSemesterYears();renderSemester()}if(id==='cloudSync')refreshCloudForm();if(id==='changePassword')initChangePassword();if(id==='monthlyGrid'){initMonthlyGrid();renderMonthlyGrid()}}
+function popIcon(sel){document.querySelectorAll(sel).forEach(el=>{el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');el.addEventListener('animationend',()=>el.classList.remove('pop'),{once:true})})}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));document.querySelectorAll('.bnav-item[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));popIcon(`.nav button[data-page="${id}"] .nav-icon`);popIcon(`.bnav-item[data-page="${id}"] .bico`);const btn=document.querySelector(`button[data-page="${id}"]`);$('pageTitle').textContent=btn.dataset.label||btn.textContent.trim();if($('topbarTitleMobile'))$('topbarTitleMobile').textContent=btn.dataset.label||btn.textContent.trim();if(id==='dashboard')renderDashboard();if(id==='students')renderStudents();if(id==='infoData')renderInfoData();if(id==='schoolInfo')renderSchoolInfo();if(id==='appearance')renderAppearance();if(id==='individual')initIndividualReport();if(id==='classes')renderClasses();if(id==='daily')renderAttendance();if(id==='weekly')renderWeekly();if(id==='monthly')renderMonthly();if(id==='yearly')renderYearly();if(id==='semester'){initSemesterYears();renderSemester()}if(id==='cloudSync')refreshCloudForm();if(id==='changePassword')initChangePassword();if(id==='monthlyGrid'){initMonthlyGrid();renderMonthlyGrid()}}
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{showPage(b.dataset.page);closeDrawer();});
 
 // ===================== MOBILE NAV DRAWER =====================
@@ -857,7 +987,7 @@ function closeModal(id){$(id).classList.remove('show')}
 function openStudentModal(id=null){populateClassSelect('studentClass');$('studentForm').reset();$('studentId').value='';$('studentModalTitle').textContent='Tambah Siswa';if(id){let s=db.students.find(x=>x.id===id);if(!s)return;$('studentModalTitle').textContent='Edit Siswa';$('studentId').value=s.id;['nis','nama','gender','studentClass','birthPlace','birthDate','phone','address'].forEach(k=>{let key={studentClass:'classId'}[k]||k;$(k).value=s[key]||''})}$('studentModal').classList.add('show')}
 function saveStudent(e){e.preventDefault();let id=$('studentId').value;let obj={id:id||uid(),nis:$('nis').value.trim(),nama:$('nama').value.trim(),gender:$('gender').value,classId:$('studentClass').value,birthPlace:$('birthPlace').value,birthDate:$('birthDate').value,phone:$('phone').value,address:$('address').value};if(db.students.some(s=>s.nis===obj.nis&&s.id!==id))return alert('NIS sudah digunakan.');if(id)db.students=db.students.map(s=>s.id===id?obj:s);else db.students.push(obj);saveDB();closeModal('studentModal');renderStudents();refreshFilters();renderDashboard()}
 function deleteStudent(id){if(confirm('Hapus data siswa ini?')){db.students=db.students.filter(s=>s.id!==id);saveDB();renderStudents();refreshFilters();renderDashboard()}}
-function renderStudents(){let q=($('studentSearch')?.value||'').toLowerCase(),c=$('studentClassFilter')?.value||'';let a=db.students.filter(s=>(!q||s.nis.toLowerCase().includes(q)||s.nama.toLowerCase().includes(q))&&(!c||s.classId===c));$('studentTable').innerHTML=a.length?a.map((s,i)=>`<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${s.gender}</td><td>${esc(className(s.classId))}</td><td>${esc(s.birthPlace||'')}${s.birthDate?' / '+formatDate(s.birthDate):''}</td><td>${esc(s.phone||'')}</td><td><button class="btn btn-secondary" onclick="openStudentModal('${s.id}')">Edit</button> <button class="btn btn-danger" onclick="deleteStudent('${s.id}')">Hapus</button></td></tr>`).join(''):`<tr><td colspan="8" class="empty">Belum ada data siswa.</td></tr>`}
+function renderStudents(){let q=($('studentSearch')?.value||'').toLowerCase(),c=$('studentClassFilter')?.value||'';let a=db.students.filter(s=>(!q||s.nis.toLowerCase().includes(q)||s.nama.toLowerCase().includes(q))&&(!c||s.classId===c));$('studentTable').innerHTML=a.length?a.map((s,i)=>`<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${nameCellHTML(s.nama)}</td><td>${genderBadge(s.gender)}</td><td>${esc(className(s.classId))}</td><td>${esc(s.birthPlace||'')}${s.birthDate?' / '+formatDate(s.birthDate):''}</td><td>${esc(s.phone||'')}</td><td><button class="btn btn-secondary" onclick="openStudentModal('${s.id}')">✏️ Edit</button> <button class="btn btn-danger" onclick="deleteStudent('${s.id}')">🗑️ Hapus</button></td></tr>`).join(''):`<tr><td colspan="8" class="empty">🗂️ Belum ada data siswa.</td></tr>`}
 function className(id){return db.classes.find(c=>c.id===id)?.name||'-'}
 function openClassModal(id=null){document.querySelector('#classModal form').reset();$('classId').value='';$('classModalTitle').textContent='Tambah Kelas';if(id){let c=db.classes.find(x=>x.id===id);$('classId').value=id;$('className').value=c.name;$('homeroom').value=c.homeroom||'';$('classModalTitle').textContent='Edit Kelas'}$('classModal').classList.add('show')}
 function saveClass(e){e.preventDefault();let id=$('classId').value,o={id:id||uid(),name:$('className').value.trim(),homeroom:$('homeroom').value.trim()};if(db.classes.some(c=>c.name.toLowerCase()===o.name.toLowerCase()&&c.id!==id))return alert('Nama kelas sudah ada.');if(id)db.classes=db.classes.map(c=>c.id===id?o:c);else db.classes.push(o);saveDB();closeModal('classModal');refreshFilters();renderClasses()}
@@ -916,7 +1046,7 @@ function renderInfoData(){
   ].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${a[3]}</b></div>`).join('');
 }
 
-function renderClasses(){$('classTable').innerHTML=db.classes.length?db.classes.map((c,i)=>`<tr><td>${i+1}</td><td>${esc(c.name)}</td><td>${esc(c.homeroom||'-')}</td><td>${db.students.filter(s=>s.classId===c.id).length}</td><td><button class="btn btn-secondary" onclick="openClassModal('${c.id}')">Edit</button> <button class="btn btn-danger" onclick="deleteClass('${c.id}')">Hapus</button></td></tr>`).join(''):`<tr><td colspan="5" class="empty">Belum ada kelas.</td></tr>`}
+function renderClasses(){$('classTable').innerHTML=db.classes.length?db.classes.map((c,i)=>`<tr><td>${i+1}</td><td>${esc(c.name)}</td><td>${esc(c.homeroom||'-')}</td><td>${db.students.filter(s=>s.classId===c.id).length}</td><td><button class="btn btn-secondary" onclick="openClassModal('${c.id}')">✏️ Edit</button> <button class="btn btn-danger" onclick="deleteClass('${c.id}')">🗑️ Hapus</button></td></tr>`).join(''):`<tr><td colspan="5" class="empty">Belum ada kelas.</td></tr>`}
 function populateClassSelect(id,all=false){let el=$(id),v=el.value;el.innerHTML=(all?'<option value="">Semua Kelas</option>':'<option value="">Pilih Kelas</option>')+db.classes.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');if(v)el.value=v}
 function refreshFilters(){['studentClassFilter','attendanceClass','weeklyClass','monthlyClass','yearlyClass'].forEach(id=>populateClassSelect(id,true));populateClassSelect('studentClass',false);populateClassSelect('gridClass',false)}
 function statusBadge(st){return st==='H'?'<span class="badge hadir">Hadir</span>':st==='S'?'<span class="badge sakit">Sakit</span>':st==='I'?'<span class="badge izin">Izin</span>':st==='B'?'<span class="badge bolos">Bolos</span>':'<span class="badge alpa">Alpa</span>'}
@@ -940,7 +1070,7 @@ function renderAttendance(){
  $('attendanceClassNotice').innerHTML=`Kelas <b>${esc(className(c))}</b> • ${a.length} siswa ditampilkan. Status awal siswa adalah <b>Hadir</b>. Anda dapat mengubahnya menjadi Sakit, Izin, atau Alpa.`;
  $('attendanceTable').innerHTML=a.length?a.map((s,i)=>{
    let st=db.attendance[d]?.[s.id]||'H';
-   return `<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${esc(className(s.classId))}</td><td><div class="radio-group">${[['H','Hadir'],['S','Sakit'],['I','Izin'],['A','Alpa'],['B','Bolos']].map(([v,l])=>`<label class="radio"><input type="radio" name="att_${s.id}" value="${v}" ${st===v?'checked':''} onchange="setAttendance('${d}','${s.id}','${v}')">${l}</label>`).join('')}</div></td></tr>`
+   return `<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${nameCellHTML(s.nama)}</td><td>${esc(className(s.classId))}</td><td><div class="radio-group">${[['H','Hadir'],['S','Sakit'],['I','Izin'],['A','Alpa'],['B','Bolos']].map(([v,l])=>`<label class="radio"><input type="radio" name="att_${s.id}" value="${v}" ${st===v?'checked':''} onchange="setAttendance('${d}','${s.id}','${v}')">${l}</label>`).join('')}</div></td></tr>`
  }).join(''):`<tr><td colspan="5" class="empty">Belum ada siswa pada kelas ini.</td></tr>`;
  renderAttendanceSummary(d,c);
 }
@@ -1201,7 +1331,7 @@ function exportIndividualReport(){
   XLSX.utils.book_append_sheet(wb,wsChart,'Grafik');
   XLSX.writeFile(wb,filename);
 }
-function renderDashboard(){let d=today(),x={H:0,S:0,I:0,A:0};db.students.forEach(s=>{let st=db.attendance[d]?.[s.id];if(st)x[st]++});$('statCards').innerHTML=[['👨‍🎓','Total Siswa',db.students.length],['🏫','Total Kelas',db.classes.length],['✅','Hadir Hari Ini',x.H],['❌','Alpa Hari Ini',x.A]].map(a=>`<div class="card stat"><div><div class="label">${a[1]}</div><div class="num">${a[2]}</div></div><div class="icon">${a[0]}</div></div>`).join('');$('dashDate').textContent=formatDate(d);$('todayStats').innerHTML=`<div class="attendance-summary">${[['H','Hadir','hadir'],['S','Sakit','sakit'],['I','Izin','izin'],['A','Alpa','alpa'],['B','Bolos','bolos']].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${x[a[0]]}</b></div>`).join('')}</div>`;let days=[];{let z=new Date();while(days.length<6){if(z.getDay()!==0)days.unshift(z.toISOString().slice(0,10));z.setDate(z.getDate()-1)}}let vals=days.map(d=>db.students.filter(s=>db.attendance[d]?.[s.id]==='H').length);let max=Math.max(1,...vals);$('weekChart').innerHTML=vals.map((v,i)=>`<div class="bar" style="height:${Math.max(5,v/max*140)}px" title="${v} siswa hadir"><span>${days[i].slice(8)}</span></div>`).join('');$('recentStudents').innerHTML=db.students.slice(-5).reverse().map(s=>`<tr><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${esc(className(s.classId))}</td><td>${s.gender}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Belum ada data.</td></tr>'}
+function renderDashboard(){let d=today(),x={H:0,S:0,I:0,A:0};db.students.forEach(s=>{let st=db.attendance[d]?.[s.id];if(st)x[st]++});$('statCards').innerHTML=[['👨‍🎓','Total Siswa',db.students.length],['🏫','Total Kelas',db.classes.length],['✅','Hadir Hari Ini',x.H],['❌','Alpa Hari Ini',x.A]].map(a=>`<div class="card stat"><div><div class="label">${a[1]}</div><div class="num">${a[2]}</div></div><div class="icon">${a[0]}</div></div>`).join('');$('dashDate').textContent=formatDate(d);$('todayStats').innerHTML=`<div class="attendance-summary">${[['H','Hadir','hadir'],['S','Sakit','sakit'],['I','Izin','izin'],['A','Alpa','alpa'],['B','Bolos','bolos']].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${x[a[0]]}</b></div>`).join('')}</div>`;let days=[];{let z=new Date();while(days.length<6){if(z.getDay()!==0)days.unshift(z.toISOString().slice(0,10));z.setDate(z.getDate()-1)}}let vals=days.map(d=>db.students.filter(s=>db.attendance[d]?.[s.id]==='H').length);let max=Math.max(1,...vals);$('weekChart').innerHTML=vals.map((v,i)=>`<div class="bar" style="height:${Math.max(5,v/max*140)}px" title="${v} siswa hadir"><span>${days[i].slice(8)}</span></div>`).join('');$('recentStudents').innerHTML=db.students.slice(-5).reverse().map(s=>`<tr><td>${esc(s.nis)}</td><td>${nameCellHTML(s.nama)}</td><td>${esc(className(s.classId))}</td><td>${genderBadge(s.gender)}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">🗂️ Belum ada data.</td></tr>'}
 function normalizeHeader(v){return String(v??'').trim().toLowerCase().replace(/[^a-z0-9]+/g,'')}
 function excelValue(row,aliases){const keys=Object.keys(row);for(const a of aliases){const t=normalizeHeader(a);const k=keys.find(x=>normalizeHeader(x)===t);if(k!==undefined&&row[k]!==undefined&&row[k]!==null&&String(row[k]).trim()!=='')return row[k]}return ''}
 function excelDateValue(v){if(v===null||v===undefined||v==='')return '';if(v instanceof Date&&!isNaN(v))return v.toISOString().slice(0,10);if(typeof v==='number'&&window.XLSX){const d=XLSX.SSF.parse_date_code(v);if(d)return `${d.y}-${String(d.m).padStart(2,'0')}-${String(d.d).padStart(2,'0')}`}let s=String(v).trim();let m=s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);if(m)return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;return s}
@@ -1746,7 +1876,31 @@ function printGridReport() {
 }
 // ===== END ABSENSI BULANAN GRID =====
 
-function init(){ensureSchool();ensureTheme();applyTheme();updateBrandLogo();$('schoolHeaderName').textContent=db.school.name||'SMK NEGERI 1 SIKUR';let d=today();$('attendanceDate').value=d;$('weeklyDate').value=d;$('monthlyDate').value=d.slice(0,7);if($('gridMonth'))$('gridMonth').value=d.slice(0,7);$('yearlyDate').value=d.slice(0,4);refreshFilters();if($('semesterYear'))initSemesterYears();renderDashboard();initCloudFromStorage();setInterval(()=>{$('clock').textContent=new Date().toLocaleString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'})},1000)}
+const DARKMODE_KEY='SIAS_DARK_MODE_V1';
+function applyDarkMode(){
+ const on=localStorage.getItem(DARKMODE_KEY)==='1';
+ document.documentElement.setAttribute('data-mode',on?'dark':'light');
+ const ic=$('modeToggleIcon'),lb=$('modeToggleLabel');
+ if(ic)ic.textContent=on?'☀️':'🌙';
+ if(lb)lb.textContent=on?'Mode Terang':'Mode Gelap';
+ applyTheme();
+ if(on){
+  const r=document.documentElement.style;
+  r.setProperty('--bg','#0b1220','important');
+  r.setProperty('--card','#131b2c','important');
+  r.setProperty('--text','#e7ecf5','important');
+  r.setProperty('--th-bg','#16203350','important');
+  r.setProperty('--border','#243046','important');
+  r.setProperty('--muted','#8b96ab','important');
+  document.body.style.setProperty('background','#0b1220','important');
+ }
+}
+function toggleDarkMode(){
+ const on=localStorage.getItem(DARKMODE_KEY)==='1';
+ localStorage.setItem(DARKMODE_KEY,on?'0':'1');
+ applyDarkMode();
+}
+function init(){ensureSchool();ensureTheme();applyTheme();applyDarkMode();updateBrandLogo();$('schoolHeaderName').textContent=db.school.name||'SMK NEGERI 1 SIKUR';let d=today();$('attendanceDate').value=d;$('weeklyDate').value=d;$('monthlyDate').value=d.slice(0,7);if($('gridMonth'))$('gridMonth').value=d.slice(0,7);$('yearlyDate').value=d.slice(0,4);refreshFilters();if($('semesterYear'))initSemesterYears();renderDashboard();initCloudFromStorage();setInterval(()=>{$('clock').textContent=new Date().toLocaleString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'})},1000)}
 init();
 checkLogin();
 initSidebar();
@@ -1805,5 +1959,6 @@ initSidebar();
     <span class="bico">☰</span><span>Lainnya</span>
   </button>
 </nav>
+<button class="fab-mobile" onclick="openDailyToday()" aria-label="Isi absensi hari ini" title="Isi Absensi Hari Ini">✏️</button>
 </body>
 </html>
