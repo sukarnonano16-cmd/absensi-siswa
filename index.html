@@ -85,7 +85,7 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}
 .table th{background:var(--th-bg);color:#475569;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em}
 .table tbody tr{transition:background .15s}
 .table tbody tr:hover{background:color-mix(in srgb,var(--primary) 6%,transparent)}
-.table tr:last-child td{border-bottom:0}.individual-report{border:1px solid var(--border);border-radius:10px;padding:20px;background:#fff}.report-head{text-align:center;border-bottom:2px solid #bae6fd;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 4px}.report-student{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 25px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.report-summary .card-mini{border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}.report-summary b{display:block;font-size:20px;margin-top:3px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #cbd5e1;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}@media(max-width:700px){.report-summary{grid-template-columns:repeat(2,1fr)}.report-student{grid-template-columns:1fr}}.attendance-percent{display:flex;align-items:center;gap:7px;min-width:115px}.percent-track{height:8px;background:#e0f2fe;border-radius:99px;overflow:hidden;width:65px}.percent-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px;transition:width .5s var(--ease)}.percent-high{color:#15803d}.percent-mid{color:#b45309}.percent-low{color:#dc2626}
+.table tr:last-child td{border-bottom:0}.individual-report{border:1px solid var(--border);border-radius:10px;padding:20px;background:#fff}.kop-surat{display:flex;align-items:center;gap:14px;justify-content:center;color:#111}.kop-surat img{width:78px;height:78px;object-fit:contain;flex-shrink:0}.kop-surat .kop-logo-ph{width:78px;height:78px;flex-shrink:0}.kop-text{text-align:center;flex:1;line-height:1.35}.kop-text .kop-gov{font-size:15.5px;font-weight:800;text-transform:uppercase;letter-spacing:.01em}.kop-text .kop-school{font-size:14.5px;font-weight:700;margin-top:1px}.kop-text .kop-addr{font-style:italic;font-size:12px;margin-top:2px}.kop-text .kop-contact{font-size:12px}.kop-line{border-bottom:3px double #111;margin:8px 0 14px}.report-head{text-align:center;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 4px}.report-student{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 25px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.report-summary .card-mini{border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}.report-summary b{display:block;font-size:20px;margin-top:3px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #cbd5e1;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}.report-signature{margin-top:26px;display:flex;justify-content:flex-end;font-size:12.5px}.report-signature .sig-block{text-align:center;min-width:210px}.report-signature .sig-space{height:55px}.report-signature .sig-name{font-weight:700;text-decoration:underline}@media(max-width:700px){.report-summary{grid-template-columns:repeat(2,1fr)}.report-student{grid-template-columns:1fr}}.attendance-percent{display:flex;align-items:center;gap:7px;min-width:115px}.percent-track{height:8px;background:#e0f2fe;border-radius:99px;overflow:hidden;width:65px}.percent-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px;transition:width .5s var(--ease)}.percent-high{color:#15803d}.percent-mid{color:#b45309}.percent-low{color:#dc2626}
 .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.01em}
 .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.75}
 .hadir{background:#dcfce7;color:#166534}.sakit{background:#fef3c7;color:#92400e}.izin{background:#dbeafe;color:#1e40af}.alpa{background:#fee2e2;color:#991b1b}.bolos{background:#ffedd5;color:#9a3412}
@@ -504,7 +504,7 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
 
   <div class="toolbar" style="align-items:center">
    <div class="student-search-wrap" id="gridStudentSearchWrap">
-    <input type="text" id="gridStudentSearch" class="input" autocomplete="off" placeholder="<svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.35-4.35"/></svg> Cari nama / NIS siswa..." oninput="onGridStudentSearch()" onfocus="onGridStudentSearch()" style="width:100%">
+    <input type="text" id="gridStudentSearch" class="input" autocomplete="off" placeholder="Cari nama / NIS siswa..." oninput="onGridStudentSearch()" onfocus="onGridStudentSearch()" style="width:100%">
     <div class="student-search-list" id="gridStudentSearchList"></div>
    </div>
    <label style="display:flex;align-items:center;gap:7px;font-size:13px">Bulan
@@ -593,7 +593,7 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
   </div>
   <div class="toolbar">
    <div class="student-search-wrap">
-    <input type="text" id="individualStudentSearch" class="input" autocomplete="off" placeholder="<svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.35-4.35"/></svg> Cari nama / NIS siswa..." oninput="onIndividualStudentSearch()" onfocus="onIndividualStudentSearch()" style="width:100%">
+    <input type="text" id="individualStudentSearch" class="input" autocomplete="off" placeholder="Cari nama / NIS siswa..." oninput="onIndividualStudentSearch()" onfocus="onIndividualStudentSearch()" style="width:100%">
     <div class="student-search-list" id="individualStudentList"></div>
    </div>
    <select id="individualStudent" class="select" style="display:none" onchange="renderIndividualReport()"><option value="">Pilih Siswa</option></select>
@@ -673,14 +673,22 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
   <div class="grid2">
    <div>
     <div style="text-align:center;margin-bottom:15px">
-      <div id="logoPreview" style="width:150px;height:150px;margin:auto;border:2px dashed #7dd3fc;border-radius:14px;display:grid;place-items:center;background:#f0f9ff;overflow:hidden;color:#64748b">Logo Sekolah</div>
+      <div id="logoPreview" style="width:130px;height:130px;margin:auto;border:2px dashed #7dd3fc;border-radius:14px;display:grid;place-items:center;background:#f0f9ff;overflow:hidden;color:#64748b">Logo Sekolah (kanan)</div>
       <input type="file" id="schoolLogoFile" accept="image/png,image/jpeg,image/webp" style="margin-top:12px;width:100%" onchange="previewSchoolLogo(event)">
       <button type="button" class="btn btn-secondary" style="margin-top:8px" onclick="removeSchoolLogo()">Hapus Logo</button>
-      <p class="date-now">Upload PNG/JPG/WEBP. Logo disimpan di browser ini.</p>
+      <p class="date-now">Tampil di sisi kanan kop surat. Upload PNG/JPG/WEBP.</p>
+    </div>
+    <div style="text-align:center;margin-bottom:15px">
+      <div id="logoPreview2" style="width:130px;height:130px;margin:auto;border:2px dashed #7dd3fc;border-radius:14px;display:grid;place-items:center;background:#f0f9ff;overflow:hidden;color:#64748b">Logo Pemerintah/Dinas (kiri)</div>
+      <input type="file" id="schoolLogoFile2" accept="image/png,image/jpeg,image/webp" style="margin-top:12px;width:100%" onchange="previewSchoolLogo2(event)">
+      <button type="button" class="btn btn-secondary" style="margin-top:8px" onclick="removeSchoolLogo2()">Hapus Logo</button>
+      <p class="date-now">Tampil di sisi kiri kop surat, mis. logo Pemprov/Dinas. Upload PNG/JPG/WEBP. Logo disimpan di browser ini.</p>
     </div>
    </div>
    <div>
     <div class="form-grid">
+     <div class="field" style="grid-column:1/-1"><label>Nama Pemerintah/Instansi Induk</label><input id="schoolGovLine1" placeholder="Contoh: PEMERINTAH PROVINSI NUSA TENGGARA BARAT"></div>
+     <div class="field" style="grid-column:1/-1"><label>Nama Dinas</label><input id="schoolGovLine2" placeholder="Contoh: DINAS PENDIDIKAN PEMUDA DAN OLAHRAGA"></div>
      <div class="field"><label>Nama Sekolah</label><input id="schoolName" value="SMK NEGERI 1 SIKUR"></div>
      <div class="field"><label>NPSN</label><input id="schoolNpsn" placeholder="Masukkan NPSN"></div>
      <div class="field"><label>NSS</label><input id="schoolNss" placeholder="Masukkan NSS"></div>
@@ -695,6 +703,15 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
      <div class="field" style="grid-column:1/-1"><label>Website</label><input id="schoolWebsite" placeholder="https://..."></div>
     </div>
    </div>
+  </div>
+ </div>
+ <div class="card" style="margin-top:18px">
+  <div class="section-title"><div><h2><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><circle cx="12" cy="9" r="3.2"/><path d="M5 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/></svg> Data Guru BK</h2><div class="date-now">Ditampilkan sebagai penandatangan pada laporan yang dicetak (PDF/Excel)</div></div></div>
+  <div class="form-grid">
+   <div class="field"><label>Nama Guru BK</label><input id="schoolBkName" placeholder="Nama lengkap Guru BK"></div>
+   <div class="field"><label>NIP Guru BK</label><input id="schoolBkNip" placeholder="Masukkan NIP Guru BK"></div>
+   <div class="field"><label>No. Telepon Guru BK</label><input id="schoolBkPhone" placeholder="Masukkan nomor HP Guru BK"></div>
+   <div class="field"><label>Jabatan</label><input id="schoolBkJabatan" placeholder="Contoh: Guru BK / Konselor Sekolah"></div>
   </div>
  </div>
 </section>
@@ -855,7 +872,7 @@ const KEY='ABSENSI_SISWA_V1';
 var db=JSON.parse(localStorage.getItem(KEY)||'null')||{students:[],classes:[],attendance:{},school:{name:'SMK NEGERI 1 SIKUR',logo:'',npsn:'',nss:'',postal:'',village:'',district:'',regency:'',province:'',phone:'',email:'',address:'',website:''}};
 const $=id=>document.getElementById(id);
 const today=()=>new Date().toISOString().slice(0,10);
-function ensureSchool(){if(!db.school)db.school={name:'SMK NEGERI 1 SIKUR',logo:'',npsn:'',nss:'',postal:'',village:'',district:'',regency:'',province:'',phone:'',email:'',address:'',website:''}}
+function ensureSchool(){if(!db.school)db.school={name:'SMK NEGERI 1 SIKUR',logo:'',logo2:'',npsn:'',nss:'',postal:'',village:'',district:'',regency:'',province:'',phone:'',email:'',address:'',website:'',govLine1:'',govLine2:'',bkName:'',bkNip:'',bkPhone:'',bkJabatan:''};else{if(db.school.logo2===undefined)db.school.logo2='';if(db.school.govLine1===undefined)db.school.govLine1='';if(db.school.govLine2===undefined)db.school.govLine2='';if(db.school.bkName===undefined)db.school.bkName='';if(db.school.bkNip===undefined)db.school.bkNip='';if(db.school.bkPhone===undefined)db.school.bkPhone='';if(db.school.bkJabatan===undefined)db.school.bkJabatan=''}}
 ensureSchool();
 
 // ==== TEMA / TAMPILAN ====
@@ -1088,9 +1105,11 @@ function deleteClass(id){if(db.students.some(s=>s.classId===id))return alert('Ke
 function renderSchoolInfo(){
  ensureSchool();
  const s=db.school;
- ['name','npsn','nss','postal','village','district','regency','province','phone','email','address','website'].forEach(k=>{const el=$('school'+k.charAt(0).toUpperCase()+k.slice(1));if(el)el.value=s[k]||''});
+ ['name','npsn','nss','postal','village','district','regency','province','phone','email','address','website','govLine1','govLine2','bkName','bkNip','bkPhone','bkJabatan'].forEach(k=>{const el=$('school'+k.charAt(0).toUpperCase()+k.slice(1));if(el)el.value=s[k]||''});
  const p=$('logoPreview');
- if(p)p.innerHTML=s.logo?`<img src="${s.logo}" style="width:100%;height:100%;object-fit:contain">`:'Logo Sekolah';
+ if(p)p.innerHTML=s.logo?`<img src="${s.logo}" style="width:100%;height:100%;object-fit:contain">`:'Logo Sekolah (kanan)';
+ const pl=$('logoPreview2');
+ if(pl)pl.innerHTML=s.logo2?`<img src="${s.logo2}" style="width:100%;height:100%;object-fit:contain">`:'Logo Pemerintah/Dinas (kiri)';
  const p2=$('appLogoPreview');
  if(p2)p2.innerHTML=s.logo?`<img src="${s.logo}" style="width:100%;height:100%;object-fit:contain">`:'<svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M12 6.8c-1.7-1.3-3.9-1.9-6.5-1.7v12.6c2.6-.2 4.8.4 6.5 1.7 1.7-1.3 3.9-1.9 6.5-1.7V5.1c-2.6-.2-4.8.4-6.5 1.7Z"/><path d="M12 6.8v12.6"/></svg>';
 }
@@ -1102,10 +1121,19 @@ function previewSchoolLogo(e){
  reader.readAsDataURL(f);
 }
 function removeSchoolLogo(){ensureSchool();db.school.logo='';saveDB();renderSchoolInfo();updateBrandLogo();}
+function previewSchoolLogo2(e){
+ ensureSchool();
+ const f=e.target.files[0]; if(!f)return;
+ if(!f.type.startsWith('image/')) return alert('Pilih file gambar PNG, JPG, atau WEBP.');
+ const reader=new FileReader();
+ reader.onload=()=>{db.school.logo2=reader.result;saveDB();renderSchoolInfo();};
+ reader.readAsDataURL(f);
+}
+function removeSchoolLogo2(){ensureSchool();db.school.logo2='';saveDB();renderSchoolInfo();}
 function saveSchoolInfo(){
  ensureSchool();
  const s=db.school;
- ['name','npsn','nss','postal','village','district','regency','province','phone','email','address','website'].forEach(k=>{const id='school'+k.charAt(0).toUpperCase()+k.slice(1);if($(id))s[k]=$(id).value.trim()});
+ ['name','npsn','nss','postal','village','district','regency','province','phone','email','address','website','govLine1','govLine2','bkName','bkNip','bkPhone','bkJabatan'].forEach(k=>{const id='school'+k.charAt(0).toUpperCase()+k.slice(1);if($(id))s[k]=$(id).value.trim()});
  saveDB();updateBrandLogo();if($('schoolHeaderName'))$('schoolHeaderName').textContent=s.name||'SMK NEGERI 1 SIKUR';alert('Informasi sekolah berhasil disimpan.');
 }
 function updateBrandLogo(){
@@ -1327,7 +1355,8 @@ function renderIndividualReport(){
     return `<tr><td>${i+1}</td><td>${formatDate(d)}</td><td>${st?statusLabel(st):'Belum diisi'}</td><td>${st?statusBadge(st):'<span class="badge">-</span>'}</td></tr>`;
   }).join('');
   $('individualReport').innerHTML=`<div class="individual-report" id="printableIndividual">
-    <div class="report-head"><h2>${esc(db.school?.name||'SMK NEGERI 1 SIKUR')}</h2><div>LAPORAN KEHADIRAN INDIVIDU</div><div>${esc(periodName)}</div></div>
+    ${schoolLetterheadHTML()}
+    <div class="report-head"><div style="font-weight:800">LAPORAN KEHADIRAN INDIVIDU</div><div>${esc(periodName)}</div></div>
     <div class="report-student"><div><b>NIS:</b> ${esc(s.nis)}</div><div><b>Nama:</b> ${esc(s.nama)}</div><div><b>Kelas:</b> ${esc(className(s.classId))}</div><div><b>Jenis Kelamin:</b> ${s.gender==='L'?'Laki-laki':'Perempuan'}</div></div>
     <div class="report-summary">
       <div class="card-mini"><span>Hadir</span><b>${x.H}</b></div><div class="card-mini"><span>Sakit</span><b>${x.S}</b></div>
@@ -1339,6 +1368,7 @@ function renderIndividualReport(){
       <div class="report-chart">${individualChartBars(x)}</div>
     </div>
     <div class="table-wrap"><table class="report-table"><thead><tr><th>No</th><th>Tanggal</th><th>Status</th><th>Keterangan</th></tr></thead><tbody>${rows}</tbody></table></div>
+    ${signatureBlockHTML()}
     <div class="report-footer"><span>Dicetak: ${new Date().toLocaleDateString('id-ID')}</span><span>${esc(db.school?.name||'SMK NEGERI 1 SIKUR')}</span></div>
   </div>`;
 }
@@ -1373,7 +1403,7 @@ function printIndividualReport(){
   if(!$('individualStudent').value)return alert('Pilih siswa terlebih dahulu.');
   const content=$('printableIndividual').outerHTML;
   const w=window.open('','_blank','width=1000,height=800');
-  w.document.write(`<html><head><title>Laporan Kehadiran Individu</title><style>body{font-family:Arial,sans-serif;padding:25px;color:#111}.individual-report{border:1px solid #ddd;padding:20px}.report-head{text-align:center;border-bottom:2px solid #38bdf8;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 5px}.report-student{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.card-mini{border:1px solid #ddd;padding:10px;text-align:center}.card-mini b{display:block;font-size:20px;margin-top:4px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #bbb;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}.report-chart-box{margin:20px 0;border:1px solid #ccc;border-radius:8px;padding:15px 15px 45px;page-break-inside:avoid}.report-chart-title{font-size:13px;font-weight:700;color:#0369a1;margin-bottom:14px}.report-chart{display:flex;align-items:end;gap:14px;height:140px}.report-chart .rbar{flex:1;border-radius:6px 6px 0 0;min-width:24px;position:relative}.report-chart .rbar span{position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);font-size:11px;color:#334155;text-align:center;white-space:nowrap;line-height:1.4}.report-chart .rbar b{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:#0f172a}@media print{button{display:none}.report-chart-box{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>${content}</body></html>`);
+  w.document.write(`<html><head><title>Laporan Kehadiran Individu</title><style>body{font-family:Arial,sans-serif;padding:25px;color:#111}.individual-report{border:1px solid #ddd;padding:20px}.kop-surat{display:flex;align-items:center;gap:14px;justify-content:center}.kop-surat img{width:78px;height:78px;object-fit:contain;flex-shrink:0}.kop-surat .kop-logo-ph{width:78px;height:78px;flex-shrink:0}.kop-text{text-align:center;flex:1;line-height:1.35}.kop-text .kop-gov{font-size:15.5px;font-weight:800;text-transform:uppercase}.kop-text .kop-school{font-size:14.5px;font-weight:700;margin-top:1px}.kop-text .kop-addr{font-style:italic;font-size:12px;margin-top:2px}.kop-text .kop-contact{font-size:12px}.kop-line{border-bottom:3px double #111;margin:8px 0 14px}.report-head{text-align:center;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 5px}.report-student{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.card-mini{border:1px solid #ddd;padding:10px;text-align:center}.card-mini b{display:block;font-size:20px;margin-top:4px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #bbb;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}.report-signature{margin-top:26px;display:flex;justify-content:flex-end;font-size:12.5px}.report-signature .sig-block{text-align:center;min-width:210px}.report-signature .sig-space{height:55px}.report-signature .sig-name{font-weight:700;text-decoration:underline}.report-chart-box{margin:20px 0;border:1px solid #ccc;border-radius:8px;padding:15px 15px 45px;page-break-inside:avoid}.report-chart-title{font-size:13px;font-weight:700;color:#0369a1;margin-bottom:14px}.report-chart{display:flex;align-items:end;gap:14px;height:140px}.report-chart .rbar{flex:1;border-radius:6px 6px 0 0;min-width:24px;position:relative}.report-chart .rbar span{position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);font-size:11px;color:#334155;text-align:center;white-space:nowrap;line-height:1.4}.report-chart .rbar b{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;color:#0f172a}@media print{button{display:none}.report-chart-box{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>${content}</body></html>`);
   w.document.close();w.focus();setTimeout(()=>w.print(),300);
 }
 function exportIndividualReport(){
@@ -1394,10 +1424,20 @@ function exportIndividualReport(){
   if(!window.XLSX){
     return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');
   }
-  const ws=XLSX.utils.aoa_to_sheet(rows);
+  const numCols=rows[0].length;
+  const kop=kopSuratRows(numCols,`Laporan Individu - ${s.nama}`);
+  const aoa=[...kop.rows,...rows];
+  ensureSchool();
+  const sc=db.school||{};
+  if(sc.bkName||sc.bkNip){
+    aoa.push(new Array(numCols).fill(''));
+    aoa.push([`Mengetahui, ${sc.bkJabatan||'Guru BK'}: ${sc.bkName||''}${sc.bkNip?' (NIP. '+sc.bkNip+')':''}`]);
+  }
+  const ws=XLSX.utils.aoa_to_sheet(aoa);
   ws['!cols']=[
     {wch:6},{wch:14},{wch:14},{wch:28},{wch:16},{wch:12},{wch:18}
   ];
+  ws['!merges']=kop.merges;
   const wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,ws,'Laporan Individu');
 
@@ -1469,17 +1509,42 @@ function sideBySideWidths(widths,blocks=2,gap=3){
   for(let i=0;i<blocks;i++){if(i>0)out.push(gap);out=out.concat(widths)}
   return out;
 }
+function schoolLetterheadHTML(){
+  ensureSchool();
+  const s=db.school||{};
+  const gov1=s.govLine1?`<div class="kop-gov">${esc(s.govLine1)}</div>`:'';
+  const gov2=s.govLine2?`<div class="kop-gov">${esc(s.govLine2)}</div>`:'';
+  const addr=[s.address,s.village,s.district,s.regency,s.province].filter(Boolean).join(', ');
+  const contactParts=[];
+  if(s.email)contactParts.push('e-mail : '+s.email);
+  if(s.postal)contactParts.push('Kode Pos. '+s.postal);
+  const contact=contactParts.join('  ');
+  const logoLeft=s.logo2?`<img src="${s.logo2}" alt="">`:'<div class="kop-logo-ph"></div>';
+  const logoRight=s.logo?`<img src="${s.logo}" alt="">`:'<div class="kop-logo-ph"></div>';
+  return `<div class="kop-surat">${logoLeft}<div class="kop-text">${gov1}${gov2}<div class="kop-school">${esc(s.name||'SMK NEGERI 1 SIKUR')}</div>${addr?`<div class="kop-addr">Alamat : ${esc(addr)}</div>`:''}${contact?`<div class="kop-contact">${esc(contact)}</div>`:''}</div>${logoRight}</div><div class="kop-line"></div>`;
+}
+function signatureBlockHTML(){
+  ensureSchool();
+  const s=db.school||{};
+  if(!s.bkName&&!s.bkNip)return '';
+  const jabatan=esc(s.bkJabatan||'Guru BK');
+  return `<div class="report-signature"><div class="sig-block"><div>${esc((s.regency||s.district||'').toString())||'&nbsp;'}, ${new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'})}</div><div>${jabatan}</div><div class="sig-space"></div><div class="sig-name">${esc(s.bkName||'')}</div>${s.bkNip?`<div>NIP. ${esc(s.bkNip)}</div>`:''}</div></div>`;
+}
 function kopSuratRows(numCols,title){
   ensureSchool();
   const s=db.school||{};
-  const lines=[s.name||'SMK NEGERI 1 SIKUR'];
+  const lines=[];
+  if(s.govLine1)lines.push(s.govLine1);
+  if(s.govLine2)lines.push(s.govLine2);
+  lines.push(s.name||'SMK NEGERI 1 SIKUR');
   const addr=[s.address,s.village,s.district,s.regency,s.province].filter(Boolean).join(', ');
-  if(addr)lines.push(addr);
+  if(addr)lines.push('Alamat : '+addr);
   const contact=[];
   if(s.npsn)contact.push('NPSN: '+s.npsn);
   if(s.nss)contact.push('NSS: '+s.nss);
   if(s.phone)contact.push('Telp: '+s.phone);
   if(s.email)contact.push('Email: '+s.email);
+  if(s.postal)contact.push('Kode Pos: '+s.postal);
   if(contact.length)lines.push(contact.join('  |  '));
   if(title)lines.push(String(title).toUpperCase());
   const rows=lines.map(line=>{const r=new Array(numCols).fill('');r[0]=line;return r});
@@ -1589,7 +1654,9 @@ function printRecapReport(type){
   }
   const school=esc(db.school?.name||'SMK NEGERI 1 SIKUR');
   const head=rows[0],body=rows.slice(1);
-  const html=`<html><head><title>${title}</title><style>@page{size:A4 landscape;margin:12mm}body{font-family:Arial,sans-serif;color:#111;font-size:11px}h2{text-align:center;margin:0 0 4px}p{text-align:center;margin:2px 0 12px}table{width:100%;border-collapse:collapse}th,td{border:1px solid #888;padding:5px;text-align:left}th{background:#e5e7eb}.footer{margin-top:20px;display:flex;justify-content:space-between;font-size:10px}</style></head><body><h2>${school}</h2><h2>${title}</h2><p>${period}</p><table><thead><tr>${head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${body.map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table><div class="footer"><span>Dicetak: ${new Date().toLocaleDateString('id-ID')}</span><span>${school}</span></div><script>window.onload=()=>{window.focus();setTimeout(()=>window.print(),300)}<\/script></body></html>`;
+  const kop=schoolLetterheadHTML();
+  const sig=signatureBlockHTML();
+  const html=`<html><head><title>${title}</title><style>@page{size:A4 landscape;margin:12mm}body{font-family:Arial,sans-serif;color:#111;font-size:11px}.kop-surat{display:flex;align-items:center;gap:14px;justify-content:center}.kop-surat img{width:64px;height:64px;object-fit:contain;flex-shrink:0}.kop-surat .kop-logo-ph{width:64px;height:64px;flex-shrink:0}.kop-text{text-align:center;flex:1;line-height:1.3}.kop-text .kop-gov{font-size:14px;font-weight:800;text-transform:uppercase}.kop-text .kop-school{font-size:13px;font-weight:700;margin-top:1px}.kop-text .kop-addr{font-style:italic;font-size:11px;margin-top:2px}.kop-text .kop-contact{font-size:11px}.kop-line{border-bottom:3px double #111;margin:6px 0 12px}h2{text-align:center;margin:0 0 4px}p{text-align:center;margin:2px 0 12px}table{width:100%;border-collapse:collapse}th,td{border:1px solid #888;padding:5px;text-align:left}th{background:#e5e7eb}.footer{margin-top:20px;display:flex;justify-content:space-between;font-size:10px}.report-signature{margin-top:24px;display:flex;justify-content:flex-end;font-size:11.5px}.report-signature .sig-block{text-align:center;min-width:200px}.report-signature .sig-space{height:50px}.report-signature .sig-name{font-weight:700;text-decoration:underline}</style></head><body>${kop}<h2>${title}</h2><p>${period}</p><table><thead><tr>${head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${body.map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table>${sig}<div class="footer"><span>Dicetak: ${new Date().toLocaleDateString('id-ID')}</span><span>${school}</span></div><script>window.onload=()=>{window.focus();setTimeout(()=>window.print(),300)}<\/script></body></html>`;
   const w=window.open('','_blank','width=1200,height=800');
   if(!w)return alert('Popup diblokir. Izinkan popup untuk mencetak PDF.');
   w.document.write(html);w.document.close();
@@ -1945,8 +2012,11 @@ function exportGridExcel() {
     const pct = total ? Math.round(100-((cnt.A+cnt.B)/total*100)) : 0;
     return [...row, cnt.H, cnt.S, cnt.I, cnt.A, cnt.B, pct+'%'];
   });
+  const numCols = headers.length;
+  const kop = kopSuratRows(numCols, `Absensi Bulanan - ${className(classId)}`);
   const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.aoa_to_sheet([headers,...rows]);
+  const ws = XLSX.utils.aoa_to_sheet([...kop.rows, headers, ...rows]);
+  ws['!merges'] = kop.merges;
   XLSX.utils.book_append_sheet(wb, ws, 'Absensi Bulanan');
   XLSX.writeFile(wb, `absensi_bulanan_${ym}_${className(classId)||classId}.xlsx`);
 }
@@ -1980,19 +2050,35 @@ function printGridReport() {
   });
   const [y,m] = ym.split('-');
   const bulan = new Date(Number(y),Number(m)-1,1).toLocaleString('id-ID',{month:'long',year:'numeric'});
+  const kop = schoolLetterheadHTML();
+  const sig = signatureBlockHTML();
   const html = `<html><head><title>Absensi Bulanan - ${bulan}</title><style>
     @page{size:A3 landscape;margin:10mm}
     body{font-family:Arial,sans-serif;font-size:10px;color:#111}
+    .kop-surat{display:flex;align-items:center;gap:14px;justify-content:center}
+    .kop-surat img{width:60px;height:60px;object-fit:contain;flex-shrink:0}
+    .kop-surat .kop-logo-ph{width:60px;height:60px;flex-shrink:0}
+    .kop-text{text-align:center;flex:1;line-height:1.3}
+    .kop-text .kop-gov{font-size:14px;font-weight:800;text-transform:uppercase}
+    .kop-text .kop-school{font-size:13px;font-weight:700;margin-top:1px}
+    .kop-text .kop-addr{font-style:italic;font-size:11px;margin-top:2px}
+    .kop-text .kop-contact{font-size:11px}
+    .kop-line{border-bottom:3px double #111;margin:6px 0 10px}
     h2,h3{text-align:center;margin:2px 0}
     table{width:100%;border-collapse:collapse;margin-top:10px}
     th,td{border:1px solid #888;padding:4px 3px;text-align:center}
     th{background:#e0f2fe}
     .footer{margin-top:15px;display:flex;justify-content:space-between;font-size:10px}
+    .report-signature{margin-top:22px;display:flex;justify-content:flex-end;font-size:11px}
+    .report-signature .sig-block{text-align:center;min-width:190px}
+    .report-signature .sig-space{height:48px}
+    .report-signature .sig-name{font-weight:700;text-decoration:underline}
     @media print{button{display:none}}
   </style></head><body>
-    <h2>${school}</h2>
+    ${kop}
     <h3>DAFTAR ABSENSI BULAN ${bulan.toUpperCase()} — KELAS ${esc(className(classId))}</h3>
     <table><thead>${headRow}</thead><tbody>${bodyRows}</tbody></table>
+    ${sig}
     <div class="footer"><span>Dicetak: ${new Date().toLocaleDateString('id-ID')}</span><span>Wali Kelas: ____________________</span></div>
     <script>window.onload=()=>{window.focus();setTimeout(()=>window.print(),400)}<\/script>
   </body></html>`;
