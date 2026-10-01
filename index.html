@@ -89,7 +89,7 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}
 .table th{background:var(--th-bg);color:#475569;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em}
 .table tbody tr{transition:background .15s}
 .table tbody tr:hover{background:color-mix(in srgb,var(--primary) 6%,transparent)}
-.table tr:last-child td{border-bottom:0}.individual-report{border:1px solid var(--border);border-radius:10px;padding:20px;background:#fff}.kop-surat{display:flex;align-items:center;gap:14px;justify-content:center;color:#111}.kop-surat img{width:78px;height:78px;object-fit:contain;flex-shrink:0}.kop-surat .kop-logo-ph{width:78px;height:78px;flex-shrink:0}.kop-text{text-align:center;flex:1;line-height:1.35}.kop-text .kop-gov{font-size:15.5px;font-weight:800;text-transform:uppercase;letter-spacing:.01em}.kop-text .kop-school{font-size:14.5px;font-weight:700;margin-top:1px}.kop-text .kop-addr{font-style:italic;font-size:12px;margin-top:2px}.kop-text .kop-contact{font-size:12px}.kop-line{border-bottom:3px double #111;margin:8px 0 14px}.report-head{text-align:center;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 4px}.report-student{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 25px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0}.report-summary .card-mini{border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}.report-summary b{display:block;font-size:20px;margin-top:3px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #cbd5e1;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}.report-signature{margin-top:26px;display:flex;justify-content:flex-end;font-size:12.5px}.report-signature .sig-block{text-align:center;min-width:210px}.report-signature .sig-space{height:55px}.report-signature .sig-name{font-weight:700;text-decoration:underline}@media(max-width:700px){.report-summary{grid-template-columns:repeat(2,1fr)}.report-student{grid-template-columns:1fr}}.attendance-percent{display:flex;align-items:center;gap:7px;min-width:115px}.percent-track{height:8px;background:#e0f2fe;border-radius:99px;overflow:hidden;width:65px}.percent-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px;transition:width .5s var(--ease)}.percent-high{color:#15803d}.percent-mid{color:#b45309}.percent-low{color:#dc2626}
+.table tr:last-child td{border-bottom:0}.individual-report{border:1px solid var(--border);border-radius:10px;padding:20px;background:#fff}.kop-surat{display:flex;align-items:center;gap:14px;justify-content:center;color:#111}.kop-surat img{width:78px;height:78px;object-fit:contain;flex-shrink:0}.kop-surat .kop-logo-ph{width:78px;height:78px;flex-shrink:0}.kop-text{text-align:center;flex:1;line-height:1.35}.kop-text .kop-gov{font-size:15.5px;font-weight:800;text-transform:uppercase;letter-spacing:.01em}.kop-text .kop-school{font-size:14.5px;font-weight:700;margin-top:1px}.kop-text .kop-addr{font-style:italic;font-size:12px;margin-top:2px}.kop-text .kop-contact{font-size:12px}.kop-line{border-bottom:3px double #111;margin:8px 0 14px}.report-head{text-align:center;padding-bottom:14px;margin-bottom:15px}.report-head h2{margin:0 0 4px}.report-student{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 25px;margin-bottom:15px;font-size:13px}.report-summary{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:15px 0}.report-summary .card-mini{border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center}.report-summary b{display:block;font-size:20px;margin-top:3px}.report-table{width:100%;border-collapse:collapse}.report-table th,.report-table td{border:1px solid #cbd5e1;padding:7px;font-size:12px}.report-table th{background:#e0f2fe}.report-footer{margin-top:30px;display:flex;justify-content:space-between;font-size:12px}.report-signature{margin-top:26px;display:flex;justify-content:flex-end;font-size:12.5px}.report-signature .sig-block{text-align:center;min-width:210px}.report-signature .sig-space{height:55px}.report-signature .sig-name{font-weight:700;text-decoration:underline}@media(max-width:700px){.report-summary{grid-template-columns:repeat(2,1fr)}.report-student{grid-template-columns:1fr}}.attendance-percent{display:flex;align-items:center;gap:7px;min-width:115px}.percent-track{height:8px;background:#e0f2fe;border-radius:99px;overflow:hidden;width:65px}.percent-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px;transition:width .5s var(--ease)}.percent-high{color:#15803d}.percent-mid{color:#b45309}.percent-low{color:#dc2626}
 .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.01em}
 .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.75}
 .hadir{background:#dcfce7;color:#166534}.sakit{background:#fef3c7;color:#92400e}.izin{background:#dbeafe;color:#1e40af}.alpa{background:#fee2e2;color:#991b1b}.bolos{background:#ffedd5;color:#9a3412}
@@ -585,20 +585,20 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
     <button class="btn btn-secondary" onclick="printRecapReport('weekly')"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M7 8V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v4"/><rect x="3" y="8" width="18" height="8" rx="1.5"/><path d="M7 15h10v6H7Z"/><path d="M7.5 11.3h1.4"/></svg> PDF</button>
   </div></div>
   <div class="toolbar"><label style="display:flex;align-items:center;gap:7px">Tanggal <input type="date" id="weeklyDate" class="input" onchange="renderWeekly()"></label><select id="weeklyClass" class="select" onchange="renderWeekly()"><option value="">Semua Kelas</option></select></div>
-  <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>% Hadir</th><th>No. WA Wali Kelas</th><th>Notifikasi</th></tr></thead><tbody id="weeklyTable"></tbody></table></div></div>
+  <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>Total</th><th>Skor Ketidak hadiran</th><th>% Hadir</th><th>No. WA Wali Kelas</th><th>Notifikasi</th></tr></thead><tbody id="weeklyTable"></tbody></table></div></div>
 </section>
 
 <section id="monthly" class="page">
  <div class="card"><div class="section-title"><h2><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg> Rekap Bulanan</h2><div><button class="btn btn-success" onclick="exportRecapExcel('monthly')"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M12 4v12M8 12l4 4 4-4"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg> Excel</button> <button class="btn btn-secondary" onclick="printRecapReport('monthly')"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M7 8V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v4"/><rect x="3" y="8" width="18" height="8" rx="1.5"/><path d="M7 15h10v6H7Z"/><path d="M7.5 11.3h1.4"/></svg> PDF</button> <button class="btn btn-success" onclick="sendWaMonthlyRecapClass()" title="Kirim rekap kehadiran Per Kelas penuh ke WhatsApp Wali Kelas"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true" style="vertical-align:-.15em"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.42 1.26 4.86L2 22l5.34-1.3a9.9 9.9 0 0 0 4.7 1.2h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.83-.12-.42-.13-.96-.31-1.66-.6-2.92-1.26-4.83-4.2-4.98-4.4-.15-.2-1.2-1.6-1.2-3.05 0-1.45.77-2.16 1.04-2.46.27-.3.6-.37.8-.37h.57c.18 0 .43-.03.66.5.24.55.8 1.9.87 2.04.07.14.12.3.02.5-.1.2-.15.3-.3.47-.15.16-.3.36-.44.49-.15.14-.3.3-.13.6.17.3.76 1.26 1.63 2.03 1.12 1 2.06 1.31 2.37 1.46.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.24.66-.14.27.1 1.7.8 2 .95.3.15.5.22.57.34.07.13.07.72-.17 1.4z"/></svg> Kirim Rekap Per Kelas ke WA Wali Kelas</button></div></div>
  <div class="toolbar"><input type="month" id="monthlyDate" class="input" onchange="renderMonthly()"><select id="monthlyClass" class="select" onchange="renderMonthly()"><option value="">Semua Kelas</option></select></div>
  <div class="notice" id="monthlyWaNotice" style="display:none">Pilih salah Per Kelas pada filter di atas (bukan "Semua Kelas") untuk mengirim rekap Per Kelas penuh ke WhatsApp wali kelas.</div>
- <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>Total</th><th>Persentase Kehadiran</th><th>No. WA Wali Kelas</th><th>Notifikasi</th></tr></thead><tbody id="monthlyTable"></tbody></table></div></div>
+ <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>Total</th><th>Skor Ketidak hadiran</th><th>Persentase Kehadiran</th><th>No. WA Wali Kelas</th><th>Notifikasi</th></tr></thead><tbody id="monthlyTable"></tbody></table></div></div>
 </section>
 
 <section id="yearly" class="page">
  <div class="card"><div class="section-title"><h2><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg> Rekap Tahunan</h2><div><button class="btn btn-success" onclick="exportRecapExcel('yearly')"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M12 4v12M8 12l4 4 4-4"/><path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/></svg> Excel</button> <button class="btn btn-secondary" onclick="printRecapReport('yearly')"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M7 8V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v4"/><rect x="3" y="8" width="18" height="8" rx="1.5"/><path d="M7 15h10v6H7Z"/><path d="M7.5 11.3h1.4"/></svg> PDF</button></div></div>
  <div class="toolbar"><input type="number" id="yearlyDate" class="input" min="2000" max="2100" onchange="renderYearly()"><select id="yearlyClass" class="select" onchange="renderYearly()"><option value="">Semua Kelas</option></select></div>
- <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>Total</th><th>Persentase Kehadiran</th><th>No. WA Wali Kelas</th><th>Notifikasi</th></tr></thead><tbody id="yearlyTable"></tbody></table></div></div>
+ <div class="table-wrap"><table class="table"><thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>Total</th><th>Skor Ketidak hadiran</th><th>Persentase Kehadiran</th><th>No. WA Wali Kelas</th><th>Notifikasi</th></tr></thead><tbody id="yearlyTable"></tbody></table></div></div>
 </section>
 
 <section id="semester" class="page">
@@ -617,7 +617,7 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
   </div>
   <div class="attendance-summary" id="semesterSummary"></div>
   <div class="table-wrap"><table class="table">
-   <thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>Total</th><th>% Hadir</th><th>No. WA Wali Kelas</th><th>Notifikasi</th></tr></thead>
+   <thead><tr><th>No</th><th>NIS</th><th>Nama</th><th>Kelas</th><th>Hadir</th><th>Sakit</th><th>Izin</th><th>Alpa</th><th>Bolos</th><th>Total</th><th>Skor Ketidak hadiran</th><th>% Hadir</th><th>No. WA Wali Kelas</th><th>Notifikasi</th></tr></thead>
    <tbody id="semesterTable"></tbody>
   </table></div>
  </div>
@@ -1493,7 +1493,7 @@ async function sendWaAbsen(studentId,date){
 }
 function buildRecapMessage(s,periodLabel,x,pct){
   const sch=db.school?.name||'Sekolah';
-  return `Yth. Bapak/Ibu Wali Kelas ${className(s.classId)},\n\nBerikut rekap kehadiran siswa:\n\nNama: ${s.nama}\nNIS: ${s.nis}\nKelas: ${className(s.classId)}\nPeriode: ${periodLabel}\n\nHadir: ${x.H}\nSakit: ${x.S}\nIzin: ${x.I}\nAlpa: ${x.A}\nBolos: ${x.B}\nPersentase Kehadiran: ${pct}%\n\nMohon menjadi perhatian dan tindak lanjutnya. Terima kasih.\n\n- ${sch}`;
+  return `Yth. Bapak/Ibu Wali Kelas ${className(s.classId)},\n\nBerikut rekap kehadiran siswa:\n\nNama: ${s.nama}\nNIS: ${s.nis}\nKelas: ${className(s.classId)}\nPeriode: ${periodLabel}\n\nHadir: ${x.H}\nSakit: ${x.S}\nIzin: ${x.I}\nAlpa: ${x.A}\nBolos: ${x.B}\nSkor Ketidak hadiran: ${skorKehadiran(x)}\nPersentase Kehadiran: ${pct}%\n\nMohon menjadi perhatian dan tindak lanjutnya. Terima kasih.\n\n- ${sch}`;
 }
 function periodLabelForRecap(type,ref){
   if(type==='weekly'){const dates=dateRange('weekly',ref);return `Mingguan (${formatDate(dates[0])} s.d. ${formatDate(dates[5])})`}
@@ -1521,12 +1521,12 @@ function buildClassRecapMessage(classId,periodLabel,rows){
   const sch=db.school?.name||'Sekolah';
   const kelas=className(classId);
   const listText=rows.map((s,i)=>{
-    return `${i+1}. ${s.nama} (NIS ${s.nis})\n   Hadir:${s.x.H} Sakit:${s.x.S} Izin:${s.x.I} Alpa:${s.x.A} Bolos:${s.x.B} - ${s.pct}%`;
+    return `${i+1}. ${s.nama} (NIS ${s.nis})\n   Hadir:${s.x.H} Sakit:${s.x.S} Izin:${s.x.I} Alpa:${s.x.A} Bolos:${s.x.B} Skor:${skorKehadiran(s.x)} - ${s.pct}%`;
   }).join('\n');
   const totals=rows.reduce((a,s)=>{a.H+=s.x.H;a.S+=s.x.S;a.I+=s.x.I;a.A+=s.x.A;a.B+=s.x.B;return a},{H:0,S:0,I:0,A:0,B:0});
   const totalAll=totals.H+totals.S+totals.I+totals.A+totals.B;
   const pctAll=totalAll?Math.round(100-((totals.A+totals.B)/totalAll*100)):0;
-  return `Yth. Bapak/Ibu Wali Kelas ${kelas},\n\nBerikut rekap kehadiran seluruh siswa kelas ${kelas} periode ${periodLabel}:\n\n${listText}\n\nRingkasan kelas:\nHadir: ${totals.H}\nSakit: ${totals.S}\nIzin: ${totals.I}\nAlpa: ${totals.A}\nBolos: ${totals.B}\nPersentase Kehadiran Kelas: ${pctAll}%\n\nMohon menjadi perhatian dan tindak lanjutnya. Terima kasih.\n\n- ${sch}`;
+  return `Yth. Bapak/Ibu Wali Kelas ${kelas},\n\nBerikut rekap kehadiran seluruh siswa kelas ${kelas} periode ${periodLabel}:\n\n${listText}\n\nRingkasan kelas:\nHadir: ${totals.H}\nSakit: ${totals.S}\nIzin: ${totals.I}\nAlpa: ${totals.A}\nBolos: ${totals.B}\nTotal Skor Ketidak hadiran: ${skorKehadiran(totals)}\nPersentase Kehadiran Kelas: ${pctAll}%\n\nMohon menjadi perhatian dan tindak lanjutnya. Terima kasih.\n\n- ${sch}`;
 }
 async function sendWaMonthlyRecapClass(){
   const classId=$('monthlyClass').value;
@@ -1625,6 +1625,9 @@ function renderAttendanceSummary(d,classId){
 }
 function isSunday(ds){return new Date(ds+'T00:00:00').getDay()===0}
 function dateRange(type,ref){let dates=[],d=new Date(ref+'T00:00:00');if(type==='weekly'){let day=d.getDay()||7;d.setDate(d.getDate()-day+1);for(let i=0;i<6;i++){dates.push(d.toISOString().slice(0,10));d.setDate(d.getDate()+1)}}else if(type==='monthly'){let y=d.getFullYear(),m=d.getMonth(),n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}else{let y=d.getFullYear();for(let m=0;m<12;m++){let n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}}return dates}
+/* Skor Ketidak hadiran: setiap 1 kali Alpa atau Bolos = 4 skor */
+const SKOR_ALPA_BOLOS=4;
+function skorKehadiran(x){return ((x.A||0)+(x.B||0))*SKOR_ALPA_BOLOS}
 function recapRows(type,ref,filter){let dates=dateRange(type,ref);return db.students.filter(s=>!filter||s.classId===filter).map(s=>{let x={H:0,S:0,I:0,A:0,B:0};dates.forEach(d=>{let st=db.attendance[d]?.[s.id]||'H';x[st]++});let total=x.H+x.S+x.I+x.A+x.B;return {...s,x,total,pct:total?Math.round(100-((x.A+x.B)/total*100)):0}})}
 function renderRecapTable(type,bodyId,refId,classId){
  let rows=recapRows(type,$(refId).value||today(),$(classId).value);
@@ -1639,8 +1642,8 @@ function renderRecapTable(type,bodyId,refId,classId){
  $(bodyId).innerHTML=rows.length?rows.map((s,i)=>{
    let cls=s.pct>=85?'percent-high':s.pct>=75?'percent-mid':'percent-low';
    const c=db.classes.find(x=>x.id===s.classId);
-   return `<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${esc(className(s.classId))}</td><td>${s.x.H}</td><td>${s.x.S}</td><td>${s.x.I}</td><td>${s.x.A}</td><td>${s.x.B}</td><td>${s.total}</td><td><div class="attendance-percent ${cls}"><b>${s.pct}%</b><span class="percent-track"><span class="percent-fill" style="width:${s.pct}%"></span></span></div></td><td>${esc(c?.homeroomPhone||'-')}</td><td>${waButtonCell(s.classId,`sendWaRecap('${type}','${refId}','${s.id}')`)}</td></tr>`;
- }).join(''):`<tr><td colspan="13" class="empty">Belum ada data siswa.</td></tr>`;
+   return `<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${esc(className(s.classId))}</td><td>${s.x.H}</td><td>${s.x.S}</td><td>${s.x.I}</td><td>${s.x.A}</td><td>${s.x.B}</td><td>${s.total}</td><td><b>${skorKehadiran(s.x)}</b></td><td><div class="attendance-percent ${cls}"><b>${s.pct}%</b><span class="percent-track"><span class="percent-fill" style="width:${s.pct}%"></span></span></div></td><td>${esc(c?.homeroomPhone||'-')}</td><td>${waButtonCell(s.classId,`sendWaRecap('${type}','${refId}','${s.id}')`)}</td></tr>`;
+ }).join(''):`<tr><td colspan="14" class="empty">Belum ada data siswa.</td></tr>`;
 }
 function renderWeekly(){renderRecapTable('weekly','weeklyTable','weeklyDate','weeklyClass')}
 function renderMonthly(){renderRecapTable('monthly','monthlyTable','monthlyDate','monthlyClass');if($('monthlyWaNotice'))$('monthlyWaNotice').style.display=$('monthlyClass').value?'none':''}
@@ -1677,7 +1680,7 @@ function renderSemester(){
     ['I','Izin','izin',totals.I],['A','Alpa','alpa',totals.A],['B','Bolos','bolos',totals.B]
   ].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${a[3]}</b></div>`).join('')+
   `<div class="summary-pill">Persentase Hadir <b>${total?Math.round(100-((totals.A+totals.B)/total*100)):0}%</b></div>`;
-  $('semesterTable').innerHTML=rows.length?rows.map((s,i)=>{const c=db.classes.find(x=>x.id===s.classId);return `<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${esc(className(s.classId))}</td><td>${s.x.H}</td><td>${s.x.S}</td><td>${s.x.I}</td><td>${s.x.A}</td><td>${s.x.B}</td><td>${s.total}</td><td><b>${s.pct}%</b></td><td>${esc(c?.homeroomPhone||'-')}</td><td>${waButtonCell(s.classId,`sendWaSemesterRow('${s.id}')`)}</td></tr>`}).join(''):'<tr><td colspan="13" class="empty">Belum ada data siswa.</td></tr>';
+  $('semesterTable').innerHTML=rows.length?rows.map((s,i)=>{const c=db.classes.find(x=>x.id===s.classId);return `<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${esc(s.nama)}</td><td>${esc(className(s.classId))}</td><td>${s.x.H}</td><td>${s.x.S}</td><td>${s.x.I}</td><td>${s.x.A}</td><td>${s.x.B}</td><td>${s.total}</td><td><b>${skorKehadiran(s.x)}</b></td><td><b>${s.pct}%</b></td><td>${esc(c?.homeroomPhone||'-')}</td><td>${waButtonCell(s.classId,`sendWaSemesterRow('${s.id}')`)}</td></tr>`}).join(''):'<tr><td colspan="14" class="empty">Belum ada data siswa.</td></tr>';
 }
 function semesterRowsForExport(){
   const y=Number($('semesterYear').value),term=$('semesterTerm').value,filter=$('semesterClass').value;
@@ -1685,12 +1688,12 @@ function semesterRowsForExport(){
   return db.students.filter(s=>!filter||s.classId===filter).map(s=>{
     const x={H:0,S:0,I:0,A:0,B:0};dates.forEach(d=>{const st=db.attendance[d]?.[s.id];if(st)x[st]++});
     const total=x.H+x.S+x.I+x.A+x.B;
-    return [s.nis,s.nama,className(s.classId),x.H,x.S,x.I,x.A,x.B,total,(total?Math.round(100-((x.A+x.B)/total*100)):0)+'%',db.classes.find(c=>c.id===s.classId)?.homeroomPhone||'-'];
+    return [s.nis,s.nama,className(s.classId),x.H,x.S,x.I,x.A,x.B,total,skorKehadiran(x),(total?Math.round(100-((x.A+x.B)/total*100)):0)+'%',db.classes.find(c=>c.id===s.classId)?.homeroomPhone||'-'];
   });
 }
 function exportSemester(){
   const y=Number($('semesterYear').value),term=$('semesterTerm').value;
-  downloadCSV(`rekap_semester_${term}_${y}.csv`,[['NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Persentase Hadir','No. WA Wali Kelas'],...semesterRowsForExport()]);
+  downloadCSV(`rekap_semester_${term}_${y}.csv`,[['NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Skor Ketidak hadiran','Persentase Hadir','No. WA Wali Kelas'],...semesterRowsForExport()]);
 }
 
 function getWeekDates(ref){
@@ -1778,7 +1781,7 @@ function renderIndividualReport(){
     <div class="report-summary">
       <div class="card-mini"><span>Hadir</span><b>${x.H}</b></div><div class="card-mini"><span>Sakit</span><b>${x.S}</b></div>
       <div class="card-mini"><span>Izin</span><b>${x.I}</b></div><div class="card-mini"><span>Alpa</span><b>${x.A}</b></div>
-      <div class="card-mini"><span>Bolos</span><b>${x.B}</b></div><div class="card-mini"><span>% Hadir</span><b>${pct}%</b></div>
+      <div class="card-mini"><span>Bolos</span><b>${x.B}</b></div><div class="card-mini"><span>Skor Ketidak hadiran</span><b>${skorKehadiran(x)}</b></div><div class="card-mini"><span>% Hadir</span><b>${pct}%</b></div>
     </div>
     <div class="report-chart-box">
       <div class="report-chart-title">Grafik Kehadiran</div>
@@ -1843,9 +1846,9 @@ async function buildIndividualDoc(){
   doc.text(`Jenis Kelamin: ${s.gender==='L'?'Laki-laki':'Perempuan'}`,marginLeft+75,y);
   y+=8;
 
-  const summaryLabels=[['Hadir',x.H],['Sakit',x.S],['Izin',x.I],['Alpa',x.A],['Bolos',x.B],['% Hadir',pct+'%']];
+  const summaryLabels=[['Hadir',x.H],['Sakit',x.S],['Izin',x.I],['Alpa',x.A],['Bolos',x.B],['Skor',skorKehadiran(x)],['% Hadir',pct+'%']];
   const gap=3,boxH=16;
-  const boxW=(pageWidth-marginLeft-marginRight-gap*5)/6;
+  const boxW=(pageWidth-marginLeft-marginRight-gap*6)/7;
   doc.setDrawColor(200);
   summaryLabels.forEach(([label,val],i)=>{
     const bx=marginLeft+i*(boxW+gap);
@@ -2061,34 +2064,34 @@ function downloadExcelWorkbook(filename,sheetName,rows,widths=[]){
   XLSX.writeFile(wb,filename);
 }
 function dailyRows(){const d=$('attendanceDate').value||today(),c=$('attendanceClass').value||'';const students=db.students.filter(s=>!c||s.classId===c);return [['No','Tanggal','NIS','Nama','Kelas','Status','Keterangan'],...students.map((s,i)=>{const st=db.attendance[d]?.[s.id]||'H';return [i+1,d,s.nis,s.nama,className(s.classId),st,statusLabel(st)]})]}
-function recapExcelRows(type){const ref={monthly:'monthlyDate',yearly:'yearlyDate'}[type];const filter=$(type+'Class').value;const rows=recapRows(type,$(ref).value||today(),filter);return [['No','NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Persentase Hadir','No. WA Wali Kelas'],...rows.map((s,i)=>[i+1,s.nis,s.nama,className(s.classId),s.x.H,s.x.S,s.x.I,s.x.A,s.x.B,s.total,s.pct+'%',db.classes.find(c=>c.id===s.classId)?.homeroomPhone||'-'])]}
+function recapExcelRows(type){const ref={monthly:'monthlyDate',yearly:'yearlyDate'}[type];const filter=$(type+'Class').value;const rows=recapRows(type,$(ref).value||today(),filter);return [['No','NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Skor Ketidak hadiran','Persentase Hadir','No. WA Wali Kelas'],...rows.map((s,i)=>[i+1,s.nis,s.nama,className(s.classId),s.x.H,s.x.S,s.x.I,s.x.A,s.x.B,s.total,skorKehadiran(s.x),s.pct+'%',db.classes.find(c=>c.id===s.classId)?.homeroomPhone||'-'])]}
 function weeklyExcelRows(){
   const value=$('weeklyDate').value||today();
   const filter=$('weeklyClass').value;
   const rows=recapRows('weekly',value,filter);
-  return [['No','NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Persentase Hadir','No. WA Wali Kelas'],
-    ...rows.map((s,i)=>[i+1,s.nis,s.nama,className(s.classId),s.x.H,s.x.S,s.x.I,s.x.A,s.x.B,s.total,s.pct+'%',db.classes.find(c=>c.id===s.classId)?.homeroomPhone||'-'])];
+  return [['No','NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Skor Ketidak hadiran','Persentase Hadir','No. WA Wali Kelas'],
+    ...rows.map((s,i)=>[i+1,s.nis,s.nama,className(s.classId),s.x.H,s.x.S,s.x.I,s.x.A,s.x.B,s.total,skorKehadiran(s.x),s.pct+'%',db.classes.find(c=>c.id===s.classId)?.homeroomPhone||'-'])];
 }
 function statusTextMap(){return {H:'hadir',S:'sakit',I:'izin',A:'alfa',B:'bolos'}}
 function exportMatrixExcel(dates,students,filename,sheetName){
   if(!window.XLSX) return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');
   const statusText=statusTextMap();
-  const firstCol=4,n=dates.length,pctCol=firstCol+n;
-  const numCols=pctCol+1;
+  const firstCol=4,n=dates.length,pctCol=firstCol+n,skorCol=pctCol+1;
+  const numCols=pctCol+2;
   const kop=kopSuratRows(numCols,sheetName);
   const aoa=[...kop.rows];
-  let row1=new Array(numCols).fill('');row1[firstCol]='Tanggal';row1[pctCol]='%';aoa.push(row1);
-  let row2=['No','NIS','Nama','Kelas'];dates.forEach(d=>{const p=d.split('-');row2.push(`${p[2]}/${p[1]}`)});row2.push('');aoa.push(row2);
+  let row1=new Array(numCols).fill('');row1[firstCol]='Tanggal';row1[pctCol]='%';row1[skorCol]='Skor Ketidak hadiran';aoa.push(row1);
+  let row2=['No','NIS','Nama','Kelas'];dates.forEach(d=>{const p=d.split('-');row2.push(`${p[2]}/${p[1]}`)});row2.push('');row2.push('');aoa.push(row2);
   students.forEach((s,idx)=>{
     let row=[idx+1,s.nis,s.nama,className(s.classId)];
     dates.forEach(d=>{const st=db.attendance[d]?.[s.id]||'H';row.push(statusText[st])});
-    row.push('');aoa.push(row);
+    row.push('');row.push('');aoa.push(row);
   });
   const ws=XLSX.utils.aoa_to_sheet(aoa);
   const merges=[...kop.merges];
   if(n>0)merges.push({s:{r:kop.offset,c:firstCol},e:{r:kop.offset,c:firstCol+n-1}});
   ws['!merges']=merges;
-  const cols=[{wch:6},{wch:10},{wch:30},{wch:18}];for(let i=0;i<n;i++)cols.push({wch:7});cols.push({wch:8});
+  const cols=[{wch:6},{wch:10},{wch:30},{wch:18}];for(let i=0;i<n;i++)cols.push({wch:7});cols.push({wch:8});cols.push({wch:16});
   ws['!cols']=cols;
   if(n>0){
     const startL=XLSX.utils.encode_col(firstCol),endL=XLSX.utils.encode_col(firstCol+n-1);
@@ -2096,6 +2099,8 @@ function exportMatrixExcel(dates,students,filename,sheetName){
       const r=kop.offset+2+idx,rowNum=r+1;
       const formula=`IF(COUNTA(${startL}${rowNum}:${endL}${rowNum})=0,0,ROUND(100-((COUNTIF(${startL}${rowNum}:${endL}${rowNum},"alfa")+COUNTIF(${startL}${rowNum}:${endL}${rowNum},"bolos"))/COUNTA(${startL}${rowNum}:${endL}${rowNum})*100),0))`;
       ws[XLSX.utils.encode_cell({r,c:pctCol})]={t:'n',f:formula,z:'0"%"'};
+      const skorFormula=`(COUNTIF(${startL}${rowNum}:${endL}${rowNum},"alfa")+COUNTIF(${startL}${rowNum}:${endL}${rowNum},"bolos"))*4`;
+      ws[XLSX.utils.encode_cell({r,c:skorCol})]={t:'n',f:skorFormula};
     });
   }
   const wb=XLSX.utils.book_new();
@@ -2236,7 +2241,7 @@ async function buildRecapDoc(type){
     title='LAPORAN REKAP SEMESTER';
     const y=Number($('semesterYear').value),term=$('semesterTerm').value;
     period=`Semester ${term} Tahun Ajaran ${y}/${y+1}`;
-    rows=[['No','NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Persentase Hadir','No. WA Wali Kelas'],...semesterRowsForExport().map((r,i)=>[i+1,...r])];
+    rows=[['No','NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Skor Ketidak hadiran','Persentase Hadir','No. WA Wali Kelas'],...semesterRowsForExport().map((r,i)=>[i+1,...r])];
     fileBase=`rekap_semester_${term}_${y}`;
   }
   const doc=newJsPDF('landscape','a4');
@@ -2267,7 +2272,7 @@ async function printRecapReport(type){
   if(!built)return;
   built.doc.save(`${built.fileBase}.pdf`);
 }
-function exportRecap(type){let ref={weekly:'weeklyDate',monthly:'monthlyDate',yearly:'yearlyDate'}[type],filter=$(type+'Class').value,rows=recapRows(type,$(ref).value||today(),filter);downloadCSV('rekap_'+type+'.csv',[['NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Persentase Hadir','No. WA Wali Kelas'],...rows.map(s=>[s.nis,s.nama,className(s.classId),s.x.H,s.x.S,s.x.I,s.x.A,s.x.B,s.pct+'%',db.classes.find(c=>c.id===s.classId)?.homeroomPhone||'-'])])}
+function exportRecap(type){let ref={weekly:'weeklyDate',monthly:'monthlyDate',yearly:'yearlyDate'}[type],filter=$(type+'Class').value,rows=recapRows(type,$(ref).value||today(),filter);downloadCSV('rekap_'+type+'.csv',[['NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Skor Ketidak hadiran','Persentase Hadir','No. WA Wali Kelas'],...rows.map(s=>[s.nis,s.nama,className(s.classId),s.x.H,s.x.S,s.x.I,s.x.A,s.x.B,skorKehadiran(s.x),s.pct+'%',db.classes.find(c=>c.id===s.classId)?.homeroomPhone||'-'])])}
 function downloadCSV(name,rows){let csv=rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
 function backupData(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup_sias_'+today()+'.json';a.click()}
 function restoreData(){let f=$('restoreFile').files[0];if(!f)return alert('Pilih file backup JSON.');let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.students||!x.classes||!x.attendance)throw 0;if(confirm('Restore akan mengganti data saat ini. Lanjutkan?')){db=x;ensureTrash();saveDB();location.reload()}}catch(e){alert('File backup tidak valid.')}};r.readAsText(f)}
@@ -2361,6 +2366,7 @@ function renderMonthlyGrid() {
   thead += '<th style="background:#fff1f2;color:#991b1b;min-width:36px">A</th>';
   thead += '<th style="background:#fff7ed;color:#9a3412;min-width:36px">B</th>';
   thead += '<th style="min-width:50px">%</th>';
+  thead += '<th style="background:#fef9c3;color:#854d0e;min-width:46px" title="Skor Ketidak hadiran: Alpa/Bolos x 4">Skor</th>';
   thead += '</tr>';
 
   let tbody = '';
@@ -2394,6 +2400,7 @@ function renderMonthlyGrid() {
     row += `<td class="grid-summary-cell col-sum-A" id="gsA_${s.id}">${cnt.A}</td>`;
     row += `<td class="grid-summary-cell col-sum-B" id="gsB_${s.id}">${cnt.B}</td>`;
     row += `<td class="grid-summary-cell ${pctCls}" id="gsPct_${s.id}">${pct}%</td>`;
+    row += `<td class="grid-summary-cell" style="background:#fef9c3;color:#854d0e" id="gsSkor_${s.id}">${skorKehadiran(cnt)}</td>`;
     row += '</tr>';
     tbody += row;
     Object.keys(cnt).forEach(k => totals[k] += cnt[k]);
@@ -2411,6 +2418,7 @@ function renderMonthlyGrid() {
     <td class="col-sum-A">${totals.A}</td>
     <td class="col-sum-B">${totals.B}</td>
     <td class="${totalPct>=85?'grid-pct-high':totalPct>=75?'grid-pct-mid':'grid-pct-low'}">${totalPct}%</td>
+    <td style="background:#fef9c3;color:#854d0e">${skorKehadiran(totals)}</td>
   </tr>`;
 
   container.innerHTML = `<div class="grid-wrap"><table class="grid-table"><thead>${thead}</thead><tbody>${tbody}</tbody></table></div>`;
@@ -2559,6 +2567,7 @@ function updateGridRowSummary(studentId) {
   setEl('gsI_'+studentId, cnt.I);
   setEl('gsA_'+studentId, cnt.A);
   setEl('gsB_'+studentId, cnt.B);
+  setEl('gsSkor_'+studentId, skorKehadiran(cnt));
   const pctEl = document.getElementById('gsPct_'+studentId);
   if(pctEl) { pctEl.textContent = pct+'%'; pctEl.className = 'grid-summary-cell '+pctCls; }
 }
@@ -2621,7 +2630,7 @@ function exportGridExcel() {
   const classId = $('gridClass')?.value || '';
   if (!classId || !_gridStudents.length) return alert('Pilih kelas terlebih dahulu.');
   const nonSunDates = _gridDates.filter(d => new Date(d+'T00:00:00').getDay() !== 0);
-  const headers = ['No','NIS','Nama',...nonSunDates.map(d=>d.slice(8)+'/'+d.slice(5,7)),'H','S','I','A','B','% Hadir'];
+  const headers = ['No','NIS','Nama',...nonSunDates.map(d=>d.slice(8)+'/'+d.slice(5,7)),'H','S','I','A','B','% Hadir','Skor Ketidak hadiran'];
   const rows = _gridStudents.map((s,i) => {
     const cnt = {H:0,S:0,I:0,A:0,B:0};
     const row = [i+1, s.nis, s.nama];
@@ -2632,7 +2641,7 @@ function exportGridExcel() {
     });
     const total = cnt.H+cnt.S+cnt.I+cnt.A+cnt.B;
     const pct = total ? Math.round(100-((cnt.A+cnt.B)/total*100)) : 0;
-    return [...row, cnt.H, cnt.S, cnt.I, cnt.A, cnt.B, pct+'%'];
+    return [...row, cnt.H, cnt.S, cnt.I, cnt.A, cnt.B, pct+'%', skorKehadiran(cnt)];
   });
   const numCols = headers.length;
   const kop = kopSuratRows(numCols, `Absensi Bulanan - ${className(classId)}`);
@@ -2653,7 +2662,7 @@ async function printGridReport() {
   const head = ['No','NIS','Nama', ...nonSunDates.map(d=>{
     const dow=new Date(d+'T00:00:00').getDay();
     return d.slice(8)+' '+DAY_NAMES[dow];
-  }), 'H','S','I','A','B','%'];
+  }), 'H','S','I','A','B','%','Skor'];
   const colorMap = {H:[220,252,231],S:[254,243,199],I:[219,234,254],A:[254,226,226],B:[255,237,213]};
   const dateColStart=3, dateColEnd=3+nonSunDates.length;
   const body = _gridStudents.map((s,i) => {
@@ -2662,7 +2671,7 @@ async function printGridReport() {
     nonSunDates.forEach(d => { const v=_gridState[s.id+'_'+d]||'H'; cnt[v]++; row.push(v); });
     const total=cnt.H+cnt.S+cnt.I+cnt.A+cnt.B;
     const pct=total?Math.round(100-((cnt.A+cnt.B)/total*100)):0;
-    row.push(cnt.H,cnt.S,cnt.I,cnt.A,cnt.B,pct+'%');
+    row.push(cnt.H,cnt.S,cnt.I,cnt.A,cnt.B,pct+'%',skorKehadiran(cnt));
     return row;
   });
   const fmt = nonSunDates.length>20?'a3':'a4';
@@ -2703,12 +2712,12 @@ function buildGridRecapMessage(classId, periodLabel, rows) {
   const sch = db.school?.name || 'Sekolah';
   const kelas = className(classId);
   const listText = rows.map((r, i) =>
-    `${i+1}. ${r.nama} (NIS ${r.nis})\n   Hadir:${r.cnt.H} Sakit:${r.cnt.S} Izin:${r.cnt.I} Alpa:${r.cnt.A} Bolos:${r.cnt.B} — ${r.pct}%`
+    `${i+1}. ${r.nama} (NIS ${r.nis})\n   Hadir:${r.cnt.H} Sakit:${r.cnt.S} Izin:${r.cnt.I} Alpa:${r.cnt.A} Bolos:${r.cnt.B} Skor:${skorKehadiran(r.cnt)} — ${r.pct}%`
   ).join('\n');
   const totals = rows.reduce((a, r) => { a.H+=r.cnt.H; a.S+=r.cnt.S; a.I+=r.cnt.I; a.A+=r.cnt.A; a.B+=r.cnt.B; return a; }, {H:0,S:0,I:0,A:0,B:0});
   const totalAll = totals.H+totals.S+totals.I+totals.A+totals.B;
   const pctAll = totalAll ? Math.round(100-((totals.A+totals.B)/totalAll*100)) : 0;
-  return `Yth. Bapak/Ibu Wali Kelas ${kelas},\n\nBerikut rekap absensi bulanan kelas ${kelas} periode ${periodLabel}:\n\n${listText}\n\nRingkasan kelas:\nHadir: ${totals.H}\nSakit: ${totals.S}\nIzin: ${totals.I}\nAlpa: ${totals.A}\nBolos: ${totals.B}\nPersentase Kehadiran Kelas: ${pctAll}%\n\nMohon menjadi perhatian dan tindak lanjutnya. Terima kasih.\n\n- ${sch}`;
+  return `Yth. Bapak/Ibu Wali Kelas ${kelas},\n\nBerikut rekap absensi bulanan kelas ${kelas} periode ${periodLabel}:\n\n${listText}\n\nRingkasan kelas:\nHadir: ${totals.H}\nSakit: ${totals.S}\nIzin: ${totals.I}\nAlpa: ${totals.A}\nBolos: ${totals.B}\nTotal Skor Ketidak hadiran: ${skorKehadiran(totals)}\nPersentase Kehadiran Kelas: ${pctAll}%\n\nMohon menjadi perhatian dan tindak lanjutnya. Terima kasih.\n\n- ${sch}`;
 }
 
 async function sendWaGridRecapClass() {
