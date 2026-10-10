@@ -777,44 +777,84 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
   <div class="card"><h2><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 0 1 14.5-6M20.5 12a8.5 8.5 0 0 1-14.5 6"/><path d="M18 3v3.5h-3.5M6 21v-3.5h3.5"/></svg> Restore Data</h2><p class="date-now">Masukkan kembali data dari file backup JSON.</p><input type="file" id="restoreFile" accept=".json" class="input"><button class="btn btn-warning" style="margin-top:10px" onclick="restoreData()">↥ Restore Data</button></div>
   <div class="card danger-zone"><h2><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M12 3.5 22 20H2Z"/><path d="M12 10v4.2"/><circle cx="12" cy="17.3" r="0.15" fill="currentColor" stroke-width="1.6"/></svg> Hapus Semua Data</h2><p class="date-now">Gunakan dengan hati-hati. Tindakan ini tidak dapat dibatalkan kecuali Anda memiliki backup.</p><button class="btn btn-danger" onclick="clearAllData()">Hapus Semua Data</button></div>
  </div>
- <div class="card" style="margin-top:18px"><h2>ℹ️ Informasi Sistem</h2><p>Versi: SIAS 1.0 • Penyimpanan: browser localStorage (offline) + Sinkron Cloud opsional via Firebase Firestore (multi perangkat, saat online). Atur di menu <svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A5.5 5.5 0 0 1 17 8.06 4 4 0 0 1 16.5 18H7Z"/></svg> Sinkron Cloud.</p></div>
+ <div class="card" style="margin-top:18px"><h2>ℹ️ Informasi Sistem</h2><p>Versi: SIAS 1.0 • Penyimpanan: browser localStorage (offline) + Sinkron Cloud opsional via Google Drive (Apps Script) (multi perangkat, saat online). Atur di menu <svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A5.5 5.5 0 0 1 17 8.06 4 4 0 0 1 16.5 18H7Z"/></svg> Sinkron Cloud.</p></div>
 </section>
 
 <section id="cloudSync" class="page">
  <div class="card">
   <h2><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A5.5 5.5 0 0 1 17 8.06 4 4 0 0 1 16.5 18H7Z"/></svg> Sinkron Cloud (Multi Perangkat)</h2>
-  <p class="date-now">Hubungkan aplikasi ke database cloud gratis (Firebase Firestore) agar data siswa, kelas, dan absensi otomatis tersinkron ke semua laptop &amp; HP yang memakai Kode Sinkronisasi yang sama, selama perangkat terhubung internet.</p>
+  <p class="date-now">Hubungkan aplikasi ke Google Drive milikmu lewat Google Apps Script (gratis selamanya, tanpa kartu kredit) agar data siswa, kelas, dan absensi otomatis tersinkron ke semua laptop &amp; HP yang memakai URL &amp; Kode Rahasia yang sama. Jika offline, data tetap tersimpan dan dikirim otomatis saat online.</p>
   <div id="cloudStatus" class="notice">Status: <b>Belum terhubung</b></div>
   <div class="form-grid">
     <div class="field" style="grid-column:1/-1">
-      <label>Konfigurasi Firebase (tempel objek firebaseConfig dari Firebase Console)</label>
-      <textarea id="cloudConfigInput" rows="7" style="width:100%;padding:9px;border:1px solid var(--border);border-radius:8px;font-family:monospace;font-size:12px" placeholder='{
-  apiKey: "AIzaSy...",
-  authDomain: "namaproyek.firebaseapp.com",
-  projectId: "namaproyek",
-  storageBucket: "namaproyek.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef"
-}'></textarea>
+      <label>URL Web App Google Apps Script (berakhiran /exec)</label>
+      <input id="cloudConfigInput" style="width:100%" placeholder="https://script.google.com/macros/s/AKfy.../exec" autocomplete="off">
     </div>
-    <div class="field"><label>Kode Sinkronisasi (samakan persis di semua perangkat)</label><input id="cloudSyncCode" placeholder="contoh: smkn1sikur-2026"></div>
+    <div class="field"><label>Kode Rahasia (sama persis dengan KUNCI di Apps Script &amp; di semua perangkat)</label><input id="cloudSyncCode" placeholder="contoh: smkn1sikur-2026"></div>
   </div>
   <div class="actions" style="justify-content:flex-start;margin-top:14px">
     <button class="btn btn-primary" onclick="connectCloud()"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M9.5 14.5 14.5 9.5"/><path d="M10.8 6.3 13 4a3.6 3.6 0 0 1 5.1 5.1l-2.3 2.3"/><path d="M13.2 17.7 11 20a3.6 3.6 0 0 1-5.1-5.1l2.3-2.3"/></svg> Hubungkan & Sinkron</button>
     <button class="btn btn-info" onclick="manualSyncCloud()"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 0 1 14.5-6M20.5 12a8.5 8.5 0 0 1-14.5 6"/><path d="M18 3v3.5h-3.5M6 21v-3.5h3.5"/></svg> Sinkron Sekarang</button>
     <button class="btn btn-danger" onclick="disconnectCloud()"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="m9 9 6 6M15 9l-6 6"/><path d="M10.8 6.3 13 4a3.6 3.6 0 0 1 5.1 5.1l-2.3 2.3"/><path d="M13.2 17.7 11 20a3.6 3.6 0 0 1-5.1-5.1l2.3-2.3"/></svg> Putuskan Sambungan</button>
+    <button class="btn btn-secondary" onclick="copySetupLink()">Salin Tautan Setup</button>
   </div>
  </div>
  <div class="card" style="margin-top:18px">
-  <h2><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.9 2.9l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4.1 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.9-2.9l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1h-.2a2 2 0 1 1 0-4.1h.1A1.7 1.7 0 0 0 4.1 7.4a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.9-2.9l.1.1a1.7 1.7 0 0 0 1.9.3H8.8a1.7 1.7 0 0 0 1-1.6v-.2a2 2 0 1 1 4.1 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.9 2.9l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1h.2a2 2 0 1 1 0 4.1h-.1a1.7 1.7 0 0 0-1.6 1Z"/></svg> Cara Mendapatkan Konfigurasi Firebase (Gratis, ±5 menit)</h2>
+  <h2><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.9 2.9l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2a2 2 0 1 1-4.1 0v-.1a1.7 1.7 0 0 0-1.1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.9-2.9l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1h-.2a2 2 0 1 1 0-4.1h.1A1.7 1.7 0 0 0 4.1 7.4a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.9-2.9l.1.1a1.7 1.7 0 0 0 1.9.3H8.8a1.7 1.7 0 0 0 1-1.6v-.2a2 2 0 1 1 4.1 0v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.9 2.9l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1h.2a2 2 0 1 1 0 4.1h-.1a1.7 1.7 0 0 0-1.6 1Z"/></svg> Cara Menyiapkan (Gratis, ±5 menit, cukup sekali)</h2>
   <ol style="font-size:13px;line-height:1.9;color:#334155;padding-left:18px">
-   <li>Buka <a href="https://console.firebase.google.com" target="_blank" rel="noopener">console.firebase.google.com</a>, login dengan akun Google, lalu klik <b>Add project / Tambah proyek</b>.</li>
-   <li>Setelah proyek dibuat, di halaman utama klik ikon <b>&lt;/&gt; (Web)</b> untuk mendaftarkan aplikasi web, beri nama bebas, klik <b>Register app</b>.</li>
-   <li>Salin seluruh objek <code>firebaseConfig</code> yang ditampilkan (dari tanda <code>{</code> sampai <code>}</code>), lalu tempel ke kotak konfigurasi di atas.</li>
-   <li>Di sidebar kiri Firebase Console, buka <b>Build → Firestore Database</b>, klik <b>Create database</b>, pilih lokasi server, dan pilih mode <b>Test mode</b> (agar aplikasi bisa langsung membaca/menulis data).</li>
-   <li>Isi kolom <b>Kode Sinkronisasi</b> bebas (mis. nama sekolah), lalu klik <b>Hubungkan &amp; Sinkron</b>. Masukkan Firebase config dan Kode Sinkronisasi yang <b>sama persis</b> di setiap laptop/HP agar datanya saling terhubung.</li>
+   <li>Buka <a href="https://script.google.com" target="_blank" rel="noopener">script.google.com</a>, login akun Google, klik <b>Proyek baru (New project)</b>.</li>
+   <li>Hapus semua isi <code>Code.gs</code>, lalu tempel kode di bawah (tombol <b>Salin Kode</b>). Ganti tulisan <code>GANTI-DENGAN-KODE-RAHASIA-ANDA</code> pada baris <code>KUNCI</code> dengan kode rahasia buatanmu sendiri (panjang &amp; acak), lalu klik ikon simpan.</li>
+   <li>Klik <b>Deploy (Terapkan) → Deployment baru</b>, pilih jenis <b>Aplikasi web (Web app)</b>. Isi <b>Execute as: Me (Saya)</b> dan <b>Who has access: Anyone (Siapa saja)</b>, lalu <b>Deploy</b>. Saat diminta izin, pilih akunmu → <b>Advanced → Go to ... (unsafe) → Allow</b> (peringatan ini normal untuk skrip buatan sendiri).</li>
+   <li>Salin <b>Web app URL</b> (berakhiran <code>/exec</code>), tempel di kolom URL di atas. Isi <b>Kode Rahasia</b> sama persis dengan <code>KUNCI</code>, lalu klik <b>Hubungkan &amp; Sinkron</b>.</li>
+   <li>Di laptop/HP lain, buka aplikasi ini, lalu isi URL dan Kode Rahasia yang <b>sama persis</b>.</li>
   </ol>
-  <p class="date-now" style="margin-top:10px">Catatan: mode Test biasanya otomatis nonaktif (mengunci akses) setelah ~30 hari. Jika sudah lewat, buka menu <b>Firestore Database → Rules</b> dan ganti menjadi selalu mengizinkan baca/tulis, atau perpanjang masa Test mode.</p>
+  <div class="actions" style="justify-content:flex-start;margin:12px 0 8px"><button type="button" class="btn btn-secondary" onclick="copyGasCode()">Salin Kode</button></div>
+  <pre id="gasCode" style="max-height:320px;overflow:auto;background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;font-size:12px;line-height:1.5;white-space:pre">// SIAS - Server sinkron (Google Apps Script)
+const KUNCI = &#x27;GANTI-DENGAN-KODE-RAHASIA-ANDA&#x27;;
+const NAMA_FILE = &#x27;SIAS_DATA.json&#x27;;
+
+function doPost(e) {
+  const lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(25000);
+    const req = JSON.parse(e.postData.contents);
+    if (req.code !== KUNCI) return out({ ok: false, error: &#x27;kunci salah&#x27; });
+    const file = cariFile();
+    const waktu = file ? Number(file.getDescription() || 0) : 0;
+    if (req.action === &#x27;meta&#x27;) {
+      return out({ ok: true, exists: !!file, updatedAt: waktu });
+    }
+    if (req.action === &#x27;get&#x27;) {
+      if (!file) return out({ ok: true, exists: false, updatedAt: 0 });
+      return out({ ok: true, exists: true, updatedAt: waktu, payload: file.getBlob().getDataAsString() });
+    }
+    if (req.action === &#x27;put&#x27;) {
+      if (file) {
+        if (waktu !== Number(req.expect || 0)) return out({ ok: false, error: &#x27;bentrok&#x27; });
+        file.setContent(req.payload);
+        file.setDescription(String(req.updatedAt));
+      } else {
+        DriveApp.createFile(NAMA_FILE, req.payload, MimeType.PLAIN_TEXT).setDescription(String(req.updatedAt));
+      }
+      return out({ ok: true, updatedAt: req.updatedAt });
+    }
+    return out({ ok: false, error: &#x27;aksi tidak dikenal&#x27; });
+  } catch (err) {
+    return out({ ok: false, error: String(err) });
+  } finally {
+    try { lock.releaseLock(); } catch (x) {}
+  }
+}
+function doGet() { return out({ ok: true, info: &#x27;SIAS sinkron aktif&#x27; }); }
+function cariFile() {
+  const it = DriveApp.getFilesByName(NAMA_FILE);
+  return it.hasNext() ? it.next() : null;
+}
+function out(o) {
+  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+</pre>
+  <p class="date-now" style="margin-top:10px">Catatan: data tersimpan sebagai file <code>SIAS_DATA.json</code> di Google Drive-mu sendiri. Jika kode Apps Script diubah, lakukan <b>Deploy → Kelola deployment → Edit → Versi baru</b>. Perangkat lain memeriksa pembaruan tiap ±20 detik saat aplikasi terbuka.</p>
  </div>
 </section>
 
@@ -834,11 +874,10 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
 <div class="modal" id="classModal"><div class="modal-box"><div class="modal-head"><h3 id="classModalTitle">Tambah Kelas</h3><button class="close" onclick="closeModal('classModal')">×</button></div>
 <form onsubmit="saveClass(event)"><input type="hidden" id="classId"><div class="form-grid"><div class="field"><label>Nama Kelas *</label><input id="className" required placeholder="Contoh: VII A"></div><div class="field"><label>Wali Kelas</label><input id="homeroom"></div><div class="field"><label>No. WhatsApp Wali Kelas</label><input id="homeroomPhone" placeholder="Contoh: 081234567890" inputmode="tel"></div></div><div class="actions"><button type="button" class="btn btn-secondary" onclick="closeModal('classModal')">Batal</button><button class="btn btn-primary">Simpan</button></div></form></div></div>
 
+<div id="syncPill" onclick="kickSync()" style="display:none;position:fixed;right:12px;bottom:12px;z-index:60;max-width:70vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#fff;border:1px solid var(--border,#e2e8f0);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.15);cursor:pointer" title="Status sinkron cloud"></div>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 <script>
 
 const LOGIN_KEY='ABSENSI_LOGIN_V1', AUTH_KEY='sias_auth', DEFAULT_USER='admin', DEFAULT_PASS='admin123';
@@ -979,7 +1018,7 @@ function chooseBgColor(v){ensureTheme();db.theme.bgColor=v;db.theme.bgImage='';r
 function previewBgImage(e){const f=e.target.files[0];if(!f)return;if(!f.type.startsWith('image/'))return alert('Pilih file gambar PNG, JPG, atau WEBP.');const reader=new FileReader();reader.onload=()=>{ensureTheme();db.theme.bgImage=reader.result;renderAppearance()};reader.readAsDataURL(f)}
 function removeBgImage(){ensureTheme();db.theme.bgImage='';renderAppearance()}
 function saveTheme(){ensureTheme();saveDB();applyTheme();alert('Pengaturan tampilan berhasil disimpan.')}
-function saveDB(skipCloud){localStorage.setItem(KEY,JSON.stringify(db));if(!skipCloud)scheduleCloudPush();markGridNeedsRefresh()}
+function saveDB(skipCloud){if(!skipCloud){db.updatedAt=Date.now();setDirty(true)}localStorage.setItem(KEY,JSON.stringify(db));if(!skipCloud)scheduleCloudPush();markGridNeedsRefresh()}
 /* Tombol "Refresh" pada Absensi Bulanan Grid sekarang selalu tampil
    di baris tombol paling atas, tidak lagi disembunyikan otomatis. */
 let gridNeedsRefresh = false;
@@ -1003,111 +1042,208 @@ document.addEventListener('visibilitychange', function(){
 window.addEventListener('pageshow', markGridNeedsRefresh);
 window.addEventListener('focus', markGridNeedsRefresh);
 
-// ==== SINKRON CLOUD (Firebase Firestore) ====
-const CLOUD_KEY='SIAS_CLOUD_CFG_V1';
-let cloudApp=null,cloudFsDb=null,cloudUnsub=null,cloudPushTimer=null,cloudApplyingRemote=false;
+// ==== SINKRON CLOUD (Google Apps Script + Google Drive, gratis) ====
+/* - Data disimpan sebagai 1 file JSON di Google Drive milik pemilik sekolah (lewat Web App Apps Script).
+   - Perubahan ditandai "belum terkirim" (dirty) di localStorage, jadi aman walau offline / tab ditutup,
+     dan otomatis dikirim saat internet kembali.
+   - Dua perangkat yang mengedit bersamaan DIGABUNG, bukan saling timpa.
+   - Perangkat lain mengecek perubahan tiap ±20 detik saat aplikasi terbuka. */
+const CLOUD_KEY='SIAS_CLOUD_CFG_V2';
+var SYNC_DIRTY_KEY='SIAS_SYNC_DIRTY',SYNC_BASE_KEY='SIAS_SYNC_BASE2';
+var cloudPushTimer=null,cloudApplyingRemote=false,cloudBusy=false,cloudAgain=false,cloudOn=false,cloudPollTimer=null;
+const clock=()=>new Date().toLocaleTimeString('id-ID');
 function loadCloudConfig(){try{return JSON.parse(localStorage.getItem(CLOUD_KEY)||'null')}catch(e){return null}}
 function saveCloudConfig(cfg){localStorage.setItem(CLOUD_KEY,JSON.stringify(cfg))}
-function setCloudStatus(text,ok){const el=$('cloudStatus');if(el)el.innerHTML=`Status: <b style="color:${ok?'#16a34a':'#dc2626'}">${esc(text)}</b>`}
+function setCloudStatus(text,ok){
+ const col=ok===true?'#16a34a':(ok==='warn'?'#d97706':'#dc2626');
+ const el=$('cloudStatus');if(el)el.innerHTML=`Status: <b style="color:${col}">${esc(text)}</b>`;
+ const p=$('syncPill');
+ if(p){if(!loadCloudConfig()){p.style.display='none';return}p.style.display='block';p.style.color=col;p.textContent=(ok===true?'\u2601\uFE0F ':ok==='warn'?'\u23F3 ':'\u26A0\uFE0F ')+text;p.title=text}
+}
 function refreshCloudForm(){
  const cfg=loadCloudConfig();
  if(!cfg)return;
- if($('cloudConfigInput'))$('cloudConfigInput').value=cfg.raw||'';
+ if($('cloudConfigInput'))$('cloudConfigInput').value=cfg.url||'';
  if($('cloudSyncCode'))$('cloudSyncCode').value=cfg.syncCode||'';
 }
-function parseFirebaseConfigText(text){
- try{return (new Function('return ('+text+')'))()}catch(e){return null}
+function copyGasCode(){
+ const t=$('gasCode').textContent;
+ const fallback=()=>{const r=document.createRange();r.selectNodeContents($('gasCode'));const s=window.getSelection();s.removeAllRanges();s.addRange(r);alert('Kode sudah terpilih. Tekan Ctrl+C (atau tahan lalu Salin di HP).')};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>alert('Kode berhasil disalin.')).catch(fallback);else fallback();
 }
 function connectCloud(){
- const raw=($('cloudConfigInput').value||'').trim();
+ const url=($('cloudConfigInput').value||'').trim();
  const syncCode=($('cloudSyncCode').value||'').trim();
- if(!raw||!syncCode)return alert('Isi konfigurasi Firebase dan Kode Sinkronisasi terlebih dahulu.');
- const parsed=parseFirebaseConfigText(raw);
- if(!parsed||!parsed.projectId)return alert('Konfigurasi Firebase tidak valid. Pastikan format sesuai contoh yang disalin dari Firebase Console.');
- if(typeof firebase==='undefined')return alert('Gagal memuat pustaka Firebase. Pastikan perangkat terhubung internet lalu coba lagi.');
- const cfg={raw,syncCode,firebaseConfig:parsed};
- saveCloudConfig(cfg);
- startCloudSync(cfg);
+ if(!url||!syncCode)return alert('Isi URL Web App dan Kode Rahasia terlebih dahulu.');
+ if(!/^https:\/\/script\.google\.com\/.+\/exec$/.test(url))return alert('URL tidak valid. Harus diawali https://script.google.com/ dan diakhiri /exec (salin dari tombol Deploy di Apps Script).');
+ saveCloudConfig({url,syncCode});
+ startCloudSync(loadCloudConfig());
 }
-function startCloudSync(cfg){
+function isDirty(){return localStorage.getItem(SYNC_DIRTY_KEY)==='1'}
+function setDirty(v){if(v)localStorage.setItem(SYNC_DIRTY_KEY,'1');else localStorage.removeItem(SYNC_DIRTY_KEY);if(v)showSyncState()}
+function getBase(){return parseInt(localStorage.getItem(SYNC_BASE_KEY)||'0',10)||0}
+function setBase(t){localStorage.setItem(SYNC_BASE_KEY,String(t))}
+function hasLocalData(){return (db.students&&db.students.length>0)||(db.classes&&db.classes.length>0)||Object.keys(db.attendance||{}).length>0}
+function showSyncState(){
+ if(!loadCloudConfig())return;
+ if(!navigator.onLine)return setCloudStatus(isDirty()?'Offline \u2022 perubahan dikirim otomatis saat online':'Offline','warn');
+ if(isDirty())setCloudStatus('Menunggu pengiriman...','warn');
+}
+function cloudErrText(e){
+ const c=(e&&e.code)||'';
+ if(c==='auth')return 'Kode Rahasia tidak sama dengan KUNCI di Apps Script';
+ if(c==='html')return 'URL salah / Web App belum diatur akses "Siapa saja (Anyone)"';
+ if(c==='network'||c==='timeout')return 'Belum bisa menjangkau server, dicoba lagi otomatis';
+ return 'Gagal sinkron: '+((e&&e.message)||e);
+}
+/* Panggil Web App Apps Script. Content-Type text/plain sengaja dipakai agar tidak ada preflight CORS. */
+async function gas(cfg,body,ms){
+ const ctrl=new AbortController(),to=setTimeout(()=>ctrl.abort(),ms||30000);
  try{
-  if(cloudUnsub){cloudUnsub();cloudUnsub=null}
-  if(!cloudApp){
-   const appName='SIAS_'+cfg.syncCode;
-   cloudApp=(firebase.apps&&firebase.apps.find(a=>a.name===appName))||firebase.initializeApp(cfg.firebaseConfig,appName);
-  }
-  cloudFsDb=cloudApp.firestore();
-  const ref=cloudFsDb.collection('sias_absensi').doc(cfg.syncCode);
-  setCloudStatus('Menghubungkan...',true);
-  cloudUnsub=ref.onSnapshot(snap=>{
-   if(!snap.exists){
-    setCloudStatus('Terhubung • mengunggah data awal...',true);
-    pushToCloud();
-    return;
-   }
-   const remote=snap.data();
-   const remoteTime=remote&&remote.updatedAt||0;
-   const localTime=db.updatedAt||0;
-   if(remote&&remote.payload&&remoteTime>localTime){
+  let r;
+  try{r=await fetch(cfg.url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({code:cfg.syncCode},body)),signal:ctrl.signal})}
+  catch(err){const e=new Error(err&&err.name==='AbortError'?'Waktu habis, koneksi lambat':'Tidak ada koneksi');e.code=err&&err.name==='AbortError'?'timeout':'network';throw e}
+  const txt=await r.text();let j;
+  try{j=JSON.parse(txt)}catch(_){const e=new Error('Respons bukan JSON');e.code='html';throw e}
+  if(!j.ok){const e=new Error(j.error||'Ditolak server');e.code=j.error==='kunci salah'?'auth':(j.error==='bentrok'?'bentrok':'server');throw e}
+  return j;
+ }finally{clearTimeout(to)}
+}
+/* Gabungkan data lokal (belum terkirim) dengan data cloud: siswa/kelas/sampah digabung per id,
+   absensi digabung per tanggal & siswa; data yang lebih baru menang bila bentrok. */
+function mergeDB(a,b){
+ const A=a.updatedAt||0,B=b.updatedAt||0;
+ const newer=A>=B?a:b,older=A>=B?b:a;
+ const out=JSON.parse(JSON.stringify(newer));
+ const uni=(o,n,key)=>{const m=new Map();(o||[]).forEach(x=>m.set(key(x),x));(n||[]).forEach(x=>m.set(key(x),x));return Array.from(m.values())};
+ out.students=uni(older.students,newer.students,x=>x.id);
+ out.classes=uni(older.classes,newer.classes,x=>x.id);
+ out.trash=uni(older.trash,newer.trash,x=>(x&&x.id)||JSON.stringify(x));
+ const att={};
+ new Set(Object.keys(older.attendance||{}).concat(Object.keys(newer.attendance||{}))).forEach(d=>{
+  att[d]=Object.assign({},(older.attendance||{})[d],(newer.attendance||{})[d]);
+ });
+ out.attendance=att;
+ return out;
+}
+async function writeCloud(cfg,expect){
+ if(!db.updatedAt)db.updatedAt=Date.now();
+ const t=db.updatedAt;
+ setCloudStatus('Mengirim data...','warn');
+ const prevBase=getBase();
+ setBase(t);
+ try{await gas(cfg,{action:'put',updatedAt:t,expect:expect,payload:JSON.stringify(db)},60000)}
+ catch(e){setBase(prevBase);throw e}
+ if(db.updatedAt===t)setDirty(false);
+ setCloudStatus('Tersinkron \u2022 '+clock(),true);
+}
+/* Satu fungsi untuk semua: cek cloud -> unduh bila ada yang baru -> gabung bila bentrok -> kirim bila ada perubahan lokal */
+async function syncNow(){
+ const cfg=loadCloudConfig();
+ if(!cfg)return;
+ if(!navigator.onLine){showSyncState();return}
+ if(cloudBusy){cloudAgain=true;return}
+ cloudBusy=true;
+ try{
+  const m=await gas(cfg,{action:'meta'});
+  let needPush=isDirty(),expect=0;
+  if(m.exists){
+   expect=m.updatedAt||0;
+   if(expect!==getBase()){
+    setCloudStatus('Mengunduh data terbaru...','warn');
+    const g=await gas(cfg,{action:'get'},60000);
+    const remote=JSON.parse(g.payload);
+    expect=g.updatedAt||0;
+    cloudApplyingRemote=true;
     try{
-     const remoteData=JSON.parse(remote.payload);
-     cloudApplyingRemote=true;
-     db=remoteData;
-     saveDB(true);
-     refreshFilters();
-     renderCurrentPage();
-     cloudApplyingRemote=false;
-    }catch(e){console.error(e)}
+     if(isDirty()){db=mergeDB(db,remote);db.updatedAt=Math.max(Date.now(),expect+1);needPush=true}
+     else{db=remote;db.updatedAt=expect;needPush=false}
+     ensureSchool();ensureTrash();ensureTheme();
+     saveDB(true);setBase(expect);refreshFilters();renderCurrentPage();
+    }finally{cloudApplyingRemote=false}
    }
-   setCloudStatus('Tersinkron • '+new Date(remoteTime||Date.now()).toLocaleTimeString('id-ID'),true);
-  },err=>{
-   console.error(err);
-   setCloudStatus('Gagal terhubung. Periksa konfigurasi & aturan akses Firestore.',false);
-  });
+  }else needPush=true; /* file cloud belum ada: unggah data awal */
+  if(needPush)await writeCloud(cfg,expect);
+  else setCloudStatus('Tersinkron \u2022 '+clock(),true);
  }catch(e){
-  console.error(e);
-  setCloudStatus('Gagal terhubung: '+e.message,false);
+  if(e&&e.code==='bentrok')cloudAgain=true; /* perangkat lain baru menyimpan: ulangi (unduh + gabung) */
+  else{console.error(e);setCloudStatus(cloudErrText(e),false)}
+ }finally{
+  cloudBusy=false;
+  if(cloudAgain){cloudAgain=false;setTimeout(syncNow,400)}
  }
 }
-function pushToCloud(){
- const cfg=loadCloudConfig();
- if(!cfg||!cloudFsDb)return;
- db.updatedAt=Date.now();
- localStorage.setItem(KEY,JSON.stringify(db));
- cloudFsDb.collection('sias_absensi').doc(cfg.syncCode).set({payload:JSON.stringify(db),updatedAt:db.updatedAt})
-  .then(()=>setCloudStatus('Tersinkron • '+new Date(db.updatedAt).toLocaleTimeString('id-ID'),true))
-  .catch(e=>{console.error(e);setCloudStatus('Gagal sinkron: periksa koneksi internet / aturan Firestore.',false)});
+function startCloudSync(cfg){
+ cloudOn=true;
+ if(getBase()===0&&hasLocalData())setDirty(true); /* data lama di perangkat ini ikut digabung, tidak tertimpa */
+ setCloudStatus('Menghubungkan...','warn');
+ clearInterval(cloudPollTimer);
+ cloudPollTimer=setInterval(()=>{if(cloudOn&&document.visibilityState==='visible')kickSync()},20000);
+ kickSync();
 }
+function pushToCloud(){setDirty(true);kickSync()}
+function kickSync(){
+ if(!loadCloudConfig())return;
+ if(!navigator.onLine){showSyncState();return}
+ syncNow();
+}
+function scheduleSync(ms){clearTimeout(cloudPushTimer);cloudPushTimer=setTimeout(kickSync,ms)}
 function manualSyncCloud(){
  const cfg=loadCloudConfig();
  if(!cfg)return alert('Belum terhubung ke cloud. Hubungkan terlebih dahulu.');
- pushToCloud();
+ if(!navigator.onLine)return alert('Perangkat sedang offline. Data akan dikirim otomatis saat online.');
+ setDirty(true);kickSync();
 }
 function disconnectCloud(){
- if(cloudUnsub){cloudUnsub();cloudUnsub=null}
- localStorage.removeItem(CLOUD_KEY);
- cloudApp=null;cloudFsDb=null;
+ cloudOn=false;clearInterval(cloudPollTimer);clearTimeout(cloudPushTimer);
+ localStorage.removeItem(CLOUD_KEY);localStorage.removeItem(SYNC_BASE_KEY);
  setCloudStatus('Belum terhubung',false);
  if($('cloudConfigInput'))$('cloudConfigInput').value='';
  if($('cloudSyncCode'))$('cloudSyncCode').value='';
 }
 function scheduleCloudPush(){
  if(cloudApplyingRemote)return;
- const cfg=loadCloudConfig();
- if(!cfg||!cloudFsDb)return;
- clearTimeout(cloudPushTimer);
- cloudPushTimer=setTimeout(pushToCloud,1000);
+ if(!loadCloudConfig())return;
+ showSyncState();
+ scheduleSync(1000);
 }
-const DEFAULT_FIREBASE_CONFIG={apiKey:"AIzaSyCZa5mCh-ipjmPayDfi15yYmHed56DGZn0",authDomain:"abseni-siswa.firebaseapp.com",projectId:"abseni-siswa",storageBucket:"abseni-siswa.firebasestorage.app",messagingSenderId:"367262723136",appId:"1:367262723136:web:42fdbed4fe2e883bfc83a5",measurementId:"G-Y68XLPJNDK"};
-const DEFAULT_SYNC_CODE="abseni-siswa";
+/* Pemicu otomatis: internet kembali, aplikasi dibuka/ditampilkan lagi */
+window.addEventListener('offline',showSyncState);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')kickSync()});
+/* ==== SETUP OTOMATIS ====
+   1) Isi 2 baris di bawah SEKALI saja, maka setiap perangkat yang membuka file ini langsung terhubung sendiri.
+   2) Atau pakai "Salin Tautan Setup": buka tautan itu di HP/laptop lain, otomatis terhubung tanpa mengetik apa pun. */
+const DEFAULT_CLOUD_URL='';   /* tempel URL Web App (berakhiran /exec) di antara tanda kutip */
+const DEFAULT_CLOUD_CODE='';  /* tempel KUNCI yang sama dengan di Apps Script */
+function setupLinkHash(cfg){return '#sync='+encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify({u:cfg.url,k:cfg.syncCode})))))}
+function setupFromHash(){
+ try{
+  const m=location.hash.match(/[#&]sync=([^&]+)/);
+  if(!m)return false;
+  const o=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1])))));
+  if(o&&/^https:\/\/script\.google\.com\/.+\/exec$/.test(o.u)&&o.k){
+   saveCloudConfig({url:o.u,syncCode:o.k});
+   history.replaceState(null,'',location.pathname+location.search);
+   return true;
+  }
+ }catch(e){}
+ return false;
+}
+function copySetupLink(){
+ const cfg=loadCloudConfig();
+ if(!cfg)return alert('Hubungkan dulu ke cloud, baru tautan setup bisa dibuat.');
+ if(location.protocol==='file:')return alert('Tautan setup hanya berfungsi jika aplikasi sudah diunggah online (mis. Netlify / Firebase Hosting / GitHub Pages). Saat ini file dibuka dari komputer.');
+ const link=location.href.split('#')[0]+setupLinkHash(cfg);
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(link).then(()=>alert('Tautan setup disalin. Buka tautan itu di HP/laptop lain, maka otomatis terhubung. Jaga kerahasiaannya karena berisi kode rahasia.')).catch(()=>prompt('Salin tautan ini:',link));
+ else prompt('Salin tautan ini:',link);
+}
 function initCloudFromStorage(){
+ localStorage.removeItem('SIAS_CLOUD_CFG_V1'); /* sisa konfigurasi Firebase lama */
+ setupFromHash();
  let cfg=loadCloudConfig();
- if(!cfg){
-  cfg={raw:JSON.stringify(DEFAULT_FIREBASE_CONFIG,null,2),syncCode:DEFAULT_SYNC_CODE,firebaseConfig:DEFAULT_FIREBASE_CONFIG};
-  saveCloudConfig(cfg);
- }
+ if(!cfg&&DEFAULT_CLOUD_URL&&DEFAULT_CLOUD_CODE){saveCloudConfig({url:DEFAULT_CLOUD_URL,syncCode:DEFAULT_CLOUD_CODE});cfg=loadCloudConfig()}
  refreshCloudForm();
- startCloudSync(cfg);
+ if(cfg)startCloudSync(cfg);
 }
 function renderCurrentPage(){
  const activeBtn=document.querySelector('.nav button.active');
@@ -1125,7 +1261,7 @@ function renderCurrentPage(){
  if(id==='semester')renderSemester();
   if(id==='monthlyGrid')renderMonthlyGrid();
 }
-window.addEventListener('online',()=>{const cfg=loadCloudConfig();if(cfg)startCloudSync(cfg)});
+window.addEventListener('online',kickSync);
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 const AVATAR_COLORS=['#6366f1','#ec4899','#06b6d4','#f59e0b','#22c55e','#ef4444','#8b5cf6','#0ea5e9','#14b8a6','#f97316'];
