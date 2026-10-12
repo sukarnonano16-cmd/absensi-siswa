@@ -5,12 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sistem Informasi Absensi Siswa</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230284c7'/%3E%3Cpath d='M12 7.2c-1.6-1.2-3.7-1.8-6.2-1.6v11.4c2.5-.2 4.6.4 6.2 1.6 1.6-1.2 3.7-1.8 6.2-1.6V5.6c-2.5-.2-4.6.4-6.2 1.6Z' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 7.2v11.4' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--primary:#38bdf8;--primary2:#0284c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--success:#16a34a;--warning:#d97706;--danger:#dc2626;--info:#0891b2;--th-bg:#f8fafc;--radius:16px;--radius-sm:10px;--radius-lg:22px;--shadow-sm:0 1px 2px rgba(15,23,42,.06),0 1px 1px rgba(15,23,42,.04);--shadow-md:0 8px 24px -6px rgba(15,23,42,.12),0 2px 6px rgba(15,23,42,.06);--shadow-lg:0 24px 48px -12px rgba(15,23,42,.22),0 8px 16px -4px rgba(15,23,42,.08);--ease:cubic-bezier(.4,0,.2,1)}
-*{box-sizing:border-box}html,body{overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;scroll-behavior:smooth}body{margin:0;font-family:'Plus Jakarta Sans',Manrope,Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:pan-y;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+*{box-sizing:border-box}html,body{overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;scroll-behavior:auto}body{margin:0;font-family:'Plus Jakarta Sans',Manrope,Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);touch-action:pan-y;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
 /* Izinkan geser/scroll ke segala arah (atas-bawah & kiri-kanan) khusus di dalam area tabel/grid, supaya di HP bisa digeser dari titik manapun di dalam tabel, tidak cuma dari sisi tertentu */
 .table-wrap,#monthlyGrid .grid-wrap{touch-action:pan-x pan-y pinch-zoom;-ms-touch-action:pan-x pan-y}
 
@@ -810,69 +807,56 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
    <li>Di laptop/HP lain, buka aplikasi ini, lalu isi URL dan Kode Rahasia yang <b>sama persis</b>.</li>
   </ol>
   <div class="actions" style="justify-content:flex-start;margin:12px 0 8px"><button type="button" class="btn btn-secondary" onclick="copyGasCode()">Salin Kode</button></div>
-  <pre id="gasCode" style="max-height:320px;overflow:auto;background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;font-size:12px;line-height:1.5;white-space:pre">// SIAS - Server sinkron v2 (Google Apps Script) - hanya mengirim PERUBAHAN, jauh lebih cepat
+  <pre id="gasCode" style="max-height:320px;overflow:auto;background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;font-size:12px;line-height:1.5;white-space:pre">// SIAS - Server sinkron v3 (Google Apps Script) - cepat: cache + tanpa baca Drive saat cek perubahan
 const KUNCI = &#x27;GANTI-DENGAN-KODE-RAHASIA-ANDA&#x27;;
 const NAMA_FILE = &#x27;SIAS_DATA.json&#x27;;
-const MAKS_LOG = 300000; // batas catatan perubahan yang disimpan (karakter)
+const MAKS_LOG = 300000; // batas catatan perubahan (karakter)
+const C = CacheService.getScriptCache(), P = PropertiesService.getScriptProperties();
 
 function doPost(e) {
+  let req;
+  try { req = JSON.parse(e.postData.contents); } catch (x) { return out({ ok: false, error: &#x27;permintaan rusak&#x27; }); }
+  if (req.code !== KUNCI) return out({ ok: false, error: &#x27;kunci salah&#x27; });
+  const tulisAksi = req.action === &#x27;put&#x27; || req.action === &#x27;patch&#x27;;
   const lock = LockService.getScriptLock();
   try {
-    lock.waitLock(25000);
-    const req = JSON.parse(e.postData.contents);
-    if (req.code !== KUNCI) return out({ ok: false, error: &#x27;kunci salah&#x27; });
-    const file = cariFile();
-    const rev = file ? Number(file.getDescription() || 0) : 0;
-
-    if (req.action === &#x27;meta&#x27;) {
-      return out({ ok: true, exists: !!file, updatedAt: rev });
-    }
+    if (tulisAksi) lock.waitLock(25000); // cek/baca tidak perlu kunci = lebih cepat
+    const rev = ambilRev(); // null = data belum ada
+    const ada = rev !== null, r0 = rev || 0;
+    if (req.action === &#x27;meta&#x27;) return out({ ok: true, exists: ada, updatedAt: r0 });
     if (req.action === &#x27;get&#x27;) {
-      if (!file) return out({ ok: true, exists: false, updatedAt: 0 });
-      return out({ ok: true, exists: true, updatedAt: rev, payload: JSON.stringify(baca(file, rev).db) });
+      if (!ada) return out({ ok: true, exists: false, updatedAt: 0 });
+      return out({ ok: true, exists: true, updatedAt: r0, payload: JSON.stringify(muat(r0).db) });
     }
-    if (req.action === &#x27;put&#x27;) { // unggah penuh (data awal / pemulihan)
-      if (file &amp;&amp; rev !== Number(req.expect || 0)) return out({ ok: false, error: &#x27;bentrok&#x27; });
+    if (req.action === &#x27;put&#x27;) {
+      if (ada &amp;&amp; r0 !== Number(req.expect || 0)) return out({ ok: false, error: &#x27;bentrok&#x27; });
       const t = Number(req.updatedAt);
-      tulis(file, { v: 2, db: JSON.parse(req.payload), log: [], logBase: t }, t);
+      simpan({ v: 2, db: JSON.parse(req.payload), log: [], logBase: t }, t);
       return out({ ok: true, updatedAt: t });
     }
-    if (req.action === &#x27;pull&#x27;) { // ambil perubahan dari perangkat lain
-      if (!file) return out({ ok: true, exists: false, updatedAt: 0 });
+    if (req.action === &#x27;pull&#x27;) {
+      if (!ada) return out({ ok: true, exists: false, updatedAt: 0 });
       const since = Number(req.since || 0);
-      if (since === rev) return out({ ok: true, exists: true, same: true, updatedAt: rev });
-      const w = baca(file, rev);
-      if (since &gt; rev || since &lt; w.logBase) {
-        return out({ ok: true, exists: true, full: true, updatedAt: rev, payload: JSON.stringify(w.db) });
-      }
-      return out({ ok: true, exists: true, updatedAt: rev, ops: opsSejak(w, since) });
+      if (since === r0) return out({ ok: true, exists: true, same: true, updatedAt: r0 });
+      const w = muat(r0);
+      if (since &gt; r0 || since &lt; w.logBase) return out({ ok: true, exists: true, full: true, updatedAt: r0, payload: JSON.stringify(w.db) });
+      return out({ ok: true, exists: true, updatedAt: r0, ops: opsSejak(w, since) });
     }
-    if (req.action === &#x27;patch&#x27;) { // kirim perubahan + terima perubahan perangkat lain sekaligus
-      if (!file) return out({ ok: false, error: &#x27;data belum ada&#x27; });
-      const ops = req.ops || [];
-      const since = Number(req.since || 0);
-      const w = baca(file, rev);
-      const penuh = since &gt; rev || since &lt; w.logBase;
+    if (req.action === &#x27;patch&#x27;) {
+      if (!ada) return out({ ok: false, error: &#x27;data belum ada&#x27; });
+      const ops = req.ops || [], since = Number(req.since || 0);
+      if (!ops.length &amp;&amp; since === r0) return out({ ok: true, exists: true, same: true, updatedAt: r0 });
+      const w = muat(r0);
+      const penuh = since &gt; r0 || since &lt; w.logBase;
       const missed = penuh ? null : opsSejak(w, since);
-      if (!ops.length) {
-        if (since === rev) return out({ ok: true, exists: true, same: true, updatedAt: rev });
-        return penuh
-          ? out({ ok: true, full: true, updatedAt: rev, payload: JSON.stringify(w.db) })
-          : out({ ok: true, updatedAt: rev, ops: missed });
-      }
-      const baru = Math.max(Date.now(), rev + 1);
+      if (!ops.length) return penuh ? out({ ok: true, full: true, updatedAt: r0, payload: JSON.stringify(w.db) }) : out({ ok: true, updatedAt: r0, ops: missed });
+      const baru = Math.max(Date.now(), r0 + 1);
       terapkan(w.db, ops);
       w.log.push({ r: baru, o: ops });
       let tot = JSON.stringify(w.log).length;
-      while (w.log.length &gt; 1 &amp;&amp; tot &gt; MAKS_LOG) {
-        const b = w.log.shift();
-        tot -= JSON.stringify(b).length + 1;
-        w.logBase = b.r;
-      }
-      tulis(file, w, baru);
-      return penuh
-        ? out({ ok: true, full: true, updatedAt: baru, payload: JSON.stringify(w.db) })
-        : out({ ok: true, updatedAt: baru, ops: missed });
+      while (w.log.length &gt; 1 &amp;&amp; tot &gt; MAKS_LOG) { const b = w.log.shift(); tot -= JSON.stringify(b).length + 1; w.logBase = b.r; }
+      simpan(w, baru);
+      return penuh ? out({ ok: true, full: true, updatedAt: baru, payload: JSON.stringify(w.db) }) : out({ ok: true, updatedAt: baru, ops: missed });
     }
     return out({ ok: false, error: &#x27;aksi tidak dikenal&#x27; });
   } catch (err) {
@@ -881,10 +865,9 @@ function doPost(e) {
     try { lock.releaseLock(); } catch (x) {}
   }
 }
-function doGet() { return out({ ok: true, info: &#x27;SIAS sinkron aktif (v2)&#x27; }); }
+function doGet() { return out({ ok: true, info: &#x27;SIAS sinkron aktif (v3)&#x27; }); }
 
 function kunci(x) { return (x &amp;&amp; x.id) || JSON.stringify(x); }
-// Terapkan daftar perubahan [kunci, nilai|null] ke data
 function terapkan(db, ops) {
   const peta = {}, sentuh = {};
   const idx = (col) =&gt; {
@@ -896,18 +879,14 @@ function terapkan(db, ops) {
     if (t === &#x27;a&#x27;) {
       const i = r.indexOf(&#x27;|&#x27;), d = r.slice(0, i), s = r.slice(i + 1);
       db.attendance = db.attendance || {};
-      if (v === null) {
-        if (db.attendance[d]) { delete db.attendance[d][s]; if (!Object.keys(db.attendance[d]).length) delete db.attendance[d]; }
-      } else { (db.attendance[d] = db.attendance[d] || {})[s] = v; }
+      if (v === null) { if (db.attendance[d]) { delete db.attendance[d][s]; if (!Object.keys(db.attendance[d]).length) delete db.attendance[d]; } }
+      else { (db.attendance[d] = db.attendance[d] || {})[s] = v; }
     } else if (t === &#x27;u&#x27;) {
       const i = r.indexOf(&#x27;|&#x27;), col = r.slice(0, i), id = r.slice(i + 1);
       db[col] = db[col] || [];
       const m = idx(col); sentuh[col] = 1;
       if (v === null) { if (m.has(id)) { db[col][m.get(id)] = null; m.delete(id); } }
-      else {
-        const o = JSON.parse(v);
-        if (m.has(id)) db[col][m.get(id)] = o; else { db[col].push(o); m.set(id, db[col].length - 1); }
-      }
+      else { const o = JSON.parse(v); if (m.has(id)) db[col][m.get(id)] = o; else { db[col].push(o); m.set(id, db[col].length - 1); } }
     } else if (t === &#x27;k&#x27;) {
       if (v === null) delete db[r]; else db[r] = JSON.parse(v);
     }
@@ -919,19 +898,58 @@ function opsSejak(w, since) {
   w.log.forEach(b =&gt; { if (b.r &gt; since) hasil = hasil.concat(b.o); });
   return hasil;
 }
-function baca(file, rev) {
-  const j = JSON.parse(file.getBlob().getDataAsString());
-  if (j &amp;&amp; j.v === 2 &amp;&amp; j.db) return { v: 2, db: j.db, log: j.log || [], logBase: Number(j.logBase || 0) };
-  return { v: 2, db: j, log: [], logBase: rev }; // file format lama
-}
-function tulis(file, w, rev) {
-  const isi = JSON.stringify(w);
-  if (file) { file.setContent(isi); file.setDescription(String(rev)); }
-  else DriveApp.createFile(NAMA_FILE, isi, MimeType.PLAIN_TEXT).setDescription(String(rev));
-}
+// ---- penyimpanan: Drive (permanen) + Cache (cepat, dikompres) ----
 function cariFile() {
+  const id = P.getProperty(&#x27;FID&#x27;);
+  if (id) { try { return DriveApp.getFileById(id); } catch (x) {} }
   const it = DriveApp.getFilesByName(NAMA_FILE);
-  return it.hasNext() ? it.next() : null;
+  if (!it.hasNext()) return null;
+  const f = it.next(); P.setProperty(&#x27;FID&#x27;, f.getId()); return f;
+}
+function ambilRev() {
+  const c = C.get(&#x27;rev&#x27;);
+  if (c !== null) return Number(c);
+  const f = cariFile();
+  if (!f) return null;
+  const r = Number(f.getDescription() || 0);
+  C.put(&#x27;rev&#x27;, String(r), 21600);
+  return r;
+}
+function muat(rev) {
+  let w = bacaCache(rev);
+  if (w) return w;
+  const f = cariFile();
+  const j = JSON.parse(f.getBlob().getDataAsString());
+  w = (j &amp;&amp; j.v === 2 &amp;&amp; j.db) ? { v: 2, db: j.db, log: j.log || [], logBase: Number(j.logBase || 0) } : { v: 2, db: j, log: [], logBase: rev };
+  cacheTulis(w, rev);
+  return w;
+}
+function simpan(w, rev) {
+  const isi = JSON.stringify(w);
+  const f = cariFile();
+  if (f) { f.setContent(isi); f.setDescription(String(rev)); }
+  else { const n = DriveApp.createFile(NAMA_FILE, isi, MimeType.PLAIN_TEXT); n.setDescription(String(rev)); P.setProperty(&#x27;FID&#x27;, n.getId()); }
+  cacheTulis(w, rev, isi);
+}
+function cacheTulis(w, rev, isi) {
+  try {
+    const z = Utilities.base64Encode(Utilities.gzip(Utilities.newBlob(isi || JSON.stringify(w), &#x27;text/plain&#x27;, &#x27;d.txt&#x27;)).getBytes());
+    const o = {}, n = Math.ceil(z.length / 90000);
+    for (let i = 0; i &lt; n; i++) o[&#x27;s&#x27; + i] = z.substr(i * 90000, 90000);
+    o.sn = String(n); o.sr = String(rev); o.rev = String(rev);
+    C.putAll(o, 21600);
+  } catch (x) { C.remove(&#x27;rev&#x27;); } // gagal cache -&gt; berikutnya baca dari Drive
+}
+function bacaCache(rev) {
+  try {
+    if (C.get(&#x27;sr&#x27;) !== String(rev)) return null;
+    const n = Number(C.get(&#x27;sn&#x27;) || 0);
+    if (!n) return null;
+    const ks = []; for (let i = 0; i &lt; n; i++) ks.push(&#x27;s&#x27; + i);
+    const m = C.getAll(ks); let z = &#x27;&#x27;;
+    for (let i = 0; i &lt; n; i++) { if (!m[&#x27;s&#x27; + i]) return null; z += m[&#x27;s&#x27; + i]; }
+    return JSON.parse(Utilities.ungzip(Utilities.newBlob(Utilities.base64Decode(z), &#x27;application/x-gzip&#x27;, &#x27;d.gz&#x27;)).getDataAsString());
+  } catch (x) { return null; }
 }
 function out(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
@@ -965,9 +983,8 @@ function out(o) {
 <form onsubmit="saveClass(event)"><input type="hidden" id="classId"><div class="form-grid"><div class="field"><label>Nama Kelas *</label><input id="className" required placeholder="Contoh: VII A"></div><div class="field"><label>Wali Kelas</label><input id="homeroom"></div><div class="field"><label>No. WhatsApp Wali Kelas</label><input id="homeroomPhone" placeholder="Contoh: 081234567890" inputmode="tel"></div></div><div class="actions"><button type="button" class="btn btn-secondary" onclick="closeModal('classModal')">Batal</button><button class="btn btn-primary">Simpan</button></div></form></div></div>
 
 <div id="syncPill" onclick="kickSync()" style="display:none;position:fixed;right:12px;bottom:12px;z-index:60;max-width:70vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#fff;border:1px solid var(--border,#e2e8f0);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.15);cursor:pointer" title="Status sinkron cloud"></div>
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script>var _xl;function loadXLSX(){return _xl||(_xl=new Promise(function(ok,no){var t=document.createElement("script");t.src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js";t.onload=ok;t.onerror=function(){_xl=null;no()};document.head.appendChild(t)}))}
+(function(){var g=function(){if(!window.XLSX)loadXLSX()};window.addEventListener("load",function(){setTimeout(g,2500)});document.addEventListener("pointerdown",g,{once:true,passive:true})})();</script>
 <script>
 
 const LOGIN_KEY='ABSENSI_LOGIN_V1', AUTH_KEY='sias_auth', DEFAULT_USER='admin', DEFAULT_PASS='admin123';
@@ -1109,7 +1126,10 @@ function chooseBgColor(v){ensureTheme();db.theme.bgColor=v;db.theme.bgImage='';r
 function previewBgImage(e){const f=e.target.files[0];if(!f)return;if(!f.type.startsWith('image/'))return alert('Pilih file gambar PNG, JPG, atau WEBP.');const reader=new FileReader();reader.onload=()=>{ensureTheme();db.theme.bgImage=reader.result;renderAppearance()};reader.readAsDataURL(f)}
 function removeBgImage(){ensureTheme();db.theme.bgImage='';renderAppearance()}
 function saveTheme(){ensureTheme();saveDB();applyTheme();alert('Pengaturan tampilan berhasil disimpan.')}
-function saveDB(skipCloud){if(!skipCloud){db.updatedAt=Date.now();localEditSeq=(localEditSeq|0)+1;setDirty(true)}localStorage.setItem(KEY,JSON.stringify(db));if(!skipCloud)scheduleCloudPush();markGridNeedsRefresh()}
+var _pt=0;function persistNow(){if(_pt){clearTimeout(_pt);_pt=0;try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){console.error(e)}}}
+function persistSoon(){if(_pt)clearTimeout(_pt);_pt=setTimeout(persistNow,350)}
+window.addEventListener('pagehide',persistNow);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')persistNow()});
+function saveDB(skipCloud){if(!skipCloud){db.updatedAt=Date.now();localEditSeq=(localEditSeq|0)+1;setDirty(true)}persistSoon();if(!skipCloud)scheduleCloudPush();markGridNeedsRefresh()}
 /* Tombol "Refresh" pada Absensi Bulanan Grid sekarang selalu tampil
    di baris tombol paling atas, tidak lagi disembunyikan otomatis. */
 let gridNeedsRefresh = false;
