@@ -810,9 +810,10 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
    <li>Di laptop/HP lain, buka aplikasi ini, lalu isi URL dan Kode Rahasia yang <b>sama persis</b>.</li>
   </ol>
   <div class="actions" style="justify-content:flex-start;margin:12px 0 8px"><button type="button" class="btn btn-secondary" onclick="copyGasCode()">Salin Kode</button></div>
-  <pre id="gasCode" style="max-height:320px;overflow:auto;background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;font-size:12px;line-height:1.5;white-space:pre">// SIAS - Server sinkron (Google Apps Script)
+  <pre id="gasCode" style="max-height:320px;overflow:auto;background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;font-size:12px;line-height:1.5;white-space:pre">// SIAS - Server sinkron v2 (Google Apps Script) - hanya mengirim PERUBAHAN, jauh lebih cepat
 const KUNCI = &#x27;GANTI-DENGAN-KODE-RAHASIA-ANDA&#x27;;
 const NAMA_FILE = &#x27;SIAS_DATA.json&#x27;;
+const MAKS_LOG = 300000; // batas catatan perubahan yang disimpan (karakter)
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -821,23 +822,57 @@ function doPost(e) {
     const req = JSON.parse(e.postData.contents);
     if (req.code !== KUNCI) return out({ ok: false, error: &#x27;kunci salah&#x27; });
     const file = cariFile();
-    const waktu = file ? Number(file.getDescription() || 0) : 0;
+    const rev = file ? Number(file.getDescription() || 0) : 0;
+
     if (req.action === &#x27;meta&#x27;) {
-      return out({ ok: true, exists: !!file, updatedAt: waktu });
+      return out({ ok: true, exists: !!file, updatedAt: rev });
     }
     if (req.action === &#x27;get&#x27;) {
       if (!file) return out({ ok: true, exists: false, updatedAt: 0 });
-      return out({ ok: true, exists: true, updatedAt: waktu, payload: file.getBlob().getDataAsString() });
+      return out({ ok: true, exists: true, updatedAt: rev, payload: JSON.stringify(baca(file, rev).db) });
     }
-    if (req.action === &#x27;put&#x27;) {
-      if (file) {
-        if (waktu !== Number(req.expect || 0)) return out({ ok: false, error: &#x27;bentrok&#x27; });
-        file.setContent(req.payload);
-        file.setDescription(String(req.updatedAt));
-      } else {
-        DriveApp.createFile(NAMA_FILE, req.payload, MimeType.PLAIN_TEXT).setDescription(String(req.updatedAt));
+    if (req.action === &#x27;put&#x27;) { // unggah penuh (data awal / pemulihan)
+      if (file &amp;&amp; rev !== Number(req.expect || 0)) return out({ ok: false, error: &#x27;bentrok&#x27; });
+      const t = Number(req.updatedAt);
+      tulis(file, { v: 2, db: JSON.parse(req.payload), log: [], logBase: t }, t);
+      return out({ ok: true, updatedAt: t });
+    }
+    if (req.action === &#x27;pull&#x27;) { // ambil perubahan dari perangkat lain
+      if (!file) return out({ ok: true, exists: false, updatedAt: 0 });
+      const since = Number(req.since || 0);
+      if (since === rev) return out({ ok: true, exists: true, same: true, updatedAt: rev });
+      const w = baca(file, rev);
+      if (since &gt; rev || since &lt; w.logBase) {
+        return out({ ok: true, exists: true, full: true, updatedAt: rev, payload: JSON.stringify(w.db) });
       }
-      return out({ ok: true, updatedAt: req.updatedAt });
+      return out({ ok: true, exists: true, updatedAt: rev, ops: opsSejak(w, since) });
+    }
+    if (req.action === &#x27;patch&#x27;) { // kirim perubahan + terima perubahan perangkat lain sekaligus
+      if (!file) return out({ ok: false, error: &#x27;data belum ada&#x27; });
+      const ops = req.ops || [];
+      const since = Number(req.since || 0);
+      const w = baca(file, rev);
+      const penuh = since &gt; rev || since &lt; w.logBase;
+      const missed = penuh ? null : opsSejak(w, since);
+      if (!ops.length) {
+        if (since === rev) return out({ ok: true, exists: true, same: true, updatedAt: rev });
+        return penuh
+          ? out({ ok: true, full: true, updatedAt: rev, payload: JSON.stringify(w.db) })
+          : out({ ok: true, updatedAt: rev, ops: missed });
+      }
+      const baru = Math.max(Date.now(), rev + 1);
+      terapkan(w.db, ops);
+      w.log.push({ r: baru, o: ops });
+      let tot = JSON.stringify(w.log).length;
+      while (w.log.length &gt; 1 &amp;&amp; tot &gt; MAKS_LOG) {
+        const b = w.log.shift();
+        tot -= JSON.stringify(b).length + 1;
+        w.logBase = b.r;
+      }
+      tulis(file, w, baru);
+      return penuh
+        ? out({ ok: true, full: true, updatedAt: baru, payload: JSON.stringify(w.db) })
+        : out({ ok: true, updatedAt: baru, ops: missed });
     }
     return out({ ok: false, error: &#x27;aksi tidak dikenal&#x27; });
   } catch (err) {
@@ -846,7 +881,54 @@ function doPost(e) {
     try { lock.releaseLock(); } catch (x) {}
   }
 }
-function doGet() { return out({ ok: true, info: &#x27;SIAS sinkron aktif&#x27; }); }
+function doGet() { return out({ ok: true, info: &#x27;SIAS sinkron aktif (v2)&#x27; }); }
+
+function kunci(x) { return (x &amp;&amp; x.id) || JSON.stringify(x); }
+// Terapkan daftar perubahan [kunci, nilai|null] ke data
+function terapkan(db, ops) {
+  const peta = {}, sentuh = {};
+  const idx = (col) =&gt; {
+    if (!peta[col]) { peta[col] = new Map(); (db[col] || []).forEach((x, i) =&gt; peta[col].set(kunci(x), i)); }
+    return peta[col];
+  };
+  ops.forEach(op =&gt; {
+    const k = op[0], v = op[1], t = k.charAt(0), r = k.slice(2);
+    if (t === &#x27;a&#x27;) {
+      const i = r.indexOf(&#x27;|&#x27;), d = r.slice(0, i), s = r.slice(i + 1);
+      db.attendance = db.attendance || {};
+      if (v === null) {
+        if (db.attendance[d]) { delete db.attendance[d][s]; if (!Object.keys(db.attendance[d]).length) delete db.attendance[d]; }
+      } else { (db.attendance[d] = db.attendance[d] || {})[s] = v; }
+    } else if (t === &#x27;u&#x27;) {
+      const i = r.indexOf(&#x27;|&#x27;), col = r.slice(0, i), id = r.slice(i + 1);
+      db[col] = db[col] || [];
+      const m = idx(col); sentuh[col] = 1;
+      if (v === null) { if (m.has(id)) { db[col][m.get(id)] = null; m.delete(id); } }
+      else {
+        const o = JSON.parse(v);
+        if (m.has(id)) db[col][m.get(id)] = o; else { db[col].push(o); m.set(id, db[col].length - 1); }
+      }
+    } else if (t === &#x27;k&#x27;) {
+      if (v === null) delete db[r]; else db[r] = JSON.parse(v);
+    }
+  });
+  Object.keys(sentuh).forEach(c =&gt; { db[c] = db[c].filter(x =&gt; x !== null); });
+}
+function opsSejak(w, since) {
+  let hasil = [];
+  w.log.forEach(b =&gt; { if (b.r &gt; since) hasil = hasil.concat(b.o); });
+  return hasil;
+}
+function baca(file, rev) {
+  const j = JSON.parse(file.getBlob().getDataAsString());
+  if (j &amp;&amp; j.v === 2 &amp;&amp; j.db) return { v: 2, db: j.db, log: j.log || [], logBase: Number(j.logBase || 0) };
+  return { v: 2, db: j, log: [], logBase: rev }; // file format lama
+}
+function tulis(file, w, rev) {
+  const isi = JSON.stringify(w);
+  if (file) { file.setContent(isi); file.setDescription(String(rev)); }
+  else DriveApp.createFile(NAMA_FILE, isi, MimeType.PLAIN_TEXT).setDescription(String(rev));
+}
 function cariFile() {
   const it = DriveApp.getFilesByName(NAMA_FILE);
   return it.hasNext() ? it.next() : null;
@@ -855,7 +937,7 @@ function out(o) {
   return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
 }
 </pre>
-  <p class="date-now" style="margin-top:10px">Catatan: data tersimpan sebagai file <code>SIAS_DATA.json</code> di Google Drive-mu sendiri. Jika kode Apps Script diubah, lakukan <b>Deploy → Kelola deployment → Edit → Versi baru</b>. Perangkat lain memeriksa pembaruan tiap ±20 detik saat aplikasi terbuka.</p>
+  <p class="date-now" style="margin-top:10px">Catatan: data tersimpan sebagai file <code>SIAS_DATA.json</code> di Google Drive-mu sendiri. <b>Sudah punya script lama?</b> Ganti seluruh isi <code>Code.gs</code> dengan kode ini (isi <code>KUNCI</code> sama persis dengan yang lama), lalu <b>Deploy → Kelola deployment → Edit → Versi baru → Deploy</b>. URL dan kode rahasia tidak berubah, data lama tetap aman. Kode v2 hanya mengirim <b>perubahan</b> sehingga jauh lebih cepat; aplikasi otomatis memakai mode lama bila script belum diperbarui. Perangkat lain memeriksa pembaruan tiap ±6 detik saat aplikasi terbuka.</p>
  </div>
 </section>
 
@@ -959,7 +1041,8 @@ const KEY='ABSENSI_SISWA_V1';
 var db=JSON.parse(localStorage.getItem(KEY)||'null')||{students:[],classes:[],attendance:{},trash:[],school:{name:'SMK NEGERI 1 SIKUR',logo:'',npsn:'',nss:'',postal:'',village:'',district:'',regency:'',province:'',phone:'',email:'',address:'',website:''}};
 function ensureTrash(){if(!Array.isArray(db.trash))db.trash=[]}
 const $=id=>document.getElementById(id);
-const today=()=>new Date().toISOString().slice(0,10);
+const ymd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const today=()=>ymd(new Date());
 function ensureSchool(){if(!db.school)db.school={name:'SMK NEGERI 1 SIKUR',logo:'',logo2:'',npsn:'',nss:'',postal:'',village:'',district:'',regency:'',province:'',phone:'',email:'',address:'',website:'',govLine1:'',govLine2:'',bkName:'',bkNip:'',bkPhone:'',bkJabatan:''};else{if(db.school.logo2===undefined)db.school.logo2='';if(db.school.govLine1===undefined)db.school.govLine1='';if(db.school.govLine2===undefined)db.school.govLine2='';if(db.school.bkName===undefined)db.school.bkName='';if(db.school.bkNip===undefined)db.school.bkNip='';if(db.school.bkPhone===undefined)db.school.bkPhone='';if(db.school.bkJabatan===undefined)db.school.bkJabatan=''}}
 ensureSchool();
 
@@ -1026,7 +1109,7 @@ function chooseBgColor(v){ensureTheme();db.theme.bgColor=v;db.theme.bgImage='';r
 function previewBgImage(e){const f=e.target.files[0];if(!f)return;if(!f.type.startsWith('image/'))return alert('Pilih file gambar PNG, JPG, atau WEBP.');const reader=new FileReader();reader.onload=()=>{ensureTheme();db.theme.bgImage=reader.result;renderAppearance()};reader.readAsDataURL(f)}
 function removeBgImage(){ensureTheme();db.theme.bgImage='';renderAppearance()}
 function saveTheme(){ensureTheme();saveDB();applyTheme();alert('Pengaturan tampilan berhasil disimpan.')}
-function saveDB(skipCloud){if(!skipCloud){db.updatedAt=Date.now();setDirty(true)}localStorage.setItem(KEY,JSON.stringify(db));if(!skipCloud)scheduleCloudPush();markGridNeedsRefresh()}
+function saveDB(skipCloud){if(!skipCloud){db.updatedAt=Date.now();localEditSeq=(localEditSeq|0)+1;setDirty(true)}localStorage.setItem(KEY,JSON.stringify(db));if(!skipCloud)scheduleCloudPush();markGridNeedsRefresh()}
 /* Tombol "Refresh" pada Absensi Bulanan Grid sekarang selalu tampil
    di baris tombol paling atas, tidak lagi disembunyikan otomatis. */
 let gridNeedsRefresh = false;
@@ -1055,10 +1138,10 @@ window.addEventListener('focus', markGridNeedsRefresh);
    - Perubahan ditandai "belum terkirim" (dirty) di localStorage, jadi aman walau offline / tab ditutup,
      dan otomatis dikirim saat internet kembali.
    - Dua perangkat yang mengedit bersamaan DIGABUNG, bukan saling timpa.
-   - Perangkat lain mengecek perubahan tiap ±20 detik saat aplikasi terbuka. */
+   - Perangkat lain mengecek perubahan tiap ±6 detik saat aplikasi terbuka. */
 const CLOUD_KEY='SIAS_CLOUD_CFG_V2';
 var SYNC_DIRTY_KEY='SIAS_SYNC_DIRTY',SYNC_BASE_KEY='SIAS_SYNC_BASE2';
-var cloudPushTimer=null,cloudApplyingRemote=false,cloudBusy=false,cloudAgain=false,cloudOn=false,cloudPollTimer=null;
+var snap=null,cloudDelta=true,localEditSeq=0,cloudForceFull=false,cloudPushTimer=null,cloudApplyingRemote=false,cloudBusy=false,cloudAgain=false,cloudOn=false,cloudPollTimer=null;
 const clock=()=>new Date().toLocaleTimeString('id-ID');
 function loadCloudConfig(){try{return JSON.parse(localStorage.getItem(CLOUD_KEY)||'null')}catch(e){return null}}
 function saveCloudConfig(cfg){localStorage.setItem(CLOUD_KEY,JSON.stringify(cfg))}
@@ -1144,6 +1227,101 @@ function mergeDB(a,b){
  out.attendance=att;
  return out;
 }
+function okText(){return 'Tersinkron \u2022 '+clock()+(cloudDelta?'':' \u2022 mode lama')}
+/*DELTA-BEGIN*/
+/* ===== SINKRON CEPAT v2: hanya kirim PERUBAHAN (bukan seluruh data) =====
+   Data dipecah jadi "entri" kecil (absensi per siswa-tanggal, tiap siswa, tiap kelas, pengaturan).
+   Yang dikirim hanya entri yang berbeda dari snapshot sinkron terakhir. Butuh kode Apps Script v2;
+   bila server masih versi lama, otomatis memakai mode lama (kirim penuh). */
+const DELTA_COLS=['students','classes','trash'];
+function itemKey(x){return (x&&x.id)||JSON.stringify(x)}
+function flatten(d){
+ const m=new Map(),att=d.attendance||{};
+ for(const dt in att){const row=att[dt];if(!row)continue;for(const sid in row){const v=row[sid];if(v!==undefined&&v!==null&&v!=='')m.set('a|'+dt+'|'+sid,String(v))}}
+ DELTA_COLS.forEach(c=>(d[c]||[]).forEach(x=>m.set('u|'+c+'|'+itemKey(x),JSON.stringify(x))));
+ Object.keys(d).forEach(k=>{if(DELTA_COLS.indexOf(k)>=0||k==='attendance'||k==='updatedAt')return;if(d[k]!==undefined)m.set('k|'+k,JSON.stringify(d[k]))});
+ return m;
+}
+function diffOps(cur,base){
+ const ops=[];
+ cur.forEach((v,k)=>{if(base.get(k)!==v)ops.push([k,v])});
+ base.forEach((v,k)=>{if(!cur.has(k))ops.push([k,null])});
+ return ops;
+}
+function readEntry(d,k){
+ const t=k.charAt(0),r=k.slice(2);
+ if(t==='a'){const i=r.indexOf('|'),row=(d.attendance||{})[r.slice(0,i)],v=row?row[r.slice(i+1)]:undefined;return(v===undefined||v===null||v==='')?null:String(v)}
+ if(t==='u'){const i=r.indexOf('|'),col=r.slice(0,i),id=r.slice(i+1),x=(d[col]||[]).find(y=>itemKey(y)===id);return x===undefined?null:JSON.stringify(x)}
+ if(t==='k')return d[r]===undefined?null:JSON.stringify(d[r]);
+ return null;
+}
+/* sama persis dengan fungsi terapkan() di Apps Script */
+function applyOpsTo(d,ops){
+ const peta={},sentuh={};
+ const idx=col=>{if(!peta[col]){peta[col]=new Map();(d[col]||[]).forEach((x,i)=>peta[col].set(itemKey(x),i))}return peta[col]};
+ ops.forEach(op=>{
+  const k=op[0],v=op[1],t=k.charAt(0),r=k.slice(2);
+  if(t==='a'){
+   const i=r.indexOf('|'),dt=r.slice(0,i),s=r.slice(i+1);
+   d.attendance=d.attendance||{};
+   if(v===null){if(d.attendance[dt]){delete d.attendance[dt][s];if(!Object.keys(d.attendance[dt]).length)delete d.attendance[dt]}}
+   else{(d.attendance[dt]=d.attendance[dt]||{})[s]=v}
+  }else if(t==='u'){
+   const i=r.indexOf('|'),col=r.slice(0,i),id=r.slice(i+1);
+   d[col]=d[col]||[];
+   const m=idx(col);sentuh[col]=1;
+   if(v===null){if(m.has(id)){d[col][m.get(id)]=null;m.delete(id)}}
+   else{const o=JSON.parse(v);if(m.has(id))d[col][m.get(id)]=o;else{d[col].push(o);m.set(id,d[col].length-1)}}
+  }else if(t==='k'){
+   if(v===null)delete d[r];else d[r]=JSON.parse(v);
+  }
+ });
+ Object.keys(sentuh).forEach(c=>{d[c]=d[c].filter(x=>x!==null)});
+}
+function snapSet(k,v){if(v===null)snap.delete(k);else snap.set(k,v)}
+async function syncDelta(cfg){
+ const seq0=localEditSeq,since=getBase();
+ const ops=isDirty()?diffOps(flatten(db),snap):[];
+ if(ops.length>4000){const e=new Error('Perubahan terlalu banyak, kirim penuh');e.code='besar';throw e}
+ let r;
+ if(ops.length){setCloudStatus('Mengirim perubahan...','warn');r=await gas(cfg,{action:'patch',since:since,ops:ops},60000)}
+ else r=await gas(cfg,{action:'pull',since:since});
+ if(r.same){if(localEditSeq===seq0)setDirty(false);setCloudStatus(okText(),true);return}
+ if(r.exists===false){const e=new Error('data belum ada');throw e}
+ ops.forEach(o=>snapSet(o[0],o[1])); /* snapshot = keadaan yang baru terkirim */
+ let changed=false;
+ cloudApplyingRemote=true;
+ try{
+  if(r.full){
+   const inflight=diffOps(flatten(db),snap); /* perubahan lokal yang terjadi selama pengiriman */
+   const remote=JSON.parse(r.payload);
+   db=remote;ensureSchool();ensureTrash();ensureTheme();
+   snap=flatten(db);
+   if(inflight.length)applyOpsTo(db,inflight);
+   changed=true;
+  }else if(r.ops&&r.ops.length){
+   const sent=new Set(ops.map(o=>o[0])),apply=[];
+   r.ops.forEach(o=>{
+    const k=o[0];
+    if(sent.has(k))return; /* perubahan kita lebih baru di server */
+    const local=readEntry(db,k),basev=snap.has(k)?snap.get(k):null;
+    if(local===basev)apply.push(o);        /* aman ditimpa data perangkat lain */
+    else snapSet(k,o[1]);                  /* ada edit lokal yang belum terkirim: edit lokal menang, dikirim ulang */
+   });
+   if(apply.length){
+    applyOpsTo(db,apply);
+    apply.forEach(o=>snapSet(o[0],readEntry(db,o[0])));
+    changed=true;
+   }
+  }
+  db.updatedAt=r.updatedAt;
+  saveDB(true);setBase(r.updatedAt);
+ }finally{cloudApplyingRemote=false}
+ if(localEditSeq===seq0)setDirty(false);
+ if(changed){refreshFilters();safeRenderAfterSync()}
+ setCloudStatus(okText(),true);
+}
+/*DELTA-END*/
 async function writeCloud(cfg,expect){
  if(!db.updatedAt)db.updatedAt=Date.now();
  const t=db.updatedAt;
@@ -1153,7 +1331,7 @@ async function writeCloud(cfg,expect){
  try{await gas(cfg,{action:'put',updatedAt:t,expect:expect,payload:JSON.stringify(db)},60000)}
  catch(e){setBase(prevBase);throw e}
  if(db.updatedAt===t)setDirty(false);
- setCloudStatus('Tersinkron \u2022 '+clock(),true);
+ setCloudStatus(okText(),true);
 }
 /* Satu fungsi untuk semua: cek cloud -> unduh bila ada yang baru -> gabung bila bentrok -> kirim bila ada perubahan lokal */
 async function syncNow(){
@@ -1162,7 +1340,24 @@ async function syncNow(){
  if(!navigator.onLine){showSyncState();return}
  if(cloudBusy){cloudAgain=true;return}
  cloudBusy=true;
+ const fastPath=!cloudForceFull&&isDirty()&&getBase()>0;
+ cloudForceFull=false;
  try{
+  if(cloudDelta&&snap&&getBase()>0){
+   try{await syncDelta(cfg);return}
+   catch(e){
+    if(e&&e.message==='aksi tidak dikenal'){cloudDelta=false;snap=null;console.info('Apps Script versi lama: memakai mode kirim penuh')}
+    else if(e&&(e.message==='data belum ada'||e.code==='besar')){snap=null}
+    else throw e;
+   }
+  }
+  if(fastPath){
+   /* JALUR CEPAT: server sudah menolak otomatis ('bentrok') bila perangkat lain lebih dulu menyimpan,
+      jadi tidak perlu cek meta dulu. Cukup 1x kirim. Bila bentrok -> jalur lengkap (unduh + gabung). */
+   await writeCloud(cfg,getBase());
+   if(!isDirty()&&cloudDelta)snap=flatten(db);
+   return;
+  }
   const m=await gas(cfg,{action:'meta'});
   let needPush=isDirty(),expect=0;
   if(m.exists){
@@ -1177,26 +1372,48 @@ async function syncNow(){
      if(isDirty()){db=mergeDB(db,remote);db.updatedAt=Math.max(Date.now(),expect+1);needPush=true}
      else{db=remote;db.updatedAt=expect;needPush=false}
      ensureSchool();ensureTrash();ensureTheme();
-     saveDB(true);setBase(expect);refreshFilters();renderCurrentPage();
+     saveDB(true);setBase(expect);refreshFilters();safeRenderAfterSync();
     }finally{cloudApplyingRemote=false}
    }
   }else needPush=true; /* file cloud belum ada: unggah data awal */
   if(needPush)await writeCloud(cfg,expect);
-  else setCloudStatus('Tersinkron \u2022 '+clock(),true);
+  else setCloudStatus(okText(),true);
+  if(!isDirty()&&cloudDelta)snap=flatten(db);
  }catch(e){
-  if(e&&e.code==='bentrok')cloudAgain=true; /* perangkat lain baru menyimpan: ulangi (unduh + gabung) */
+  if(e&&e.code==='bentrok'){cloudAgain=true;cloudForceFull=true} /* perangkat lain baru menyimpan: ulangi (unduh + gabung) */
   else{console.error(e);setCloudStatus(cloudErrText(e),false)}
  }finally{
   cloudBusy=false;
   if(cloudAgain){cloudAgain=false;setTimeout(syncNow,400)}
  }
 }
+/* Cek perubahan dari perangkat lain: tiap 6 detik saat aplikasi dipakai, 30 detik bila 3 menit tidak disentuh,
+   berhenti saat tab/aplikasi tidak terlihat dan langsung cek begitu dibuka lagi. */
+var lastActivity=Date.now();
+['pointerdown','keydown','touchstart'].forEach(ev=>document.addEventListener(ev,()=>{lastActivity=Date.now()},{passive:true}));
+function cloudPollLoop(){
+ clearTimeout(cloudPollTimer);
+ const delay=(Date.now()-lastActivity>180000)?30000:6000;
+ cloudPollTimer=setTimeout(()=>{
+  if(!cloudOn)return;
+  if(document.visibilityState==='visible')kickSync();
+  cloudPollLoop();
+ },delay);
+}
+/* Setelah data baru diunduh, tampilan disegarkan; tunda sebentar bila pengguna sedang mengetik agar isian tidak terganggu */
+function safeRenderAfterSync(tries){
+ tries=tries||0;
+ const a=document.activeElement;
+ const typing=a&&((a.tagName==='INPUT'&&!/^(radio|checkbox|button|submit|date|month|file)$/i.test(a.type))||a.tagName==='TEXTAREA');
+ if(typing&&tries<5){setTimeout(()=>safeRenderAfterSync(tries+1),1500);return}
+ renderCurrentPage();
+}
 function startCloudSync(cfg){
  cloudOn=true;
  if(getBase()===0&&hasLocalData())setDirty(true); /* data lama di perangkat ini ikut digabung, tidak tertimpa */
  setCloudStatus('Menghubungkan...','warn');
- clearInterval(cloudPollTimer);
- cloudPollTimer=setInterval(()=>{if(cloudOn&&document.visibilityState==='visible')kickSync()},20000);
+ snap=(cloudDelta&&!isDirty()&&getBase()>0)?flatten(db):null;
+ cloudPollLoop();
  kickSync();
 }
 function pushToCloud(){setDirty(true);kickSync()}
@@ -1213,7 +1430,7 @@ function manualSyncCloud(){
  setDirty(true);kickSync();
 }
 function disconnectCloud(){
- cloudOn=false;clearInterval(cloudPollTimer);clearTimeout(cloudPushTimer);
+ cloudOn=false;snap=null;clearTimeout(cloudPollTimer);clearTimeout(cloudPushTimer);
  localStorage.removeItem(CLOUD_KEY);localStorage.removeItem(SYNC_BASE_KEY);
  setCloudStatus('Belum terhubung',false);
  if($('cloudConfigInput'))$('cloudConfigInput').value='';
@@ -1223,10 +1440,13 @@ function scheduleCloudPush(){
  if(cloudApplyingRemote)return;
  if(!loadCloudConfig())return;
  showSyncState();
- scheduleSync(1000);
+ scheduleSync(150);
 }
 /* Pemicu otomatis: internet kembali, aplikasi dibuka/ditampilkan lagi */
 window.addEventListener('offline',showSyncState);
+window.addEventListener('focus',()=>kickSync());
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&isDirty()){clearTimeout(cloudPushTimer);kickSync()}});
+window.addEventListener('pagehide',()=>{if(isDirty())kickSync()});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')kickSync()});
 /* ==== SETUP OTOMATIS ====
    1) Isi 2 baris di bawah SEKALI saja, maka setiap perangkat yang membuka file ini langsung terhubung sendiri.
@@ -1778,7 +1998,7 @@ function renderAttendanceSummary(d,classId){
  $('attendanceSummary').innerHTML=[['H','Hadir','hadir'],['S','Sakit','sakit'],['I','Izin','izin'],['A','Alpa','alpa'],['B','Bolos','bolos']].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${x[a[0]]}</b></div>`).join('')+`<div class="summary-pill">Persentase Hadir <b>${pct}%</b></div>`;
 }
 function isSunday(ds){return new Date(ds+'T00:00:00').getDay()===0}
-function dateRange(type,ref){let dates=[],d=new Date(ref+'T00:00:00');if(type==='weekly'){let day=d.getDay()||7;d.setDate(d.getDate()-day+1);for(let i=0;i<6;i++){dates.push(d.toISOString().slice(0,10));d.setDate(d.getDate()+1)}}else if(type==='monthly'){let y=d.getFullYear(),m=d.getMonth(),n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}else{let y=d.getFullYear();for(let m=0;m<12;m++){let n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}}return dates}
+function dateRange(type,ref){let dates=[],d=new Date(ref+'T00:00:00');if(type==='weekly'){let day=d.getDay()||7;d.setDate(d.getDate()-day+1);for(let i=0;i<6;i++){dates.push(ymd(d));d.setDate(d.getDate()+1)}}else if(type==='monthly'){let y=d.getFullYear(),m=d.getMonth(),n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}else{let y=d.getFullYear();for(let m=0;m<12;m++){let n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}}return dates}
 /* Skor Ketidak hadiran: setiap 1 kali Alpa atau Bolos = 4 skor */
 const SKOR_ALPA_BOLOS=4;
 function skorKehadiran(x){return ((x.A||0)+(x.B||0))*SKOR_ALPA_BOLOS}
@@ -1804,7 +2024,7 @@ function renderMonthly(){renderRecapTable('monthly','monthlyTable','monthlyDate'
 function renderYearly(){renderRecapTable('yearly','yearlyTable','yearlyDate','yearlyClass')}
 function semesterDates(year,term){
   const dates=[],start=term==='1'?new Date(year,6,1):new Date(year+1,0,1),end=term==='1'?new Date(year,11,31):new Date(year+1,5,30);
-  for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1)) if(d.getDay()!==0) dates.push(d.toISOString().slice(0,10));
+  for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1)) if(d.getDay()!==0) dates.push(ymd(d));
   return dates;
 }
 function initSemesterYears(){
@@ -1856,10 +2076,33 @@ function getWeekDates(ref){
   d.setDate(d.getDate()-day+1);
   const out=[];
   for(let i=0;i<6;i++){
-    out.push(d.toISOString().slice(0,10));
+    out.push(ymd(d));
     d.setDate(d.getDate()+1);
   }
   return out;
+}
+/* ===== Helper laporan individu: baca status absensi secara konsisten ===== */
+function normStatus(v){
+  if(v===undefined||v===null||v==='')return '';
+  const c=String(v).trim().charAt(0).toUpperCase();
+  return 'HSIAB'.includes(c)&&c?c:'';
+}
+/* Status siswa pada tanggal d:
+   - ada catatan untuk siswa ini -> pakai catatan itu
+   - belum ada catatan, tapi absensi kelasnya pada hari itu sudah diisi -> Hadir (status awal)
+   - absensi kelas hari itu belum diisi sama sekali -> '' (belum diisi, tidak dihitung) */
+function indivStatus(d,s){
+  const day=db.attendance&&db.attendance[d];
+  if(!day)return '';
+  const own=normStatus(day[s.id]);
+  if(own)return own;
+  const taken=db.students.some(t=>t.classId===s.classId&&normStatus(day[t.id]));
+  return taken?'H':'';
+}
+function indivCount(dates,s){
+  const x={H:0,S:0,I:0,A:0,B:0};
+  dates.forEach(d=>{const st=indivStatus(d,s);if(st)x[st]++});
+  return x;
 }
 function individualDates(){
   const p=$('individualPeriod').value;
@@ -1880,16 +2123,21 @@ function individualDates(){
 }
 function initIndividualReport(){
   const now=new Date(), y=now.getFullYear();
+  const prev={stu:$('individualStudent').value,search:$('individualStudentSearch').value,date:$('individualDate').value,month:$('individualMonth').value,year:$('individualYear').value,term:$('individualTerm').value};
   $('individualStudent').innerHTML='<option value="">Pilih Siswa</option>'+db.students.map(s=>`<option value="${s.id}">${esc(s.nis)} - ${esc(s.nama)} (${esc(className(s.classId))})</option>`).join('');
-  if(!$('individualStudent').value){$('individualStudentSearch').value='';}
-  $('individualDate').value=today();
-  $('individualMonth').value=today().slice(0,7);
+  const stuOk=prev.stu&&db.students.some(s=>s.id===prev.stu);
+  $('individualStudent').value=stuOk?prev.stu:'';
+  if(stuOk){const st=db.students.find(s=>s.id===prev.stu);$('individualStudentSearch').value=`${st.nis} - ${st.nama} (${className(st.classId)})`;}
+  else{$('individualStudentSearch').value='';}
+  $('individualDate').value=prev.date||today();
+  $('individualMonth').value=prev.month||today().slice(0,7);
   $('individualYear').innerHTML='';
   for(let yy=y-5;yy<=y+1;yy++) $('individualYear').innerHTML+=`<option value="${yy}">${yy}/${yy+1}</option>`;
-  $('individualYear').value=(new Date().getMonth()+1>=7?y:y-1);
-  $('individualTerm').value=(new Date().getMonth()+1>=7?'1':'2');
+  $('individualYear').value=prev.year||(new Date().getMonth()+1>=7?y:y-1);
+  $('individualTerm').value=prev.term||(new Date().getMonth()+1>=7?'1':'2');
   toggleIndividualPeriod();
   $('individualSchoolName').textContent=db.school?.name||'SMK NEGERI 1 SIKUR';
+  renderIndividualReport();
 }
 function toggleIndividualPeriod(){
   const p=$('individualPeriod').value;
@@ -1908,7 +2156,7 @@ function renderIndividualReport(){
     return;
   }
   const dates=individualDates(), x={H:0,S:0,I:0,A:0,B:0};
-  dates.forEach(d=>{const st=db.attendance[d]?.[s.id]||'H';x[st]++});
+  {const _c=indivCount(dates,s);x.H=_c.H;x.S=_c.S;x.I=_c.I;x.A=_c.A;x.B=_c.B}
   const total=x.H+x.S+x.I+x.A+x.B, pct=total?Math.round(100-((x.A+x.B)/total*100)):0;
   const period=$('individualPeriod').value;
   let periodName='';
@@ -1925,7 +2173,7 @@ function renderIndividualReport(){
   }
   _individualReportData={s,x,pct,periodName};
   const rows=dates.map((d,i)=>{
-    const st=db.attendance[d]?.[s.id]||'';
+    const st=indivStatus(d,s);
     return `<tr><td>${i+1}</td><td>${formatDate(d)}</td><td>${st?statusLabel(st):'Belum diisi'}</td><td>${st?statusBadge(st):'<span class="badge">-</span>'}</td></tr>`;
   }).join('');
   $('individualReport').innerHTML=`<div class="individual-report" id="printableIndividual">
@@ -1937,6 +2185,7 @@ function renderIndividualReport(){
       <div class="card-mini"><span>Izin</span><b>${x.I}</b></div><div class="card-mini"><span>Alpa</span><b>${x.A}</b></div>
       <div class="card-mini"><span>Bolos</span><b>${x.B}</b></div><div class="card-mini"><span>Skor Ketidak hadiran</span><b>${skorKehadiran(x)}</b></div><div class="card-mini"><span>% Hadir</span><b>${pct}%</b></div>
     </div>
+    <div class="date-now" style="margin:-6px 0 12px;font-size:12px">Dihitung dari <b>${total}</b> hari yang sudah diabsen (dari ${dates.length} hari pada periode ini). Hari yang belum diisi tidak dihitung.</div>
     <div class="report-chart-box">
       <div class="report-chart-title">Grafik Kehadiran</div>
       <div class="report-chart">${individualChartBars(x)}</div>
@@ -1979,7 +2228,7 @@ async function buildIndividualDoc(){
   if(!s){alert('Siswa tidak ditemukan.');return null}
   const dates=individualDates();
   const x={H:0,S:0,I:0,A:0,B:0};
-  dates.forEach(d=>{const st=db.attendance[d]?.[s.id]||'H';x[st]++});
+  {const _c=indivCount(dates,s);x.H=_c.H;x.S=_c.S;x.I=_c.I;x.A=_c.A;x.B=_c.B}
   const total=x.H+x.S+x.I+x.A+x.B, pct=total?Math.round(100-((x.A+x.B)/total*100)):0;
   const periodName=_individualReportData?.periodName||'';
   const doc=newJsPDF('portrait','a4');
@@ -2037,7 +2286,7 @@ async function buildIndividualDoc(){
 
   const head=[['No','Tanggal','Status','Keterangan']];
   const body=dates.map((d,i)=>{
-    const st=db.attendance[d]?.[s.id]||'';
+    const st=indivStatus(d,s);
     return [i+1, formatDate(d), st||'-', st?statusLabel(st):'Belum diisi'];
   });
   if(y>pageHeight-40){doc.addPage('a4','portrait');y=20}
@@ -2067,7 +2316,7 @@ function exportIndividualReport(){
   const p=$('individualPeriod').value;
   const rows=[['No','Tanggal','NIS','Nama','Kelas','Status','Keterangan']];
   dates.forEach((d,i)=>{
-    const st=db.attendance[d]?.[s.id]||'';
+    const st=indivStatus(d,s);
     rows.push([i+1,d,s.nis,s.nama,className(s.classId),st||'',st?statusLabel(st):'Belum diisi']);
   });
   const prefix=p==='daily'?'harian':p==='weekly'?'mingguan':p==='monthly'?'bulanan':p==='semester'?'semester':'tahunan';
@@ -2096,7 +2345,7 @@ function exportIndividualReport(){
 
   // Sheet Grafik Kehadiran: rekap jumlah per status + bar visual (blok karakter) & native Excel bar chart
   const x={H:0,S:0,I:0,A:0,B:0};
-  dates.forEach(d=>{const st=db.attendance[d]?.[s.id]||'H';x[st]++});
+  {const _c=indivCount(dates,s);x.H=_c.H;x.S=_c.S;x.I=_c.I;x.A=_c.A;x.B=_c.B}
   const statLabels=[['Hadir',x.H],['Sakit',x.S],['Izin',x.I],['Alpa',x.A],['Bolos',x.B]];
   const maxVal=Math.max(1,x.H,x.S,x.I,x.A,x.B);
   const barWidth=30;
