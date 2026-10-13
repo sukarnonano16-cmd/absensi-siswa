@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Sistem Informasi Absensi Siswa</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230284c7'/%3E%3Cpath d='M12 7.2c-1.6-1.2-3.7-1.8-6.2-1.6v11.4c2.5-.2 4.6.4 6.2 1.6 1.6-1.2 3.7-1.8 6.2-1.6V5.6c-2.5-.2-4.6.4-6.2 1.6Z' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 7.2v11.4' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
@@ -366,33 +366,315 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
 @keyframes iconTap{0%{transform:scale(1)}40%{transform:scale(.72)}100%{transform:scale(1)}}
 .app-topbar .hamburger:hover span{background:#fffdf5}
 @media(hover:none){.nav button:hover .nav-icon{animation:none}}
+
+/* =====================================================================
+   TAMPILAN MODERN v2 — kolom bergaris tipis, ringan, nyaman di HP & laptop
+   (blok ini sengaja diletakkan paling akhir agar menimpa gaya sebelumnya)
+   ===================================================================== */
+:root{--line:#d9e0ea;--radius:14px;--radius-sm:10px;--radius-lg:20px;--shadow-sm:0 1px 2px rgba(15,23,42,.05);--shadow-md:0 6px 20px -8px rgba(15,23,42,.14)}
+html[data-mode="dark"]{--line:#2b3850}
+body{font-family:'Plus Jakarta Sans',Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:14px;line-height:1.5}
+
+/* --- Gerak dikurangi: tidak ada animasi berulang, aplikasi lebih ringan --- */
+.icon,.card.stat,.brand-logo-badge,.login-blob,.login-logo,.live-dot{animation:none!important}
+.icon::after,.login-logo::after,.nav-icon::after{display:none}
+.login-box::before{animation:none!important;opacity:.5}
+.nav-icon:not(.pop),.nav button:hover .nav-icon:not(.pop),.nav button.active .nav-icon:not(.pop){animation:none!important}
+.nav button:hover{transform:none}
+.login-blob{opacity:.3}
+
+/* --- Kartu & panel: datar, bergaris tipis --- */
+.card{border:1px solid var(--line);border-radius:var(--radius);box-shadow:none}
+.card:hover{box-shadow:var(--shadow-md)}
+.stat .num{font-size:28px}
+.stat .label{text-transform:none;font-size:13px;letter-spacing:0}
+.icon{width:42px;height:42px;border-radius:12px;box-shadow:none}
+.cards .card.stat .icon{box-shadow:none}
+.section-title h2{font-size:17px}
+.topbar h1{font-size:22px}
+.summary-pill{border-color:var(--line);box-shadow:none}
+
+/* --- Tombol & isian: area sentuh nyaman --- */
+.btn{min-height:40px;border-radius:var(--radius-sm);box-shadow:none!important;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn-primary{background:var(--primary2);color:#fff}
+.btn-primary:hover{background:var(--primary2);filter:brightness(1.1)}
+.btn-success{background:var(--success)}
+.btn-danger{background:var(--danger)}
+.btn-warning{background:var(--warning)}
+.btn-info{background:var(--info)}
+.btn-secondary{background:color-mix(in srgb,var(--text) 7%,var(--card));color:var(--text);border:1px solid var(--line)}
+.input,.select,.field input,.field select,.student-search-wrap input{min-height:42px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--card);color:var(--text)}
+.input:focus,.select:focus,.field input:focus,.field select:focus{border-color:var(--primary2)}
+.table .btn{min-height:34px;padding:6px 11px;font-size:12.5px}
+
+/* --- TABEL: garis tipis di setiap kolom dan baris --- */
+.table-wrap{border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.table{border-collapse:separate;border-spacing:0;background:var(--card)}
+.table th,.table td{padding:10px 12px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;vertical-align:middle}
+.table th:last-child,.table td:last-child{border-right:0}
+.table tr:last-child td{border-bottom:0}
+.table th{background:var(--th-bg);color:var(--text);font-size:12.5px;font-weight:700;text-transform:none;letter-spacing:0;position:sticky;top:0;z-index:3;white-space:nowrap}
+.table tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--text) 2.5%,transparent)}
+.table tbody tr:hover td{background:color-mix(in srgb,var(--primary) 9%,transparent)}
+html[data-mode="dark"] .table th{color:var(--text)}
+
+/* --- GRID ABSENSI BULANAN: garis tipis, kolom identitas tetap terlihat saat digeser --- */
+#monthlyGrid .grid-wrap{border:1px solid var(--line);border-radius:12px;background:var(--card)}
+#monthlyGrid .grid-table{border-collapse:separate;border-spacing:0;background:var(--card);font-size:12px}
+#monthlyGrid .grid-table th,#monthlyGrid .grid-table td{border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+#monthlyGrid .grid-table thead th{color:var(--text);font-weight:700}
+#monthlyGrid .grid-table thead th.col-nama,#monthlyGrid .grid-table td.col-nama{border-right:1px solid var(--line);box-shadow:3px 0 5px -3px rgba(15,23,42,.18)}
+#monthlyGrid .grid-table tbody tr:hover td{background-image:linear-gradient(color-mix(in srgb,var(--primary) 8%,transparent),color-mix(in srgb,var(--primary) 8%,transparent))}
+.grid-cell{width:30px;height:28px;border-radius:7px;margin:2px auto;font-size:11.5px}
+.grid-cell:hover{transform:none;filter:brightness(.94);box-shadow:0 0 0 2px color-mix(in srgb,var(--primary2) 45%,transparent)}
+.grid-cell.sunday-day{background:repeating-linear-gradient(135deg,#f1f5f9 0 4px,#e8edf3 4px 8px);color:#94a3b8}
+html[data-mode="dark"] .grid-cell.sunday-day{background:repeating-linear-gradient(135deg,#1a2438 0 4px,#16203a 4px 8px)}
+.grid-bulk-bar{border-radius:12px;background:color-mix(in srgb,var(--primary) 8%,var(--card));border-color:var(--line)}
+.grid-legend{gap:12px}
+
+/* --- Navigasi & popup --- */
+.bottom-nav{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.status-picker{border-color:var(--line)}
+.picker-btn{min-height:50px}
+.modal{backdrop-filter:none;background:rgba(9,14,23,.55)}
+.modal-box{border:1px solid var(--line)}
+
+/* --- LAPTOP / LAYAR LEBAR --- */
+@media(min-width:1100px){
+  .main{padding:28px 36px}
+  .page{max-width:1480px;margin-left:auto;margin-right:auto}
+  .cards{gap:18px}
+}
+@media screen and (min-width:651px){
+  .table-wrap{max-height:calc(100vh - 250px)}
+  #monthlyGrid .grid-wrap{max-height:calc(100vh - 230px)}
+}
+
+/* --- TABLET --- */
+@media(max-width:900px){
+  .main{padding:22px 20px}
+}
+
+/* --- HP --- */
+@media(max-width:650px){
+  html{-webkit-text-size-adjust:100%}
+  .main{padding-left:12px;padding-right:12px}
+  .topbar h1{font-size:19px}
+  .cards{gap:10px}
+  .card{padding:14px}
+  .stat .num{font-size:24px}
+  .icon{width:36px;height:36px;border-radius:10px;font-size:17px}
+  /* isian 16px agar layar tidak otomatis memperbesar saat mengetik di iPhone */
+  .input,.select,.field input,.field select,.student-search-wrap input,.login-field input{font-size:16px;min-height:46px}
+  .btn{min-height:44px}
+  .table .btn{min-height:38px}
+  /* toolbar: kontrol berjajar dua-dua, mudah dijangkau ibu jari */
+  .toolbar{gap:8px}
+  .toolbar>*{flex:1 1 calc(50% - 8px);min-width:0}
+  .toolbar .student-search-wrap,.toolbar .input[type=search],.toolbar .input[type=text]{flex-basis:100%}
+  .actions{flex-direction:column-reverse}
+  .actions .btn{width:100%}
+  .section-title{gap:8px}
+  /* tabel & grid: geser lembut, tinggi disesuaikan dengan app bar & menu bawah */
+  .table th,.table td{padding:9px 10px;font-size:13px}
+  .table-wrap{max-height:none}
+  #monthlyGrid .grid-wrap{max-height:calc(100dvh - 300px);min-height:260px}
+  .grid-cell{width:32px;height:30px}
+  /* jendela isian tampil sebagai lembar dari bawah */
+  .modal{align-items:flex-end;padding:0}
+  .modal-box{width:100%;max-height:92dvh;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));animation:sheetIn .25s var(--ease)}
+  .picker-btn{min-height:54px}
+}
+@keyframes sheetIn{from{transform:translateY(40px);opacity:.6}to{transform:translateY(0);opacity:1}}
+@media(hover:none){.btn:hover{filter:none}.card:hover{box-shadow:none}}
+
+/* =====================================================================
+   MENU KOTAK ala HP (peluncur fitur) + fitur terbuka seperti aplikasi HP
+   ===================================================================== */
+#appLauncher{display:none}
+.app-topbar .app-back{display:none}
+@keyframes appOpen{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes homeIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
+@media(max-width:650px){
+  #appLauncher{display:block;margin:2px 0 14px}
+  .l-group{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:12px 6px 6px;margin-bottom:12px}
+  .l-title{margin:0 0 6px 10px;font-size:13px;font-weight:700;color:var(--muted)}
+  .l-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px 0}
+  .l-tile{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7px;border:0;background:transparent;color:var(--text);padding:8px 3px 10px;min-height:100px;font-size:11.5px;font-weight:600;line-height:1.25;text-align:center;cursor:pointer;border-radius:14px;-webkit-tap-highlight-color:transparent}
+  .l-tile:active{background:color-mix(in srgb,var(--text) 6%,transparent)}
+  .l-ico{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;color:#fff;font-size:27px;transition:transform .12s var(--ease)}
+  .l-tile:active .l-ico{transform:scale(.9)}
+  .l-name{display:block;max-width:100%;overflow-wrap:anywhere}
+  .l-badge{position:absolute;top:4px;left:calc(50% + 12px);min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#ef4444;color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;border:2px solid var(--card)}
+
+  /* menu bawah diganti menu kotak; tombol kembali muncul saat fitur dibuka */
+  .bottom-nav{display:none!important}
+  .main{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .fab-mobile{bottom:calc(22px + env(safe-area-inset-bottom,0px))}
+  body.in-app .fab-mobile{display:none}
+  body.in-app .app-topbar .hamburger,body.in-app .app-topbar .topbar-logo{display:none}
+  .app-topbar .app-back{width:44px;height:44px;border:0;background:transparent;color:#fff;align-items:center;justify-content:center;border-radius:50%;font-size:24px;flex-shrink:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  body.in-app .app-topbar .app-back{display:flex}
+  .app-topbar .app-back:active{background:rgba(255,255,255,.2)}
+  body.in-app .app-topbar-title{font-size:17px}
+  body.in-app .topbar{display:none}
+  body.in-app .main{padding-top:68px}
+  #monthlyGrid .grid-wrap{max-height:calc(100dvh - 200px)}
+
+  /* fitur terbuka seperti aplikasi: muncul membesar, kembali memudar */
+  .page.active{animation:appOpen .26s var(--ease)}
+  #dashboard.page.active{animation:homeIn .22s var(--ease)}
+}
+
+/* perapian HP: bayangan menu samping tidak bocor ke layar, kepala halaman dipadatkan */
+@media(max-width:650px){
+  .sidebar:not(.open){box-shadow:none}
+  .topbar{gap:2px;margin-bottom:12px}
+  #pageTitle{display:none}
+  .topbar>div:last-child{display:none}
+}
+
+/* perbaikan: jarak atas konten di HP tidak boleh tertimpa aturan tablet (app bar tinggi 56px) */
+@media(max-width:650px){.main{padding-top:72px}}
+
+/* =====================================================================
+   LOGIN BARU: lembar absensi hidup (kotak status terisi satu per satu)
+   ===================================================================== */
+#loginScreen{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:row;align-items:stretch;justify-content:stretch;padding:0;overflow:hidden;color:#fff;background-color:#075985;--lg-empty:#e6ebf2}
+#loginScreen .lg-hero{position:relative;flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:clamp(28px,5vw,60px);overflow:hidden}
+#loginScreen .lg-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 50% at 6% 0%,rgba(255,255,255,.2),transparent 70%),radial-gradient(55% 45% at 100% 100%,rgba(0,0,0,.2),transparent 70%)}
+#loginScreen .lg-hero>*{position:relative}
+#loginScreen .lg-brand{display:flex;align-items:center;gap:14px}
+#loginScreen .login-logo{width:56px;height:56px;min-width:56px;margin:0;border-radius:16px;display:grid;place-items:center;font-size:28px;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.32);box-shadow:none;overflow:hidden;position:relative}
+#loginScreen .login-logo:has(img){background:#fff}
+#loginScreen .lg-brand-text{display:flex;flex-direction:column;gap:2px;min-width:0}
+#loginScreen .lg-brand-text strong{font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+#loginScreen .lg-brand-text span{font-size:13px;color:rgba(255,255,255,.82)}
+#loginScreen .lg-copy h1{margin:0 0 12px;max-width:15em;font-size:clamp(28px,3.5vw,46px);line-height:1.1;font-weight:800;letter-spacing:-.03em;color:#fff}
+#loginScreen .lg-copy p{margin:0;max-width:33em;font-size:clamp(14px,1.25vw,16.5px);line-height:1.55;color:rgba(255,255,255,.86)}
+
+/* lembar absensi mini */
+#loginScreen .lg-sheet{width:min(100%,530px);background:#fff;color:#0f172a;border-radius:20px;padding:14px 14px 12px;box-shadow:0 30px 60px -22px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.45)}
+#loginScreen .lg-sheet-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;font-size:12.5px;font-weight:700}
+#loginScreen .lg-live{display:inline-flex;align-items:center;gap:6px;color:#15803d}
+#loginScreen .lg-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:lgBlink 1.6s ease-in-out infinite}
+#loginScreen .lg-grid{display:grid;grid-template-columns:minmax(56px,1.5fr) repeat(8,1fr);gap:6px 5px;align-items:center}
+#loginScreen .lg-row{display:contents}
+#loginScreen .lg-d{font-size:10px;font-weight:700;color:#94a3b8;text-align:center}
+#loginScreen .lg-n{display:block;height:8px;width:var(--w,70%);border-radius:4px;background:var(--lg-empty)}
+#loginScreen .lg-c{position:relative;display:block;aspect-ratio:1;border-radius:7px;background:var(--lg-empty)}
+#loginScreen .lg-c::before,#loginScreen .lg-c::after{position:absolute;inset:0;border-radius:inherit;opacity:0;animation:lgFill 10s ease-in-out infinite var(--d,1s) both}
+#loginScreen .lg-c::before{content:'';background:var(--cb)}
+#loginScreen .lg-c::after{display:grid;place-items:center;font-size:10.5px;font-weight:800;color:var(--cf)}
+#loginScreen .lg-h{--cb:#dcfce7;--cf:#166534}#loginScreen .lg-h::after{content:'H'}
+#loginScreen .lg-s{--cb:#fef3c7;--cf:#92400e}#loginScreen .lg-s::after{content:'S'}
+#loginScreen .lg-i{--cb:#dbeafe;--cf:#1e40af}#loginScreen .lg-i::after{content:'I'}
+#loginScreen .lg-a{--cb:#fee2e2;--cf:#991b1b}#loginScreen .lg-a::after{content:'A'}
+#loginScreen .lg-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:#475569}
+#loginScreen .lg-legend span{display:inline-flex;align-items:center;gap:5px}
+#loginScreen .lg-k{display:grid;place-items:center;width:18px;height:18px;border-radius:5px;font-style:normal;font-size:10px;font-weight:800;background:var(--cb);color:var(--cf)}
+
+/* panel formulir */
+#loginScreen .lg-panel{flex:0 0 min(500px,44%);background:var(--card);color:var(--text);display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,4vw,56px);overflow-y:auto;animation:lgSlideIn .7s var(--ease) .08s both}
+#loginScreen .lg-card{width:100%;max-width:380px;margin:0 auto}
+#loginScreen .lg-card h2{margin:0 0 6px;font-size:30px;font-weight:800;letter-spacing:-.025em;color:var(--text)}
+#loginScreen .lg-sub{margin:0 0 24px;font-size:14px;color:var(--muted)}
+#loginScreen .lg-field{margin-bottom:16px}
+#loginScreen .lg-field label{display:block;margin-bottom:7px;font-size:13px;font-weight:700;color:var(--text)}
+#loginScreen .lg-input{position:relative}
+#loginScreen .lg-input>.lg-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--muted);pointer-events:none;transition:color .2s}
+#loginScreen .lg-input:focus-within>.lg-ico{color:var(--primary2)}
+#loginScreen .lg-input input{width:100%;min-height:50px;padding:0 48px 0 44px;border:1.5px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--text) 3%,var(--card));color:var(--text);font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+#loginScreen .lg-input input::placeholder{color:var(--muted);opacity:.8}
+#loginScreen .lg-input input:focus{border-color:var(--primary2);background:var(--card);box-shadow:0 0 0 4px color-mix(in srgb,var(--primary2) 18%,transparent)}
+#loginScreen .lg-eye{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:42px;height:42px;display:grid;place-items:center;border:0;border-radius:11px;background:transparent;color:var(--muted);font-size:18px;cursor:pointer;transition:background .15s,color .15s}
+#loginScreen .lg-eye:hover{background:color-mix(in srgb,var(--text) 7%,transparent);color:var(--text)}
+#loginScreen .lg-caps{display:none;margin-top:7px;font-size:12px;font-weight:600;color:#b45309}
+#loginScreen .lg-caps.show{display:block}
+#loginScreen .login-error{display:none;margin:0 0 16px;padding:11px 14px;border-radius:12px;border:1px solid #fecaca;border-left:4px solid #dc2626;background:#fee2e2;color:#991b1b;font-size:13px;font-weight:600;animation:lgErr .3s var(--ease)}
+#loginScreen .lg-btn{position:relative;overflow:hidden;width:100%;min-height:52px;margin-top:6px;border:0;border-radius:14px;background:var(--primary2);color:#fff;font-size:15.5px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;box-shadow:0 12px 24px -12px color-mix(in srgb,var(--primary2) 85%,transparent);transition:transform .15s var(--ease),filter .15s}
+#loginScreen .lg-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);pointer-events:none}
+#loginScreen .lg-btn:hover::after{transform:translateX(120%);transition:transform .7s var(--ease)}
+#loginScreen .lg-btn:hover{filter:brightness(1.07)}
+#loginScreen .lg-btn:active{transform:scale(.985)}
+#loginScreen .lg-btn:disabled{cursor:wait}
+#loginScreen .lg-btn .ic{font-size:19px}
+#loginScreen .lg-spin{display:none;width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;animation:lgSpin .7s linear infinite}
+#loginScreen .lg-btn.loading .lg-spin{display:block}
+#loginScreen .lg-btn.loading .ic{display:none}
+#loginScreen .lg-foot{margin-top:26px;text-align:center;font-size:12px;color:var(--muted)}
+
+/* gerak: masuk bertahap, kotak terisi, getar saat salah, keluar halus */
+#loginScreen .lg-in{animation:lgUp .6s var(--ease) both;animation-delay:calc(var(--i,0)*70ms + 120ms)}
+#loginScreen .lg-card.shake{animation:lgShake .45s var(--ease)}
+#loginScreen.leaving{animation:lgLeave .38s var(--ease) both}
+@keyframes lgUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes lgSlideIn{from{opacity:0;transform:translateX(44px)}to{opacity:1;transform:none}}
+@keyframes lgSheetUp{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+@keyframes lgFill{0%,5%{opacity:0;transform:scale(.5)}11%{opacity:1;transform:scale(1.18)}15%,86%{opacity:1;transform:scale(1)}94%,100%{opacity:0;transform:scale(.9)}}
+@keyframes lgBlink{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes lgSpin{to{transform:rotate(360deg)}}
+@keyframes lgShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(5px)}}
+@keyframes lgErr{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes lgLeave{to{opacity:0;transform:scale(1.03)}}
+@media(prefers-reduced-motion:reduce){
+  #loginScreen .lg-c::before,#loginScreen .lg-c::after{animation:none!important;opacity:1;transform:none}
+  #loginScreen .lg-dot{animation:none!important}
+}
+
+/* tablet & HP: kepala di atas, formulir naik dari bawah seperti lembar */
+@media(max-width:860px){
+  #loginScreen{flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  #loginScreen .lg-hero{flex:0 0 auto;gap:18px;justify-content:flex-start;padding:max(22px,env(safe-area-inset-top,0px)) 20px 58px}
+  #loginScreen .lg-copy h1{font-size:25px;margin-bottom:0}
+  #loginScreen .lg-copy p{display:none}
+  #loginScreen .lg-sheet{width:100%;padding:11px 11px 9px}
+  #loginScreen .lg-row.r3,#loginScreen .lg-row.r4,#loginScreen .lg-row.r5{display:none}
+  #loginScreen .lg-legend{display:none}
+  #loginScreen .lg-panel{flex:1 0 auto;justify-content:flex-start;margin-top:-30px;border-radius:28px 28px 0 0;padding:28px 22px calc(26px + env(safe-area-inset-bottom,0px));overflow:visible;animation:lgSheetUp .65s var(--ease) .1s both}
+  #loginScreen .lg-card h2{font-size:26px}
+  #loginScreen .lg-input input{font-size:16px}
+}
+@media(max-width:860px) and (max-height:740px){#loginScreen .lg-sheet{display:none}}
+
+@media(min-width:561px) and (max-width:860px){#loginScreen .lg-sheet{width:min(100%,460px)}}
 </style>
 </head>
 <body>
 
 <div id="loginScreen">
-  <span class="login-blob b1"></span>
-  <span class="login-blob b2"></span>
-  <span class="login-blob b3"></span>
-  <div class="login-box">
-    <div class="login-logo"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M12 6.8c-1.7-1.3-3.9-1.9-6.5-1.7v12.6c2.6-.2 4.8.4 6.5 1.7 1.7-1.3 3.9-1.9 6.5-1.7V5.1c-2.6-.2-4.8.4-6.5 1.7Z"/><path d="M12 6.8v12.6"/></svg></div>
-    <span class="login-badge"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.7"/><path d="M8 10.5V7.3a4 4 0 0 1 8 0v3.2"/></svg> Area Login Aman</span>
-    <h2>ABSENSI SISWA</h2>
-    <p>Silakan login untuk masuk ke Dashboard</p>
-    <div id="loginError" class="login-error">Username atau password salah.</div>
-    <form id="loginForm" onsubmit="loginApp(event)">
-      <div class="login-field"><label>Username</label><input id="loginUsername" autocomplete="username" required placeholder="Masukkan username"></div>
-      <div class="login-field">
-       <label>Password</label>
-       <div class="login-pass-wrap">
-        <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Masukkan password">
-        <button type="button" class="login-eye" id="loginEyeBtn" onclick="togglePassVisibility()" title="Tampilkan password" aria-label="Tampilkan password"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"/><circle cx="12" cy="12" r="3"/></svg></button>
-       </div>
-      </div>
-      <button class="login-btn" type="submit"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.7"/><path d="M8 10.5V7.3a4 4 0 0 1 8 0v3.2"/></svg> LOGIN</button>
-    </form>
-    <div class="login-help">Sistem Informasi Absensi Siswa • BY SUKARNO HADI</div>
-  </div>
+  <section class="lg-hero">
+    <div class="lg-brand lg-in" style="--i:0">
+      <div class="login-logo"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M12 6.8c-1.7-1.3-3.9-1.9-6.5-1.7v12.6c2.6-.2 4.8.4 6.5 1.7 1.7-1.3 3.9-1.9 6.5-1.7V5.1c-2.6-.2-4.8.4-6.5 1.7Z"/><path d="M12 6.8v12.6"/></svg></div>
+      <div class="lg-brand-text"><strong id="loginSchoolName">SMK NEGERI 1 SIKUR</strong><span>Sistem Informasi Absensi Siswa</span></div>
+    </div>
+    <div class="lg-copy lg-in" style="--i:1">
+      <h1>Catat kehadiran siswa,SMK NEGERI 1 SIKUR (Smart, Inovatif, Kreatif, Unggul Religius).</h1>
+      <p>Absensi harian dan bulanan, rekap otomatis, dari HP maupun laptop.</p>
+    </div>
+    <div class="lg-sheet lg-in" style="--i:2" aria-hidden="true">
+      <div class="lg-sheet-head"><span>Absensi bulan ini</span><span class="lg-live"><i class="lg-dot"></i>Rekap otomatis</span></div>
+      <div class="lg-grid"><div class="lg-row r0"><span></span><span class="lg-d">1</span><span class="lg-d">2</span><span class="lg-d">3</span><span class="lg-d">4</span><span class="lg-d">5</span><span class="lg-d">6</span><span class="lg-d">7</span><span class="lg-d">8</span></div><div class="lg-row r1"><span class="lg-n" style="--w:68%"></span><i class="lg-c lg-h" style="--d:1.0s"></i><i class="lg-c lg-h" style="--d:1.17s"></i><i class="lg-c lg-h" style="--d:1.34s"></i><i class="lg-c lg-h" style="--d:1.51s"></i><i class="lg-c lg-s" style="--d:1.68s"></i><i class="lg-c lg-h" style="--d:1.85s"></i><i class="lg-c lg-h" style="--d:2.02s"></i><i class="lg-c lg-h" style="--d:2.19s"></i></div><div class="lg-row r2"><span class="lg-n" style="--w:82%"></span><i class="lg-c lg-h" style="--d:1.3s"></i><i class="lg-c lg-h" style="--d:1.47s"></i><i class="lg-c lg-i" style="--d:1.64s"></i><i class="lg-c lg-h" style="--d:1.81s"></i><i class="lg-c lg-h" style="--d:1.98s"></i><i class="lg-c lg-h" style="--d:2.15s"></i><i class="lg-c lg-h" style="--d:2.32s"></i><i class="lg-c lg-a" style="--d:2.49s"></i></div><div class="lg-row r3"><span class="lg-n" style="--w:58%"></span><i class="lg-c lg-h" style="--d:1.6s"></i><i class="lg-c lg-s" style="--d:1.77s"></i><i class="lg-c lg-h" style="--d:1.94s"></i><i class="lg-c lg-h" style="--d:2.11s"></i><i class="lg-c lg-h" style="--d:2.28s"></i><i class="lg-c lg-h" style="--d:2.45s"></i><i class="lg-c lg-i" style="--d:2.62s"></i><i class="lg-c lg-h" style="--d:2.79s"></i></div><div class="lg-row r4"><span class="lg-n" style="--w:76%"></span><i class="lg-c lg-h" style="--d:1.9s"></i><i class="lg-c lg-h" style="--d:2.07s"></i><i class="lg-c lg-h" style="--d:2.24s"></i><i class="lg-c lg-a" style="--d:2.41s"></i><i class="lg-c lg-h" style="--d:2.58s"></i><i class="lg-c lg-h" style="--d:2.75s"></i><i class="lg-c lg-h" style="--d:2.92s"></i><i class="lg-c lg-h" style="--d:3.09s"></i></div><div class="lg-row r5"><span class="lg-n" style="--w:64%"></span><i class="lg-c lg-h" style="--d:2.2s"></i><i class="lg-c lg-h" style="--d:2.37s"></i><i class="lg-c lg-h" style="--d:2.54s"></i><i class="lg-c lg-h" style="--d:2.71s"></i><i class="lg-c lg-h" style="--d:2.88s"></i><i class="lg-c lg-s" style="--d:3.05s"></i><i class="lg-c lg-h" style="--d:3.22s"></i><i class="lg-c lg-h" style="--d:3.39s"></i></div></div>
+      <div class="lg-legend"><span><i class="lg-k" style="--cb:#dcfce7;--cf:#166534">H</i>Hadir</span><span><i class="lg-k" style="--cb:#fef3c7;--cf:#92400e">S</i>Sakit</span><span><i class="lg-k" style="--cb:#dbeafe;--cf:#1e40af">I</i>Izin</span><span><i class="lg-k" style="--cb:#fee2e2;--cf:#991b1b">A</i>Alpa</span></div>
+    </div>
+  </section>
+  <main class="lg-panel">
+    <div class="lg-card" id="loginCard">
+      <h2 class="lg-in" style="--i:3">Masuk</h2>
+      <p class="lg-sub lg-in" style="--i:4">Masukkan username dan password untuk membuka dashboard.</p>
+      <div id="loginError" class="login-error" role="alert">Username atau password salah.</div>
+      <form id="loginForm" onsubmit="loginApp(event)">
+        <div class="lg-field lg-in" style="--i:5"><label for="loginUsername">Username</label>
+          <div class="lg-input"><svg class="ic lg-ico" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg><input id="loginUsername" autocomplete="username" required placeholder="Masukkan username" autocapitalize="none" spellcheck="false"></div></div>
+        <div class="lg-field lg-in" style="--i:6"><label for="loginPassword">Password</label>
+          <div class="lg-input"><svg class="ic lg-ico" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.7"/><path d="M8 10.5V7.3a4 4 0 0 1 8 0v3.2"/></svg><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Masukkan password">
+            <button type="button" class="lg-eye" id="loginEyeBtn" onclick="togglePassVisibility()" title="Tampilkan password" aria-label="Tampilkan password"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+          <div class="lg-caps" id="loginCaps">Caps Lock sedang aktif</div></div>
+        <button class="lg-btn lg-in" style="--i:7" type="submit" id="loginBtn"><span class="lg-spin" aria-hidden="true"></span><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg><span class="lg-bt">Masuk</span></button>
+      </form>
+      <div class="lg-foot lg-in" style="--i:8">Sistem Informasi Absensi Siswa &bull; BY SUKARNO HADI</div>
+    </div>
+  </main>
 </div>
 
 <div class="app-topbar" id="appTopbar">
@@ -3409,6 +3691,123 @@ initSidebar();
     applyLevel(v);
   };
   applyLevel(getLevel());
+})();
+</script>
+<script>
+/* Menu kotak ala HP + tombol kembali (HP saja; di laptop tampilan tidak berubah) */
+(function(){
+  var mq=window.matchMedia('(max-width:650px)');
+  var PALETTE=[['#38bdf8','#0284c7'],['#34d399','#059669'],['#818cf8','#4f46e5'],['#fb7185','#e11d48'],['#fbbf24','#d97706'],['#a78bfa','#7c3aed'],['#2dd4bf','#0d9488'],['#fb923c','#ea580c']];
+  function syncBadge(){
+    var s=document.getElementById('navTrashBadge'),d=document.getElementById('launcherTrashBadge');
+    if(!d)return;
+    var n=s?s.textContent.trim():'';
+    var show=s&&s.style.display!=='none'&&n;
+    d.textContent=n;d.style.display=show?'':'none';
+  }
+  function build(){
+    var dash=document.getElementById('dashboard'),nav=document.querySelector('.sidebar .nav');
+    if(!dash||!nav||document.getElementById('appLauncher'))return;
+    var wrap=document.createElement('div');wrap.id='appLauncher';
+    var grid=null,i=0;
+    Array.prototype.forEach.call(nav.children,function(el){
+      if(el.classList.contains('nav-title')){
+        var g=document.createElement('section');g.className='l-group';
+        var h=document.createElement('h2');h.className='l-title';h.textContent=el.textContent.trim();
+        grid=document.createElement('div');grid.className='l-grid';
+        g.appendChild(h);g.appendChild(grid);wrap.appendChild(g);return;
+      }
+      var page=el.dataset&&el.dataset.page;
+      if(!page||page==='dashboard'||!grid)return;
+      var c=PALETTE[i++%PALETTE.length];
+      var b=document.createElement('button');b.type='button';b.className='l-tile';b.dataset.page=page;
+      var ico=document.createElement('span');ico.className='l-ico';
+      ico.style.background='linear-gradient(145deg,'+c[0]+','+c[1]+')';
+      var src=el.querySelector('.nav-icon');ico.innerHTML=src?src.innerHTML:'';
+      var nm=document.createElement('span');nm.className='l-name';
+      nm.textContent=el.dataset.label||el.textContent.trim();
+      b.appendChild(ico);b.appendChild(nm);
+      if(page==='trash'){var bd=document.createElement('span');bd.className='l-badge';bd.id='launcherTrashBadge';bd.style.display='none';b.appendChild(bd)}
+      grid.appendChild(b);
+    });
+    dash.insertBefore(wrap,dash.firstChild);
+    wrap.addEventListener('click',function(e){
+      var t=e.target.closest('.l-tile');if(!t)return;
+      var r=t.getBoundingClientRect();
+      document.documentElement.style.setProperty('--ox',(r.left+r.width/2)+'px');
+      showPage(t.dataset.page);
+    });
+    var s=document.getElementById('navTrashBadge');
+    if(s&&window.MutationObserver)new MutationObserver(syncBadge).observe(s,{attributes:true,childList:true,characterData:true,subtree:true});
+    syncBadge();
+  }
+  function addBack(){
+    var bar=document.getElementById('appTopbar');
+    if(!bar||bar.querySelector('.app-back'))return;
+    var b=document.createElement('button');b.type='button';b.className='app-back';b.setAttribute('aria-label','Kembali ke menu');
+    b.innerHTML='<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+    b.onclick=function(){window.appBack()};
+    bar.insertBefore(b,bar.firstChild);
+  }
+  window.appBack=function(){
+    if(history.state&&history.state.app)history.back();else showPage('dashboard');
+  };
+  var _sp=window.showPage;
+  window.showPage=function(id){
+    var r=_sp.apply(this,arguments);
+    var inApp=id!=='dashboard';
+    document.body.classList.toggle('in-app',inApp);
+    if(mq.matches){
+      if(inApp){
+        if(history.state&&history.state.app){if(history.state.app!==id)history.replaceState({app:id},'')}
+        else history.pushState({app:id},'');
+      }
+      window.scrollTo(0,0);
+    }
+    syncBadge();
+    return r;
+  };
+  window.addEventListener('popstate',function(){
+    if(document.body.classList.contains('in-app'))window.showPage('dashboard');
+  });
+  build();addBack();
+})();
+</script>
+<script>
+/* Login: nama sekolah, efek tombol, getar saat salah, keluar halus, peringatan Caps Lock */
+(function(){
+  var scr=document.getElementById('loginScreen');if(!scr)return;
+  function $$(id){return document.getElementById(id)}
+  function syncSchool(){var h=$$('schoolHeaderName'),t=$$('loginSchoolName');if(h&&t&&h.textContent.trim())t.textContent=h.textContent.trim()}
+  var hn=$$('schoolHeaderName');
+  if(hn&&window.MutationObserver)new MutationObserver(syncSchool).observe(hn,{childList:true,characterData:true,subtree:true});
+  syncSchool();
+  var _la=window.loginApp,fake={preventDefault:function(){}};
+  window.loginApp=function(e){
+    if(e&&e.preventDefault)e.preventDefault();
+    var btn=$$('loginBtn'),card=$$('loginCard');
+    if(btn.disabled)return;
+    var a=(typeof getAuth==='function')?getAuth():{user:'',pass:''};
+    var ok=$$('loginUsername').value.trim()===a.user&&$$('loginPassword').value===a.pass;
+    btn.classList.add('loading');btn.disabled=true;
+    setTimeout(function(){
+      btn.classList.remove('loading');btn.disabled=false;
+      if(ok){
+        scr.classList.add('leaving');
+        setTimeout(function(){_la(fake);scr.classList.remove('leaving')},380);
+      }else{
+        _la(fake);
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');
+      }
+    },480);
+  };
+  var pw=$$('loginPassword'),caps=$$('loginCaps');
+  function capsCheck(ev){if(!ev.getModifierState)return;caps.classList.toggle('show',ev.getModifierState('CapsLock'))}
+  pw.addEventListener('keydown',capsCheck);pw.addEventListener('keyup',capsCheck);
+  pw.addEventListener('blur',function(){caps.classList.remove('show')});
+  if(window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches&&getComputedStyle(scr).display!=='none'){
+    setTimeout(function(){var u=$$('loginUsername');if(u&&scr.style.display!=='none')u.focus()},900);
+  }
 })();
 </script>
 </body>
