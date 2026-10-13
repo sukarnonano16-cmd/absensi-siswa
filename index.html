@@ -127,7 +127,7 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}
 .color-pick-row input[type=color]{width:46px;height:36px;border:1px solid var(--border);border-radius:8px;padding:2px;cursor:pointer;background:#fff}
 .upload-bg-box{border:2px dashed #7dd3fc;border-radius:12px;padding:16px;text-align:center;background:#f0f9ff}
 @media(max-width:900px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px)}.cards{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
-@media(max-width:650px){.sidebar{position:static;width:100%;height:auto}.app{display:block}.main{margin:0;width:100%;padding:15px}.cards{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;gap:10px;flex-direction:column}}
+@media(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){.sidebar{position:static;width:100%;height:auto}.app{display:block}.main{margin:0;width:100%;padding:15px}.cards{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;gap:10px;flex-direction:column}}
 /* ===== Mobile app bar & nav drawer (Android-style) ===== */
 .app-topbar{display:none;position:fixed;top:0;left:0;right:0;height:56px;background:linear-gradient(90deg,var(--primary2),var(--primary));color:#fff;align-items:center;gap:6px;padding:0 6px;z-index:150;box-shadow:0 2px 12px rgba(0,0,0,.2)}
 .app-topbar .hamburger{width:44px;height:44px;border:0;background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;cursor:pointer;border-radius:50%;flex-shrink:0}
@@ -139,7 +139,7 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}
 .app-topbar .app-topbar-title{font-weight:800;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .drawer-backdrop{position:fixed;inset:0;background:rgba(9,14,23,.55);opacity:0;pointer-events:none;transition:opacity .25s;z-index:190}
 .drawer-backdrop.show{opacity:1;pointer-events:auto}
-@media(max-width:650px){
+@media(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
   .app-topbar{display:flex}
   .sidebar{position:fixed;top:0;left:0;bottom:0;width:82%;max-width:300px;height:100vh;transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:200;box-shadow:14px 0 40px rgba(0,0,0,.35);border-radius:0 18px 18px 0}
   .sidebar.open{transform:translateX(0)}
@@ -152,7 +152,7 @@ button,input,select{font:inherit}.app{display:flex;min-height:100vh}
 
 /* ===== BOTTOM NAV (Android-style) — menu utama di bawah layar HP ===== */
 .bottom-nav{display:none}
-@media(max-width:650px){
+@media(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
   .bottom-nav{
     display:flex;position:fixed;bottom:0;left:0;right:0;z-index:170;
     background:var(--card);border-top:1px solid var(--border);
@@ -331,7 +331,7 @@ html[data-mode="dark"] ::-webkit-scrollbar-thumb{background:#334155;border-color
 .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px #22c55e33;animation:pulseDot 1.8s infinite}
 @keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
 .fab-mobile{display:none}
-@media(max-width:650px){
+@media(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
   .fab-mobile{display:flex;position:fixed;right:16px;bottom:calc(64px + env(safe-area-inset-bottom,0px) + 14px);z-index:160;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;border:0;align-items:center;justify-content:center;font-size:24px;box-shadow:0 10px 26px -6px color-mix(in srgb,var(--primary2) 70%,transparent);cursor:pointer;transition:transform .15s var(--ease)}
   .fab-mobile:active{transform:scale(.92)}
   header.topbar>div:last-child .btn-primary{display:none}
@@ -456,7 +456,7 @@ html[data-mode="dark"] .grid-cell.sunday-day{background:repeating-linear-gradien
 }
 
 /* --- HP --- */
-@media(max-width:650px){
+@media(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
   html{-webkit-text-size-adjust:100%}
   .main{padding-left:12px;padding-right:12px}
   .topbar h1{font-size:19px}
@@ -495,7 +495,7 @@ html[data-mode="dark"] .grid-cell.sunday-day{background:repeating-linear-gradien
 .app-topbar .app-back{display:none}
 @keyframes appOpen{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes homeIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
-@media(max-width:650px){
+@media(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
   #appLauncher{display:block;margin:2px 0 14px}
   .l-group{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:12px 6px 6px;margin-bottom:12px}
   .l-title{margin:0 0 6px 10px;font-size:13px;font-weight:700;color:var(--muted)}
@@ -527,7 +527,7 @@ html[data-mode="dark"] .grid-cell.sunday-day{background:repeating-linear-gradien
 }
 
 /* perapian HP: bayangan menu samping tidak bocor ke layar, kepala halaman dipadatkan */
-@media(max-width:650px){
+@media(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
   .sidebar:not(.open){box-shadow:none}
   .topbar{gap:2px;margin-bottom:12px}
   #pageTitle{display:none}
@@ -535,7 +535,7 @@ html[data-mode="dark"] .grid-cell.sunday-day{background:repeating-linear-gradien
 }
 
 /* perbaikan: jarak atas konten di HP tidak boleh tertimpa aturan tablet (app bar tinggi 56px) */
-@media(max-width:650px){.main{padding-top:72px}}
+@media(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){.main{padding-top:72px}}
 
 /* =====================================================================
    LOGIN BARU: lembar absensi hidup (kotak status terisi satu per satu)
@@ -638,6 +638,52 @@ html[data-mode="dark"] .grid-cell.sunday-day{background:repeating-linear-gradien
 @media(max-width:860px) and (max-height:740px){#loginScreen .lg-sheet{display:none}}
 
 @media(min-width:561px) and (max-width:860px){#loginScreen .lg-sheet{width:min(100%,460px)}}
+
+/* =====================================================================
+   HP BERDIRI & MIRING: SEMUA SISWA TAMPIL (absensi harian & bulanan)
+   ===================================================================== */
+@media(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  /* tanpa batas tinggi: seluruh daftar siswa tampil, halaman yang digulir */
+  .table-wrap,#monthlyGrid .grid-wrap,body.in-app #monthlyGrid .grid-wrap{max-height:none!important;min-height:0!important;overflow-y:visible}
+  #monthlyGrid .grid-wrap{overflow-x:auto}
+  .main{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+  .toolbar>*{min-width:0}
+  .grid-bulk-bar{font-size:11.5px}
+
+  /* grid bulanan: kolom tetap diperkecil agar tanggal tetap terlihat */
+  #monthlyGrid .grid-table thead th.col-no,#monthlyGrid .grid-table td.col-no{min-width:26px;max-width:28px;padding:3px 2px;font-size:10px}
+  #monthlyGrid .grid-table thead th.col-nis,#monthlyGrid .grid-table td.col-nis{position:static;min-width:62px;max-width:70px;font-size:10px;padding:3px 3px}
+  #monthlyGrid .grid-table thead th.col-nama,#monthlyGrid .grid-table td.col-nama{left:26px;min-width:92px;max-width:110px;font-size:11px;padding:3px 5px;white-space:normal;line-height:1.2;word-break:break-word}
+  #monthlyGrid .grid-table thead th.col-no{left:0}
+  #monthlyGrid .grid-table td.col-no{left:0}
+  #monthlyGrid .grid-table thead th.col-nis{z-index:2}
+  .grid-cell{width:30px;height:28px;margin:1px auto}
+}
+
+/* HP berdiri: absensi harian jadi kartu per siswa, tanpa geser ke samping */
+@media(max-width:650px){
+  #daily .table-wrap{border:0;overflow:visible}
+  #daily .table,#daily .table tbody{display:block;width:100%}
+  #daily .table thead{display:none}
+  #daily .table tr{display:grid;grid-template-columns:28px 1fr auto;grid-template-areas:"no nama nama" "no nis kelas" "rad rad rad" "ntf ntf ntf";gap:2px 8px;padding:10px;margin-bottom:8px;border:1px solid var(--border);border-radius:12px;background:var(--card)}
+  #daily .table td{display:block;border:0;padding:0;font-size:12px}
+  #daily .table td:nth-child(1){grid-area:no;font-weight:700;color:var(--muted);align-self:center}
+  #daily .table td:nth-child(2){grid-area:nis;color:var(--muted)}
+  #daily .table td:nth-child(3){grid-area:nama;font-size:13px}
+  #daily .table td:nth-child(4){grid-area:kelas;color:var(--muted);text-align:right}
+  #daily .table td:nth-child(5){grid-area:rad;margin-top:6px}
+  #daily .table td:nth-child(6){grid-area:ntf;margin-top:6px}
+  #daily .table td:nth-child(6):not(:has(button)){display:none}
+  #daily .table td.empty{grid-column:1/-1}
+  #daily .radio-group{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #daily .radio{padding:9px 0;text-align:center;font-size:12px;min-height:40px}
+  #daily .table td:nth-child(6) .btn{width:100%}
+}
+/* HP miring: tabel harian dibuat rapat agar muat tanpa geser ke samping */
+@media(orientation:landscape) and (max-height:500px) and (pointer:coarse){
+  #daily .table th,#daily .table td{padding:6px 7px;font-size:12px}
+  #daily .radio{padding:7px 8px}
+}
 </style>
 </head>
 <body>
@@ -3696,7 +3742,7 @@ initSidebar();
 <script>
 /* Menu kotak ala HP + tombol kembali (HP saja; di laptop tampilan tidak berubah) */
 (function(){
-  var mq=window.matchMedia('(max-width:650px)');
+  var mq=window.matchMedia('(max-width:650px),(orientation:landscape) and (max-height:500px) and (pointer:coarse)');
   var PALETTE=[['#38bdf8','#0284c7'],['#34d399','#059669'],['#818cf8','#4f46e5'],['#fb7185','#e11d48'],['#fbbf24','#d97706'],['#a78bfa','#7c3aed'],['#2dd4bf','#0d9488'],['#fb923c','#ea580c']];
   function syncBadge(){
     var s=document.getElementById('navTrashBadge'),d=document.getElementById('launcherTrashBadge');
