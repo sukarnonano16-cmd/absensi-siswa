@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0284c7">
 <title>Sistem Informasi Absensi Siswa</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230284c7'/%3E%3Cpath d='M12 7.2c-1.6-1.2-3.7-1.8-6.2-1.6v11.4c2.5-.2 4.6.4 6.2 1.6 1.6-1.2 3.7-1.8 6.2-1.6V5.6c-2.5-.2-4.6.4-6.2 1.6Z' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M12 7.2v11.4' stroke='white' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
@@ -717,7 +718,7 @@ body.grid-full #monthlyGrid .grid-wrap{max-height:calc(100vh - 170px)}
       <div class="lg-brand-text"><strong id="loginSchoolName">SMK NEGERI 1 SIKUR</strong><span>Sistem Informasi Absensi Siswa</span></div>
     </div>
     <div class="lg-copy lg-in" style="--i:1">
-      <h1>Absensi kehadiran siswa,.</h1>
+      <h1>Absensi kehadiran siswa.</h1>
       <p>Absensi harian dan bulanan, rekap otomatis, dari HP maupun laptop.</p>
     </div>
     <div class="lg-sheet lg-in" style="--i:2" aria-hidden="true">
@@ -768,6 +769,7 @@ body.grid-full #monthlyGrid .grid-wrap{max-height:calc(100vh - 170px)}
     <div class="nav-title">Absensi</div>
     <button data-page="daily" data-label="Absensi Harian"><span class="nav-icon"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="1.5"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="m8.5 12.5 2 2 4-4.2"/></svg></span><span>Absensi Harian</span></button>
     <button data-page="monthlyGrid" data-label="Absensi Bulanan Grid"><span class="nav-icon"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></span><span>Absensi Bulanan Grid</span></button>
+    <button data-page="holidays" data-label="Hari Libur"><span class="nav-icon"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/><path d="m10 13.5 4 4M14 13.5l-4 4"/></svg></span><span>Hari Libur</span></button>
     <button data-page="weekly" data-label="Rekap Mingguan"><span class="nav-icon"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M4 20V10M11 20V4M18 20v-7"/><path d="M2.5 20h19"/></svg></span><span>Rekap Mingguan</span></button>
     <button data-page="monthly" data-label="Rekap Bulanan"><span class="nav-icon"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></span><span>Rekap Bulanan</span></button>
     <button data-page="yearly" data-label="Rekap Tahunan"><span class="nav-icon"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg></span><span>Rekap Tahunan</span></button>
@@ -924,6 +926,26 @@ body.grid-full #monthlyGrid .grid-wrap{max-height:calc(100vh - 170px)}
   <div id="gridNotice" class="notice">Silakan pilih bulan dan kelas untuk menampilkan tabel absensi.</div>
   <div id="gridSummary" class="attendance-summary" style="display:none"></div>
   <div id="monthlyGrid-content"></div>
+ </div>
+</section>
+
+<section id="holidays" class="page">
+ <div class="card">
+  <div class="section-title"><h2>Hari Libur &amp; Hari Tidak Efektif</h2></div>
+  <div class="notice">Tanggal di daftar ini <b>bukan hari efektif</b>: absensinya tidak bisa diisi dan tidak dihitung pada rekap mingguan, bulanan, semester, tahunan, grid, serta laporan individu. Bawaan: libur nasional &amp; cuti bersama RI 2026&ndash;2027 menurut SKB 3 Menteri. Tanggal hari raya keagamaan dapat disesuaikan oleh Menteri Agama, jadi ubah manual bila ada perubahan. Data absensi lama tidak pernah dihapus.</div>
+  <div class="toolbar">
+   <label style="display:flex;align-items:center;gap:7px">Tahun <select id="holidayYear" class="select" onchange="renderHolidays()"></select></label>
+   <label style="display:flex;align-items:center;gap:7px"><input type="checkbox" id="holidayCuti" onchange="toggleCutiBersama()"> Cuti bersama dihitung libur sekolah</label>
+   <button class="btn btn-secondary" onclick="loadDefaultHolidays()">Muat Libur Nasional RI 2026&ndash;2027</button>
+  </div>
+  <div class="toolbar">
+   <label style="display:flex;align-items:center;gap:7px">Dari <input type="date" id="holidayFrom" class="input"></label>
+   <label style="display:flex;align-items:center;gap:7px">Sampai <input type="date" id="holidayTo" class="input"></label>
+   <input id="holidayName" class="input" placeholder="Keterangan, mis. Libur Semester Ganjil" style="min-width:240px" maxlength="80">
+   <button class="btn btn-primary" onclick="addHoliday()">Tambah Libur Sekolah</button>
+  </div>
+  <div class="attendance-summary" id="holidaySummary"></div>
+  <div class="table-wrap"><table class="table"><thead><tr><th>Tanggal</th><th>Hari</th><th>Keterangan</th><th>Jenis</th><th>Aksi</th></tr></thead><tbody id="holidayTable"></tbody></table></div>
  </div>
 </section>
 
@@ -1335,22 +1357,64 @@ function out(o) {
 
 <div id="syncPill" onclick="kickSync()" style="display:none;position:fixed;right:12px;bottom:12px;z-index:60;max-width:70vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#fff;border:1px solid var(--border,#e2e8f0);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.15);cursor:pointer" title="Status sinkron cloud"></div>
 <script>var _xl;function loadXLSX(){return _xl||(_xl=new Promise(function(ok,no){var t=document.createElement("script");t.src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js";t.onload=ok;t.onerror=function(){_xl=null;no()};document.head.appendChild(t)}))}
-(function(){var g=function(){if(!window.XLSX)loadXLSX()};window.addEventListener("load",function(){setTimeout(g,2500)});document.addEventListener("pointerdown",g,{once:true,passive:true})})();</script>
+(function(){var g=function(){if(!window.XLSX)loadXLSX().catch(function(){})};window.addEventListener("load",function(){setTimeout(g,2500)});document.addEventListener("pointerdown",g,{once:true,passive:true})})();</script>
 <script>
 
 const LOGIN_KEY='ABSENSI_LOGIN_V1', AUTH_KEY='sias_auth', DEFAULT_USER='admin', DEFAULT_PASS='admin123';
-function getAuth(){
-  try{const a=JSON.parse(localStorage.getItem(AUTH_KEY));if(a&&a.user&&a.pass)return a}catch(e){}
-  return{user:DEFAULT_USER,pass:DEFAULT_PASS};
+/* SHA-256 sinkron (tanpa crypto.subtle supaya jalan juga di file:// dan HTTP) */
+function sha256(str){
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const by=Array.from(new TextEncoder().encode(String(str)));
+  const bits=by.length*8;
+  by.push(0x80);
+  while(by.length%64!==56)by.push(0);
+  const hi=Math.floor(bits/4294967296),lo=bits>>>0;
+  for(let i=3;i>=0;i--)by.push((hi>>>(i*8))&255);
+  for(let i=3;i>=0;i--)by.push((lo>>>(i*8))&255);
+  let h=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const rr=(x,n)=>(x>>>n)|(x<<(32-n));
+  for(let o=0;o<by.length;o+=64){
+    const w=new Array(64);
+    for(let i=0;i<16;i++)w[i]=((by[o+i*4]<<24)|(by[o+i*4+1]<<16)|(by[o+i*4+2]<<8)|by[o+i*4+3])>>>0;
+    for(let i=16;i<64;i++){const s0=rr(w[i-15],7)^rr(w[i-15],18)^(w[i-15]>>>3),s1=rr(w[i-2],17)^rr(w[i-2],19)^(w[i-2]>>>10);w[i]=(w[i-16]+s0+w[i-7]+s1)>>>0}
+    let a=h[0],b=h[1],c=h[2],d=h[3],e=h[4],f=h[5],g=h[6],hh=h[7];
+    for(let i=0;i<64;i++){
+      const S1=rr(e,6)^rr(e,11)^rr(e,25),ch=(e&f)^(~e&g),t1=(hh+S1+ch+K[i]+w[i])>>>0;
+      const S0=rr(a,2)^rr(a,13)^rr(a,22),mj=(a&b)^(a&c)^(b&c),t2=(S0+mj)>>>0;
+      hh=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=b;b=a;a=(t1+t2)>>>0;
+    }
+    h=[(h[0]+a)>>>0,(h[1]+b)>>>0,(h[2]+c)>>>0,(h[3]+d)>>>0,(h[4]+e)>>>0,(h[5]+f)>>>0,(h[6]+g)>>>0,(h[7]+hh)>>>0];
+  }
+  return h.map(x=>x.toString(16).padStart(8,'0')).join('');
 }
-function setAuth(user,pass){localStorage.setItem(AUTH_KEY,JSON.stringify({user,pass}))}
+function hashPass(p,salt){return sha256(salt+'|'+p)}
+function newSalt(){return uid()+uid()}
+/* Password disimpan sebagai hash+salt. Data lama (teks biasa) otomatis dimigrasi saat dibaca. */
+function getAuth(){
+  try{
+    const a=JSON.parse(localStorage.getItem(AUTH_KEY));
+    if(a&&a.user){
+      if(a.hash&&a.salt)return a;
+      if(a.pass){const salt=newSalt(),n={user:a.user,salt,hash:hashPass(a.pass,salt)};localStorage.setItem(AUTH_KEY,JSON.stringify(n));return n}
+    }
+  }catch(e){}
+  return{user:DEFAULT_USER,salt:'default',hash:hashPass(DEFAULT_PASS,'default'),isDefault:true};
+}
+function setAuth(user,pass){const salt=newSalt();localStorage.setItem(AUTH_KEY,JSON.stringify({user,salt,hash:hashPass(pass,salt)}))}
+function authOk(auth,pass){return hashPass(pass,auth.salt)===auth.hash}
+/* Batasi percobaan login: 5x salah -> terkunci 30 detik, makin lama bila terus salah (maks 5 menit) */
+const FAIL_KEY='sias_login_fail';
+function lockRemaining(){try{const f=JSON.parse(localStorage.getItem(FAIL_KEY)||'null');if(f&&f.until>Date.now())return Math.ceil((f.until-Date.now())/1000)}catch(e){}return 0}
+function noteLoginFail(){let f={n:0,until:0};try{f=JSON.parse(localStorage.getItem(FAIL_KEY)||'null')||f}catch(e){}f.n=(f.n||0)+1;if(f.n>=5)f.until=Date.now()+Math.min(30000*(f.n-4),300000);try{localStorage.setItem(FAIL_KEY,JSON.stringify(f))}catch(e){}}
+function resetLoginFail(){try{localStorage.removeItem(FAIL_KEY)}catch(e){}}
+function authCheck(u,p){if(lockRemaining()>0)return false;const a=getAuth();return u===a.user&&authOk(a,p)}
 function loginApp(e){
   e.preventDefault();
   const auth=getAuth();
-  if($('loginUsername').value.trim()===auth.user && $('loginPassword').value===auth.pass){
-    localStorage.setItem(LOGIN_KEY,'1');$('loginScreen').style.display='none';
+  if(authCheck($('loginUsername').value.trim(),$('loginPassword').value)){
+    localStorage.setItem(LOGIN_KEY,'1');$('loginScreen').style.display='none';resetLoginFail();if(auth.isDefault)setTimeout(()=>alert('Anda masih memakai username & password bawaan (admin / admin123). Segera ganti di menu Ganti Password agar data siswa aman.'),600);
     $('loginUsername').value='';$('loginPassword').value='';$('loginError').style.display='none';
-  }else{$('loginError').style.display='block';$('loginPassword').value='';$('loginPassword').focus();}
+  }else{const _L0=lockRemaining();if(!_L0)noteLoginFail();const _L=lockRemaining();$('loginError').textContent=_L>0?'Terlalu banyak percobaan. Coba lagi dalam '+_L+' detik.':'Username atau password salah.';$('loginError').style.display='block';$('loginPassword').value='';$('loginPassword').focus();}
 }
 function logoutApp(){
   if(confirm('Keluar dari aplikasi?')){localStorage.removeItem(LOGIN_KEY);$('loginScreen').style.display='flex';$('loginUsername').focus();}
@@ -1381,8 +1445,9 @@ function changePassword(e){
   const newPass2=$('cpNewPass2').value;
   const notice=$('changePasswordNotice');
   const showError=msg=>{notice.style.display='block';notice.style.background='#fee2e2';notice.style.color='#991b1b';notice.textContent=msg};
-  if(oldPass!==auth.pass){showError('Password saat ini salah.');return}
-  if(newPass.length<4){showError('Password baru minimal 4 karakter.');return}
+  if(!authOk(auth,oldPass)){showError('Password saat ini salah.');return}
+  if(newPass.length<6){showError('Password baru minimal 6 karakter.');return}
+  if(newPass===DEFAULT_PASS){showError('Password baru tidak boleh sama dengan password bawaan.');return}
   if(newPass!==newPass2){showError('Konfirmasi password baru tidak cocok.');return}
   setAuth(newUser||auth.user,newPass);
   notice.style.display='block';notice.style.background='#dcfce7';notice.style.color='#166534';
@@ -1477,7 +1542,8 @@ function chooseBgColor(v){ensureTheme();db.theme.bgColor=v;db.theme.bgImage='';r
 function previewBgImage(e){const f=e.target.files[0];if(!f)return;if(!f.type.startsWith('image/'))return alert('Pilih file gambar PNG, JPG, atau WEBP.');const reader=new FileReader();reader.onload=()=>{ensureTheme();db.theme.bgImage=reader.result;renderAppearance()};reader.readAsDataURL(f)}
 function removeBgImage(){ensureTheme();db.theme.bgImage='';renderAppearance()}
 function saveTheme(){ensureTheme();saveDB();applyTheme();alert('Pengaturan tampilan berhasil disimpan.')}
-var _pt=0;function persistNow(){if(_pt){clearTimeout(_pt);_pt=0;try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){console.error(e)}}}
+var _pt=0;function persistNow(){if(_pt){clearTimeout(_pt);_pt=0;try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){console.error(e);warnStorage(e)}}}
+var _qw=0;function warnStorage(){if(_qw)return;_qw=1;alert('PERINGATAN: data GAGAL disimpan di perangkat ini (penyimpanan penuh).\n\nPerubahan terakhir belum tersimpan. Segera unduh backup di menu "Backup & Data", lalu perkecil ukuran logo / gambar latar di menu Tampilan & Logo.')}
 function persistSoon(){if(_pt)clearTimeout(_pt);_pt=setTimeout(persistNow,350)}
 window.addEventListener('pagehide',persistNow);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')persistNow()});
 function saveDB(skipCloud){if(!skipCloud){db.updatedAt=Date.now();localEditSeq=(localEditSeq|0)+1;setDirty(true)}persistSoon();if(!skipCloud)scheduleCloudPush();markGridNeedsRefresh()}
@@ -1672,7 +1738,7 @@ async function syncDelta(cfg){
   if(r.full){
    const inflight=diffOps(flatten(db),snap); /* perubahan lokal yang terjadi selama pengiriman */
    const remote=JSON.parse(r.payload);
-   db=remote;ensureSchool();ensureTrash();ensureTheme();
+   db=remote;ensureSchool();ensureTrash();ensureTheme();ensureHolidays();
    snap=flatten(db);
    if(inflight.length)applyOpsTo(db,inflight);
    changed=true;
@@ -1748,7 +1814,7 @@ async function syncNow(){
     try{
      if(isDirty()){db=mergeDB(db,remote);db.updatedAt=Math.max(Date.now(),expect+1);needPush=true}
      else{db=remote;db.updatedAt=expect;needPush=false}
-     ensureSchool();ensureTrash();ensureTheme();
+     ensureSchool();ensureTrash();ensureTheme();ensureHolidays();
      saveDB(true);setBase(expect);refreshFilters();safeRenderAfterSync();
     }finally{cloudApplyingRemote=false}
    }
@@ -1887,7 +1953,7 @@ function nameCellHTML(name){return `<span class="name-cell">${avatarHTML(name)}<
 function genderBadge(g){return g==='L'?'<span class="gender-badge male"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em;width:0.85em;height:0.85em" aria-hidden="true"><circle cx="9.5" cy="14.5" r="5.5"/><path d="M14 4h6v6"/><path d="m19.6 4.4-6 6"/></svg> L</span>':g==='P'?'<span class="gender-badge female"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em;width:0.85em;height:0.85em" aria-hidden="true"><circle cx="12" cy="9.5" r="5.5"/><path d="M12 15v6.5M8.7 19h6.6"/></svg> P</span>':`<span class="gender-badge">${esc(g||'-')}</span>`}
 function formatDate(d){return new Date(d+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'2-digit',year:'numeric'})}
 function popIcon(sel){document.querySelectorAll(sel).forEach(el=>{el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');el.addEventListener('animationend',()=>el.classList.remove('pop'),{once:true})})}
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));document.querySelectorAll('.bnav-item[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));popIcon(`.nav button[data-page="${id}"] .nav-icon`);popIcon(`.bnav-item[data-page="${id}"] .bico`);const btn=document.querySelector(`button[data-page="${id}"]`);$('pageTitle').textContent=btn.dataset.label||btn.textContent.trim();if($('topbarTitleMobile'))$('topbarTitleMobile').textContent=btn.dataset.label||btn.textContent.trim();if(id==='dashboard')renderDashboard();if(id==='students')renderStudents();if(id==='infoData')renderInfoData();if(id==='schoolInfo')renderSchoolInfo();if(id==='appearance')renderAppearance();if(id==='individual')initIndividualReport();if(id==='classes')renderClasses();if(id==='trash')renderTrash();if(id==='daily')renderAttendance();if(id==='weekly')renderWeekly();if(id==='monthly')renderMonthly();if(id==='yearly')renderYearly();if(id==='semester'){initSemesterYears();renderSemester()}if(id==='cloudSync')refreshCloudForm();if(id==='changePassword')initChangePassword();if(id==='monthlyGrid'){initMonthlyGrid();renderMonthlyGrid()}}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));document.querySelectorAll('.bnav-item[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===id));popIcon(`.nav button[data-page="${id}"] .nav-icon`);popIcon(`.bnav-item[data-page="${id}"] .bico`);const btn=document.querySelector(`button[data-page="${id}"]`);$('pageTitle').textContent=btn.dataset.label||btn.textContent.trim();if($('topbarTitleMobile'))$('topbarTitleMobile').textContent=btn.dataset.label||btn.textContent.trim();if(id==='dashboard')renderDashboard();if(id==='students')renderStudents();if(id==='infoData')renderInfoData();if(id==='schoolInfo')renderSchoolInfo();if(id==='appearance')renderAppearance();if(id==='individual')initIndividualReport();if(id==='classes')renderClasses();if(id==='trash')renderTrash();if(id==='daily')renderAttendance();if(id==='weekly')renderWeekly();if(id==='monthly')renderMonthly();if(id==='yearly')renderYearly();if(id==='semester'){initSemesterYears();renderSemester()}if(id==='holidays')renderHolidays();if(id==='cloudSync')refreshCloudForm();if(id==='changePassword')initChangePassword();if(id==='monthlyGrid'){initMonthlyGrid();renderMonthlyGrid()}}
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{showPage(b.dataset.page);closeDrawer();});
 
 // ===================== MOBILE NAV DRAWER =====================
@@ -2338,10 +2404,12 @@ function waButtonCell(classId,onclickExpr){
 function renderAttendance(){
  let d=$('attendanceDate').value||today();$('attendanceDate').value=d;
  let c=$('attendanceClass').value,q=($('attendanceSearch').value||'').toLowerCase();
- if(isSunday(d)){
-   $('attendanceTable').innerHTML='<tr><td colspan="5" class="empty">Hari Minggu bukan hari efektif. Silakan pilih tanggal Senin–Sabtu.</td></tr>';
+ if(isOffDay(d)){
+   const _hn=isHoliday(d)?holidayName(d):'';
+   const _why=_hn?('Hari libur: '+esc(_hn)):'Hari Minggu';
+   $('attendanceTable').innerHTML='<tr><td colspan="5" class="empty">'+_why+' \u2014 bukan hari efektif. Silakan pilih tanggal lain.</td></tr>';
    $('attendanceSummary').innerHTML='';
-   $('attendanceClassNotice').innerHTML='<b>Hari Minggu bukan hari efektif</b> — absensi hanya berlaku untuk hari Senin sampai Sabtu (6 hari efektif).';
+   $('attendanceClassNotice').innerHTML='<b>'+_why+'</b> \u2014 bukan hari efektif, absensi tidak diisi dan tidak dihitung di rekap.'+(_hn?` <button class="btn btn-secondary" style="padding:6px 10px;font-size:12px;margin-left:6px" onclick="schoolOpenOnHoliday('${d}')">Sekolah tetap masuk hari ini</button>`:'');
    return;
  }
  if(!c){
@@ -2351,7 +2419,7 @@ function renderAttendance(){
    return;
  }
  let a=db.students.filter(s=>s.classId===c&&(!q||s.nama.toLowerCase().includes(q)||s.nis.toLowerCase().includes(q)));
- $('attendanceClassNotice').innerHTML=`Kelas <b>${esc(className(c))}</b> • ${a.length} siswa ditampilkan. Status awal siswa adalah <b>Hadir</b>. Anda dapat mengubahnya menjadi Sakit, Izin, atau Alpa.`;
+ $('attendanceClassNotice').innerHTML=`Kelas <b>${esc(className(c))}</b> • ${a.length} siswa ditampilkan. Status awal siswa adalah <b>Hadir</b> otomatis sampai hari ini; ubah hanya yang tidak hadir. Tanggal yang belum tiba tidak dihitung di rekap.`;
  $('attendanceTable').innerHTML=a.length?a.map((s,i)=>{
    let st=db.attendance[d]?.[s.id]||'H';
    return `<tr><td>${i+1}</td><td>${esc(s.nis)}</td><td>${nameCellHTML(s.nama)}</td><td>${esc(className(s.classId))}</td><td><div class="radio-group">${[['H','Hadir'],['S','Sakit'],['I','Izin'],['A','Alpa'],['B','Bolos']].map(([v,l])=>`<label class="radio"><input type="radio" name="att_${s.id}" value="${v}" ${st===v?'checked':''} onchange="setAttendance('${d}','${s.id}','${v}');renderAttendance()">${l}</label>`).join('')}</div></td></tr>`
@@ -2361,7 +2429,7 @@ function renderAttendance(){
 function setAttendance(d,id,v){db.attendance[d]=db.attendance[d]||{};db.attendance[d][id]=v;saveDB();renderAttendanceSummary(d)}
 function setAllAttendance(v){
  let d=$('attendanceDate').value||today(),c=$('attendanceClass').value;
- if(isSunday(d))return alert('Hari Minggu bukan hari efektif. Silakan pilih tanggal Senin–Sabtu.');
+ if(isOffDay(d))return alert((isHoliday(d)?'Tanggal ini hari libur ('+holidayName(d)+')':'Hari Minggu')+' bukan hari efektif. Silakan pilih tanggal lain.');
  if(!c)return alert('Pilih kelas terlebih dahulu.');
  db.attendance[d]=db.attendance[d]||{};
  db.students.filter(s=>s.classId===c).forEach(s=>db.attendance[d][s.id]=v);
@@ -2375,7 +2443,147 @@ function renderAttendanceSummary(d,classId){
  $('attendanceSummary').innerHTML=[['H','Hadir','hadir'],['S','Sakit','sakit'],['I','Izin','izin'],['A','Alpa','alpa'],['B','Bolos','bolos']].map(a=>`<div class="summary-pill"><span class="badge ${a[2]}">${a[1]}</span><b>${x[a[0]]}</b></div>`).join('')+`<div class="summary-pill">Persentase Hadir <b>${pct}%</b></div>`;
 }
 function isSunday(ds){return new Date(ds+'T00:00:00').getDay()===0}
-function dateRange(type,ref){let dates=[],d=new Date(ref+'T00:00:00');if(type==='weekly'){let day=d.getDay()||7;d.setDate(d.getDate()-day+1);for(let i=0;i<6;i++){dates.push(ymd(d));d.setDate(d.getDate()+1)}}else if(type==='monthly'){let y=d.getFullYear(),m=d.getMonth(),n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}else{let y=d.getFullYear();for(let m=0;m<12;m++){let n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isSunday(ds))dates.push(ds)}}}return dates}
+/* ===== HARI LIBUR (kalender RI + libur sekolah) =====
+   db.holidays = { 'YYYY-MM-DD': {n:'Keterangan', t:'N'|'C'|'S'} }  N=Libur Nasional, C=Cuti Bersama, S=Libur Sekolah
+   Tanggal libur = bukan hari efektif: tidak bisa diisi, tidak dihitung di rekap/grid/laporan. Data absensi lama tidak dihapus.
+   Sumber bawaan: SKB 3 Menteri Libur Nasional & Cuti Bersama 2026 dan 2027. */
+const HOLIDAY_DEFAULTS=[
+['2026-01-01','Tahun Baru 2026 Masehi','N'],
+['2026-01-16','Isra Mikraj Nabi Muhammad saw.','N'],
+['2026-02-16','Tahun Baru Imlek 2577 Kongzili','C'],
+['2026-02-17','Tahun Baru Imlek 2577 Kongzili','N'],
+['2026-03-18','Hari Suci Nyepi','C'],
+['2026-03-19','Hari Suci Nyepi (Tahun Baru Saka 1948)','N'],
+['2026-03-20','Idulfitri 1447 H','C'],
+['2026-03-21','Idulfitri 1447 H','N'],
+['2026-03-22','Idulfitri 1447 H','N'],
+['2026-03-23','Idulfitri 1447 H','C'],
+['2026-03-24','Idulfitri 1447 H','C'],
+['2026-04-03','Wafat Yesus Kristus','N'],
+['2026-04-05','Kebangkitan Yesus Kristus (Paskah)','N'],
+['2026-05-01','Hari Buruh Internasional','N'],
+['2026-05-14','Kenaikan Yesus Kristus','N'],
+['2026-05-15','Kenaikan Yesus Kristus','C'],
+['2026-05-27','Iduladha 1447 H','N'],
+['2026-05-28','Iduladha 1447 H','C'],
+['2026-05-31','Hari Raya Waisak 2570 BE','N'],
+['2026-06-01','Hari Lahir Pancasila','N'],
+['2026-06-16','1 Muharam Tahun Baru Islam 1448 H','N'],
+['2026-08-17','Proklamasi Kemerdekaan RI','N'],
+['2026-08-25','Maulid Nabi Muhammad saw.','N'],
+['2026-12-24','Kelahiran Yesus Kristus (Natal)','C'],
+['2026-12-25','Kelahiran Yesus Kristus (Natal)','N'],
+['2027-01-01','Tahun Baru 2027 Masehi','N'],
+['2027-01-05','Isra Mikraj Nabi Muhammad saw.','N'],
+['2027-02-05','Tahun Baru Imlek 2578 Kongzili','C'],
+['2027-02-06','Tahun Baru Imlek 2578 Kongzili','N'],
+['2027-03-08','Hari Suci Nyepi (Tahun Baru Saka 1949)','N'],
+['2027-03-09','Idulfitri 1448 H','C'],
+['2027-03-10','Idulfitri 1448 H','N'],
+['2027-03-11','Idulfitri 1448 H','N'],
+['2027-03-12','Idulfitri 1448 H','C'],
+['2027-03-15','Idulfitri 1448 H','C'],
+['2027-03-25','Wafat Yesus Kristus','C'],
+['2027-03-26','Wafat Yesus Kristus','N'],
+['2027-03-28','Kebangkitan Yesus Kristus (Paskah)','N'],
+['2027-05-01','Hari Buruh Internasional','N'],
+['2027-05-06','Kenaikan Yesus Kristus','N'],
+['2027-05-17','Iduladha 1448 H','N'],
+['2027-05-18','Iduladha 1448 H','C'],
+['2027-05-19','Hari Raya Waisak 2571 BE','C'],
+['2027-05-20','Hari Raya Waisak 2571 BE','N'],
+['2027-06-01','Hari Lahir Pancasila','N'],
+['2027-06-06','1 Muharam Tahun Baru Islam 1449 H','N'],
+['2027-08-15','Maulid Nabi Muhammad saw.','N'],
+['2027-08-17','Proklamasi Kemerdekaan RI','N'],
+['2027-12-24','Kelahiran Yesus Kristus (Natal)','C'],
+['2027-12-25','Kelahiran Yesus Kristus (Natal)','N'],
+['2027-12-26','Isra Mikraj Nabi Muhammad saw.','N']
+];
+const HOLIDAY_TYPES={N:'Libur Nasional',C:'Cuti Bersama',S:'Libur Sekolah'};
+const HARI_ID=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+function ensureHolidays(){
+  if(!db.holidays||typeof db.holidays!=='object'||Array.isArray(db.holidays)){
+    db.holidays={};HOLIDAY_DEFAULTS.forEach(h=>{db.holidays[h[0]]={n:h[1],t:h[2]}});
+  }
+  if(!db.holidayOpts||typeof db.holidayOpts!=='object')db.holidayOpts={cuti:true};
+}
+function isHoliday(ds){
+  const h=db.holidays&&db.holidays[ds];
+  if(!h)return false;
+  if(h.t==='C'&&db.holidayOpts&&db.holidayOpts.cuti===false)return false;
+  return true;
+}
+function holidayName(ds){const h=db.holidays&&db.holidays[ds];return h?String(h.n||''):''}
+function isOffDay(ds){return isSunday(ds)||isHoliday(ds)}
+/* Otomatis Hadir sampai hari ini: tanggal yang BELUM tiba tidak dihitung (kecuali sudah ada catatan Sakit/Izin/Alpa/Bolos).
+   Begitu harinya tiba, semua siswa otomatis terhitung Hadir kecuali diubah. */
+function isFutureEmpty(ds){
+  if(ds<=today())return false;
+  const day=db.attendance&&db.attendance[ds];
+  if(!day)return true;
+  for(const k in day){const v=day[k];if(v!==undefined&&v!==null&&v!==''&&String(v).trim().charAt(0).toUpperCase()!=='H')return false}
+  return true;
+}
+function isNonEffective(ds){return isOffDay(ds)||isFutureEmpty(ds)}
+function cleanHolidayName(v){return String(v||'').replace(/[<>&"'`]/g,'').trim().slice(0,80)}
+function renderHolidays(yearSel){
+  ensureHolidays();
+  const sel=$('holidayYear');if(!sel)return;
+  const thisY=String(new Date().getFullYear());
+  const years=new Set(['2026','2027',thisY]);
+  Object.keys(db.holidays).forEach(k=>years.add(k.slice(0,4)));
+  const cur=yearSel||sel.value||thisY;
+  sel.innerHTML=Array.from(years).sort().map(y=>`<option value="${y}">${y}</option>`).join('');
+  sel.value=years.has(cur)?cur:thisY;
+  $('holidayCuti').checked=db.holidayOpts.cuti!==false;
+  const y=sel.value;
+  const list=Object.keys(db.holidays).filter(k=>k.startsWith(y+'-')).sort();
+  let eff=0;list.forEach(d=>{if(isHoliday(d)&&!isSunday(d))eff++});
+  $('holidaySummary').innerHTML=`<div class="summary-pill">Tercatat tahun ${y} <b>${list.length}</b></div><div class="summary-pill">Mengurangi hari efektif (Sen\u2013Sab) <b>${eff}</b></div>`;
+  $('holidayTable').innerHTML=list.length?list.map(d=>{
+    const h=db.holidays[d],dow=new Date(d+'T00:00:00').getDay(),off=h.t==='C'&&db.holidayOpts.cuti===false;
+    return `<tr style="${off?'opacity:.55':''}"><td>${formatDate(d)}</td><td>${HARI_ID[dow]}${dow===0?' (Minggu, memang bukan hari efektif)':''}</td><td>${esc(h.n)}</td><td>${HOLIDAY_TYPES[h.t]||'Libur Sekolah'}${off?' (tidak dihitung)':''}</td><td><button class="btn btn-danger" style="padding:6px 10px;font-size:12px" onclick="deleteHoliday('${d}')">Hapus</button></td></tr>`;
+  }).join(''):`<tr><td colspan="5" class="empty">Belum ada hari libur pada tahun ${y}.</td></tr>`;
+}
+function addHoliday(){
+  ensureHolidays();
+  const a=$('holidayFrom').value,b=$('holidayTo').value||a,n=cleanHolidayName($('holidayName').value);
+  if(!a)return alert('Pilih tanggal mulai libur.');
+  if(!n)return alert('Isi keterangan libur, misalnya: Libur Semester Ganjil.');
+  if(b<a)return alert('Tanggal akhir tidak boleh sebelum tanggal mulai.');
+  const d=new Date(a+'T00:00:00'),end=new Date(b+'T00:00:00');
+  if((end-d)/864e5>120)return alert('Rentang libur maksimal 120 hari sekali tambah.');
+  let c=0,withData=0;
+  for(;d<=end;d.setDate(d.getDate()+1)){const k=ymd(d);db.holidays[k]={n,t:'S'};c++;if(db.attendance&&db.attendance[k]&&Object.keys(db.attendance[k]).length)withData++}
+  saveDB();
+  $('holidayName').value='';$('holidayTo').value='';
+  renderHolidays(a.slice(0,4));
+  if(withData)alert(c+' tanggal ditambahkan. '+withData+' di antaranya sudah memiliki data absensi; datanya tidak dihapus, hanya tidak dihitung lagi di rekap.');
+}
+function deleteHoliday(ds){
+  ensureHolidays();
+  if(!db.holidays[ds])return;
+  if(!confirm('Hapus '+formatDate(ds)+' ('+db.holidays[ds].n+') dari daftar libur?\nTanggal ini akan dihitung kembali sebagai hari efektif.'))return;
+  delete db.holidays[ds];saveDB();renderHolidays($('holidayYear').value);
+}
+function toggleCutiBersama(){ensureHolidays();db.holidayOpts.cuti=!!$('holidayCuti').checked;saveDB();renderHolidays($('holidayYear').value)}
+function loadDefaultHolidays(){
+  ensureHolidays();
+  if(!confirm('Muat libur nasional & cuti bersama RI 2026\u20132027 (SKB 3 Menteri)?\n\nTanggal yang sudah ada tidak diubah. Tanggal bawaan yang pernah Anda hapus akan muncul kembali.'))return;
+  let c=0;HOLIDAY_DEFAULTS.forEach(h=>{if(!db.holidays[h[0]]){db.holidays[h[0]]={n:h[1],t:h[2]};c++}});
+  if(c)saveDB();
+  renderHolidays();
+  alert(c?c+' tanggal libur ditambahkan.':'Semua libur nasional 2026\u20132027 sudah ada di daftar.');
+}
+/* Dari halaman Absensi Harian: sekolah ternyata masuk pada tanggal merah */
+function schoolOpenOnHoliday(ds){
+  if(!isHoliday(ds)||db.holidays[ds].t==='S'&&false)return;
+  if(!confirm('Tetap masuk sekolah pada '+formatDate(ds)+'?\n"'+holidayName(ds)+'" akan dihapus dari daftar libur sehingga absensi bisa diisi dan dihitung.'))return;
+  delete db.holidays[ds];saveDB();renderAttendance();
+}
+
+function dateRange(type,ref){let dates=[],d=new Date(ref+'T00:00:00');if(type==='weekly'){let day=d.getDay()||7;d.setDate(d.getDate()-day+1);for(let i=0;i<6;i++){const _w=ymd(d);if(!isHoliday(_w)&&!isFutureEmpty(_w))dates.push(_w);d.setDate(d.getDate()+1)}}else if(type==='monthly'){let y=d.getFullYear(),m=d.getMonth(),n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isNonEffective(ds))dates.push(ds)}}else{let y=d.getFullYear();for(let m=0;m<12;m++){let n=new Date(y,m+1,0).getDate();for(let i=1;i<=n;i++){let ds=`${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;if(!isNonEffective(ds))dates.push(ds)}}}return dates}
 /* Skor Ketidak hadiran: setiap 1 kali Alpa atau Bolos = 4 skor */
 const SKOR_ALPA_BOLOS=4;
 function skorKehadiran(x){return ((x.A||0)+(x.B||0))*SKOR_ALPA_BOLOS}
@@ -2401,7 +2609,7 @@ function renderMonthly(){renderRecapTable('monthly','monthlyTable','monthlyDate'
 function renderYearly(){renderRecapTable('yearly','yearlyTable','yearlyDate','yearlyClass')}
 function semesterDates(year,term){
   const dates=[],start=term==='1'?new Date(year,6,1):new Date(year+1,0,1),end=term==='1'?new Date(year,11,31):new Date(year+1,5,30);
-  for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1)) if(d.getDay()!==0) dates.push(ymd(d));
+  for(let d=new Date(start);d<=end;d.setDate(d.getDate()+1)) if(d.getDay()!==0&&!isHoliday(ymd(d))&&!isFutureEmpty(ymd(d))) dates.push(ymd(d));
   return dates;
 }
 function initSemesterYears(){
@@ -2478,7 +2686,7 @@ function indivStatus(d,s){
 }
 function indivCount(dates,s){
   const x={H:0,S:0,I:0,A:0,B:0};
-  dates.forEach(d=>{const st=indivStatus(d,s);if(st)x[st]++});
+  dates.forEach(d=>{if(isHoliday(d)||isFutureEmpty(d))return;const st=indivStatus(d,s);if(st)x[st]++});
   return x;
 }
 function individualDates(){
@@ -2487,14 +2695,14 @@ function individualDates(){
   if(p==='weekly') return getWeekDates($('individualDate').value||today());
   if(p==='monthly'){
     const ref=$('individualMonth').value||today(), [y,m]=ref.split('-').map(Number), n=new Date(y,m,0).getDate();
-    return Array.from({length:n},(_,i)=>`${y}-${String(m).padStart(2,'0')}-${String(i+1).padStart(2,'0')}`).filter(ds=>!isSunday(ds));
+    return Array.from({length:n},(_,i)=>`${y}-${String(m).padStart(2,'0')}-${String(i+1).padStart(2,'0')}`).filter(ds=>!isNonEffective(ds));
   }
   if(p==='semester') return semesterDates(Number($('individualYear').value),$('individualTerm').value);
   const y=Number($('individualYear').value);
   const out=[];
   for(let m=0;m<12;m++){
     const days=new Date(y,m+1,0).getDate();
-    for(let d=1;d<=days;d++){const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;if(!isSunday(ds))out.push(ds);}
+    for(let d=1;d<=days;d++){const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;if(!isNonEffective(ds))out.push(ds);}
   }
   return out;
 }
@@ -2538,7 +2746,7 @@ function renderIndividualReport(){
   const period=$('individualPeriod').value;
   let periodName='';
   if(period==='daily'){
-    periodName=`Harian — ${formatDate(dates[0])}${isSunday(dates[0])?' (Hari Minggu — bukan hari efektif)':''}`;
+    periodName=`Harian — ${formatDate(dates[0])}${isHoliday(dates[0])?' (Libur: '+holidayName(dates[0])+' — bukan hari efektif)':isSunday(dates[0])?' (Hari Minggu — bukan hari efektif)':''}`;
   }else if(period==='weekly'){
     periodName=`Mingguan — ${formatDate(dates[0])} s.d. ${formatDate(dates[5])}`;
   }else if(period==='monthly'){
@@ -2551,7 +2759,7 @@ function renderIndividualReport(){
   _individualReportData={s,x,pct,periodName};
   const rows=dates.map((d,i)=>{
     const st=indivStatus(d,s);
-    return `<tr><td>${i+1}</td><td>${formatDate(d)}</td><td>${st?statusLabel(st):'Belum diisi'}</td><td>${st?statusBadge(st):'<span class="badge">-</span>'}</td></tr>`;
+    return `<tr><td>${i+1}</td><td>${formatDate(d)}</td><td>${st?statusLabel(st):(isHoliday(d)?'Libur: '+esc(holidayName(d)):'Belum diisi')}</td><td>${st?statusBadge(st):'<span class="badge">-</span>'}</td></tr>`;
   }).join('');
   $('individualReport').innerHTML=`<div class="individual-report" id="printableIndividual">
     ${schoolLetterheadHTML()}
@@ -2664,7 +2872,7 @@ async function buildIndividualDoc(){
   const head=[['No','Tanggal','Status','Keterangan']];
   const body=dates.map((d,i)=>{
     const st=indivStatus(d,s);
-    return [i+1, formatDate(d), st||'-', st?statusLabel(st):'Belum diisi'];
+    return [i+1, formatDate(d), st||'-', st?statusLabel(st):(isHoliday(d)?'Libur: '+holidayName(d):'Belum diisi')];
   });
   if(y>pageHeight-40){doc.addPage('a4','portrait');y=20}
   doc.autoTable({
@@ -2694,7 +2902,7 @@ function exportIndividualReport(){
   const rows=[['No','Tanggal','NIS','Nama','Kelas','Status','Keterangan']];
   dates.forEach((d,i)=>{
     const st=indivStatus(d,s);
-    rows.push([i+1,d,s.nis,s.nama,className(s.classId),st||'',st?statusLabel(st):'Belum diisi']);
+    rows.push([i+1,d,s.nis,s.nama,className(s.classId),st||'',st?statusLabel(st):(isHoliday(d)?'Libur: '+holidayName(d):'Belum diisi')]);
   });
   const prefix=p==='daily'?'harian':p==='weekly'?'mingguan':p==='monthly'?'bulanan':p==='semester'?'semester':'tahunan';
   const filename=`laporan_individu_${prefix}_${s.nis}_${today()}.xlsx`;
@@ -2746,7 +2954,7 @@ function normalizeHeader(v){return String(v??'').trim().toLowerCase().replace(/[
 function excelValue(row,aliases){const keys=Object.keys(row);for(const a of aliases){const t=normalizeHeader(a);const k=keys.find(x=>normalizeHeader(x)===t);if(k!==undefined&&row[k]!==undefined&&row[k]!==null&&String(row[k]).trim()!=='')return row[k]}return ''}
 function excelDateValue(v){if(v===null||v===undefined||v==='')return '';if(v instanceof Date&&!isNaN(v))return v.toISOString().slice(0,10);if(typeof v==='number'&&window.XLSX){const d=XLSX.SSF.parse_date_code(v);if(d)return `${d.y}-${String(d.m).padStart(2,'0')}-${String(d.d).padStart(2,'0')}`}let s=String(v).trim();let m=s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);if(m)return `${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`;return s}
 function findOrCreateClass(name){name=String(name??'').trim();if(!name)return '';let c=db.classes.find(x=>x.name.toLowerCase()===name.toLowerCase());if(c)return c.id;c={id:uid(),name,homeroom:''};db.classes.push(c);return c.id}
-function importStudentsExcel(event){const file=event.target.files[0];event.target.value='';if(!file)return;if(!window.XLSX)return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');const reader=new FileReader();reader.onload=function(e){try{const wb=XLSX.read(e.target.result,{type:'array',cellDates:true});const sheet=wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(sheet,{defval:''});if(!rows.length)return alert('File Excel tidak memiliki data.');let added=0,updated=0,skipped=0;rows.forEach(row=>{const nis=String(excelValue(row,['NIS','NISN','Nomor Induk','Nomor Induk Siswa'])).trim();const nama=String(excelValue(row,['Nama','Nama Lengkap','Nama Siswa'])).trim();if(!nis||!nama){skipped++;return}const g=String(excelValue(row,['Jenis Kelamin','JK','Gender'])).trim().toUpperCase();const gender=g==='P'||g.includes('PEREMPUAN')||g.includes('WANITA')?'P':'L';const kelas=String(excelValue(row,['Kelas','Nama Kelas','Rombel'])).trim();const obj={id:'',nis,nama,gender,classId:findOrCreateClass(kelas),birthPlace:String(excelValue(row,['Tempat Lahir','TempatLahir'])).trim(),birthDate:excelDateValue(excelValue(row,['Tanggal Lahir','Tgl Lahir','TanggalLahir'])),phone:String(excelValue(row,['No HP','Nomor HP','HP','Telepon','No Telepon'])).trim(),address:String(excelValue(row,['Alamat'])).trim()};const existing=db.students.find(s=>String(s.nis).trim()===nis);if(existing){obj.id=existing.id;db.students=db.students.map(s=>s.id===existing.id?obj:s);updated++}else{obj.id=uid();db.students.push(obj);added++}});saveDB();refreshFilters();renderStudents();renderInfoData();renderClasses();renderDashboard();alert(`Import selesai!\nDitambahkan: ${added}\nDiperbarui: ${updated}\nDilewati: ${skipped}`)}catch(err){console.error(err);alert('Gagal membaca file Excel. Pastikan file .xlsx, .xls, atau .csv valid.')}};reader.readAsArrayBuffer(file)}
+function importStudentsExcel(event){const file=event.target.files[0];event.target.value='';if(!file)return;if(!window.XLSX)return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');const reader=new FileReader();reader.onload=function(e){try{const wb=XLSX.read(e.target.result,{type:'array',cellDates:true});const sheet=wb.Sheets[wb.SheetNames[0]];const rows=XLSX.utils.sheet_to_json(sheet,{defval:''});if(!rows.length)return alert('File Excel tidak memiliki data.');let added=0,updated=0,skipped=0;rows.forEach(row=>{const nis=String(excelValue(row,['NIS','NISN','Nomor Induk','Nomor Induk Siswa'])).trim();const nama=String(excelValue(row,['Nama','Nama Lengkap','Nama Siswa'])).trim();if(!nis||!nama){skipped++;return}const g=String(excelValue(row,['Jenis Kelamin','JK','Gender'])).trim().toUpperCase();const gender=!g?'':(g==='P'||g.includes('PEREMPUAN')||g.includes('WANITA')?'P':'L');const kelas=String(excelValue(row,['Kelas','Nama Kelas','Rombel'])).trim();const obj={id:'',nis,nama,gender,classId:findOrCreateClass(kelas),birthPlace:String(excelValue(row,['Tempat Lahir','TempatLahir'])).trim(),birthDate:excelDateValue(excelValue(row,['Tanggal Lahir','Tgl Lahir','TanggalLahir'])),phone:String(excelValue(row,['No HP','Nomor HP','HP','Telepon','No Telepon'])).trim(),address:String(excelValue(row,['Alamat'])).trim()};const existing=db.students.find(s=>String(s.nis).trim()===nis);if(existing){const merged=Object.assign({},existing);Object.keys(obj).forEach(k=>{if(k!=='id'&&obj[k]!==''&&obj[k]!==undefined&&obj[k]!==null)merged[k]=obj[k]});db.students=db.students.map(s=>s.id===existing.id?merged:s);updated++}else{obj.id=uid();if(!obj.gender)obj.gender='L';db.students.push(obj);added++}});saveDB();refreshFilters();renderStudents();renderInfoData();renderClasses();renderDashboard();alert(`Import selesai!\nDitambahkan: ${added}\nDiperbarui: ${updated}\nDilewati: ${skipped}`)}catch(err){console.error(err);alert('Gagal membaca file Excel. Pastikan file .xlsx, .xls, atau .csv valid.')}};reader.readAsArrayBuffer(file)}
 function downloadExcelTemplate(){if(!window.XLSX)return alert('Modul Excel belum tersedia. Hubungkan komputer ke internet lalu coba lagi.');const rows=[{'NIS':'1001','Nama':'Contoh Siswa','Jenis Kelamin':'L','Kelas':'VII A','Tempat Lahir':'Denpasar','Tanggal Lahir':'2013-01-15','No HP':'08123456789','Alamat':'Jl. Contoh'}];const ws=XLSX.utils.json_to_sheet(rows);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Data Siswa');XLSX.writeFile(wb,'Template_Import_Data_Siswa.xlsx')}
 function exportStudents(){
   let filter=$('studentClassFilter')?.value||'';
@@ -2895,7 +3103,7 @@ function exportDailyExcel(){
 function exportRecapExcel(type){
   if(type==='weekly'){
     const value=$('weeklyDate').value||today(),filter=$('weeklyClass').value;
-    const dates=getWeekDates(value);
+    const dates=getWeekDates(value).filter(d=>!isHoliday(d)&&!isFutureEmpty(d));
     const students=db.students.filter(s=>!filter||s.classId===filter);
     exportMatrixExcel(dates,students,`rekap_mingguan_${value}.xlsx`,'Rekap Mingguan');
     return;
@@ -3055,7 +3263,7 @@ async function printRecapReport(type){
 function exportRecap(type){let ref={weekly:'weeklyDate',monthly:'monthlyDate',yearly:'yearlyDate'}[type],filter=$(type+'Class').value,rows=recapRows(type,$(ref).value||today(),filter);downloadCSV('rekap_'+type+'.csv',[['NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Skor Ketidak hadiran','Persentase Hadir','No. WA Wali Kelas'],...rows.map(s=>[s.nis,s.nama,className(s.classId),s.x.H,s.x.S,s.x.I,s.x.A,s.x.B,skorKehadiran(s.x),s.pct+'%',db.classes.find(c=>c.id===s.classId)?.homeroomPhone||'-'])])}
 function downloadCSV(name,rows){let csv=rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
 function backupData(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup_sias_'+today()+'.json';a.click()}
-function restoreData(){let f=$('restoreFile').files[0];if(!f)return alert('Pilih file backup JSON.');let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.students||!x.classes||!x.attendance)throw 0;if(confirm('Restore akan mengganti data saat ini. Lanjutkan?')){db=x;ensureTrash();saveDB();location.reload()}}catch(e){alert('File backup tidak valid.')}};r.readAsText(f)}
+function restoreData(){let f=$('restoreFile').files[0];if(!f)return alert('Pilih file backup JSON.');let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x||typeof x!=='object'||!Array.isArray(x.students)||!Array.isArray(x.classes)||!x.attendance||typeof x.attendance!=='object'||Array.isArray(x.attendance))throw 0;if(confirm('Restore akan MENGGANTI data saat ini dengan isi file:\n\u2022 '+x.students.length+' siswa\n\u2022 '+x.classes.length+' kelas\n\u2022 '+Object.keys(x.attendance).length+' hari absensi\n\nSaran: unduh backup data saat ini lebih dulu. Lanjutkan?')){db=x;ensureSchool();ensureTrash();ensureTheme();ensureHolidays();saveDB();persistNow();location.reload()}}catch(e){alert('File backup tidak valid.')}};r.readAsText(f)}
 function clearAllData(){
  $('wipePass').value='';$('wipeText').value='';$('wipeErr').textContent='';$('wipeGo').disabled=false;
  $('wipeInfo').textContent=loadCloudConfig()
@@ -3067,7 +3275,7 @@ function clearAllData(){
 async function confirmWipe(){
  const err=$('wipeErr'),btn=$('wipeGo');
  err.textContent='';
- if($('wipePass').value!==getAuth().pass){err.textContent='Password salah. Data tidak dihapus.';$('wipePass').value='';$('wipePass').focus();return}
+ if(!authOk(getAuth(),$('wipePass').value)){err.textContent='Password salah. Data tidak dihapus.';$('wipePass').value='';$('wipePass').focus();return}
  if($('wipeText').value.trim()!=='HAPUS'){err.textContent='Ketik HAPUS (huruf besar) untuk melanjutkan.';return}
  const cfg=loadCloudConfig();
  if(cfg&&!navigator.onLine){err.textContent='Perangkat sedang offline. Sambungkan internet agar data di semua perangkat ikut terhapus.';return}
@@ -3077,7 +3285,7 @@ async function confirmWipe(){
  try{
   backupData(); /* cadangan otomatis dari data sebelum dihapus */
   db={students:[],classes:[],attendance:{},trash:[]};
-  ensureSchool();ensureTrash();ensureTheme();
+  ensureSchool();ensureTrash();ensureTheme();ensureHolidays();
   if(cfg){
    const m=await gas(cfg,{action:'meta'});
    db.updatedAt=Date.now();
@@ -3147,7 +3355,7 @@ function renderMonthlyGrid() {
     allDates.forEach(d => {
       const key = s.id + '_' + d;
       const dayOfWeek = new Date(d + 'T00:00:00').getDay();
-      if (dayOfWeek === 0) {
+      if (isNonEffective(d)) {
         _gridState[key] = '__SUN__';
       } else {
         _gridState[key] = db.attendance[d]?.[s.id] || 'H';
@@ -3156,7 +3364,7 @@ function renderMonthlyGrid() {
   });
 
   // Build table
-  const nonSunDates = allDates.filter(d => new Date(d+'T00:00:00').getDay() !== 0);
+  const nonSunDates = allDates.filter(d => !isNonEffective(d));
   updateBulkDateSel(nonSunDates);
 
   let thead = '<tr>';
@@ -3167,8 +3375,8 @@ function renderMonthlyGrid() {
     const dow = new Date(d+'T00:00:00').getDay();
     const dd = d.slice(8);
     const dayName = DAY_NAMES[dow];
-    const isSun = dow === 0;
-    thead += `<th style="${isSun?'background:#fef2f2;color:#f87171':''}">
+    const isSun = isOffDay(d);
+    thead += `<th title="${isHoliday(d)?esc(holidayName(d)):''}" style="${isSun?'background:#fef2f2;color:#f87171':''}">
       <span class="grid-date-head">
         <span class="dnum">${dd}</span>
         <span class="dday${isSun?' sun':''}">${dayName}</span>
@@ -3195,10 +3403,10 @@ function renderMonthlyGrid() {
     let cnt = {H:0,S:0,I:0,A:0,B:0};
     allDates.forEach(d => {
       const dow = new Date(d+'T00:00:00').getDay();
-      const isSun = dow === 0;
+      const isSun = isNonEffective(d);
       const key = s.id + '_' + d;
       if (isSun) {
-        row += `<td style="background:#fef2f2"><span class="grid-cell sunday-day">—</span></td>`;
+        row += `<td style="${isOffDay(d)?'background:#fef2f2':''}" title="${isHoliday(d)?esc(holidayName(d)):(isSunday(d)?'':'Belum tiba \u2014 otomatis Hadir saat harinya tiba')}"><span class="grid-cell sunday-day">${isHoliday(d)?'L':isSunday(d)?'\u2014':'\u00b7'}</span></td>`;
       } else {
         const v = _gridState[key] || 'H';
         cnt[v] = (cnt[v]||0) + 1;
@@ -3226,7 +3434,7 @@ function renderMonthlyGrid() {
   const totalPct = totalAll ? Math.round(totals.H/totalAll*100) : 0;
   tbody += `<tr style="background:#f8fafc;font-weight:800">
     <td colspan="3" class="col-nama" style="text-align:right;padding:5px 8px;font-size:12px;position:sticky;left:0">TOTAL KESELURUHAN</td>
-    ${allDates.map(d => new Date(d+'T00:00:00').getDay()===0?`<td style="background:#fef2f2"></td>`:'<td></td>').join('')}
+    ${allDates.map(d => isNonEffective(d)?`<td style="background:#fef2f2"></td>`:'<td></td>').join('')}
     <td class="col-sum-H">${totals.H}</td>
     <td class="col-sum-S">${totals.S}</td>
     <td class="col-sum-I">${totals.I}</td>
@@ -3358,7 +3566,7 @@ function updateGridRowSummary(studentId) {
   const cnt = {H:0,S:0,I:0,A:0,B:0};
   _gridDates.forEach(d => {
     const dow = new Date(d+'T00:00:00').getDay();
-    if (dow === 0) return;
+    if (isNonEffective(d)) return;
     const v = _gridState[studentId+'_'+d] || 'H';
     cnt[v] = (cnt[v]||0) + 1;
   });
@@ -3386,7 +3594,7 @@ function bulkFillDate(status) {
   const date = $('bulkDateSel')?.value;
   if (!date) return alert('Pilih tanggal terlebih dahulu.');
   const dow = new Date(date+'T00:00:00').getDay();
-  if (dow === 0) return alert('Hari Minggu tidak bisa diisi absensi.');
+  if (isOffDay(date)) return alert('Hari Minggu / hari libur tidak bisa diisi absensi.');
   _gridStudents.forEach(s => {
     _gridState[s.id+'_'+date] = status;
     // update button in DOM
@@ -3417,7 +3625,7 @@ function saveGridAttendance() {
   _gridStudents.forEach(s => {
     _gridDates.forEach(d => {
       const dow = new Date(d+'T00:00:00').getDay();
-      if (dow === 0) return;
+      if (isNonEffective(d)) return;
       const key = s.id + '_' + d;
       const v = _gridState[key] || 'H';
       db.attendance[d] = db.attendance[d] || {};
@@ -3433,7 +3641,7 @@ function exportGridExcel() {
   const ym = $('gridMonth')?.value || today().slice(0,7);
   const classId = $('gridClass')?.value || '';
   if (!classId || !_gridStudents.length) return alert('Pilih kelas terlebih dahulu.');
-  const nonSunDates = _gridDates.filter(d => new Date(d+'T00:00:00').getDay() !== 0);
+  const nonSunDates = _gridDates.filter(d => !isNonEffective(d));
   const headers = ['No','NIS','Nama',...nonSunDates.map(d=>d.slice(8)+'/'+d.slice(5,7)),'H','S','I','A','B','% Hadir','Skor Ketidak hadiran'];
   const rows = _gridStudents.map((s,i) => {
     const cnt = {H:0,S:0,I:0,A:0,B:0};
@@ -3460,7 +3668,7 @@ async function printGridReport() {
   const ym = $('gridMonth')?.value || today().slice(0,7);
   const classId = $('gridClass')?.value || '';
   if (!classId || !_gridStudents.length) return alert('Pilih kelas terlebih dahulu.');
-  const nonSunDates = _gridDates.filter(d => new Date(d+'T00:00:00').getDay() !== 0);
+  const nonSunDates = _gridDates.filter(d => !isNonEffective(d));
   const [y,m] = ym.split('-');
   const bulan = new Date(Number(y),Number(m)-1,1).toLocaleString('id-ID',{month:'long',year:'numeric'});
   const head = ['No','NIS','Nama', ...nonSunDates.map(d=>{
@@ -3548,12 +3756,12 @@ async function sendWaGridRecapClass() {
       const key = s.id + '_' + d;
       if (!_gridState[key]) {
         const dow = new Date(d+'T00:00:00').getDay();
-        _gridState[key] = dow === 0 ? '__SUN__' : (db.attendance[d]?.[s.id] || 'H');
+        _gridState[key] = isNonEffective(d) ? '__SUN__' : (db.attendance[d]?.[s.id] || 'H');
       }
     });
   });
 
-  const nonSunDates = gridDates.filter(d => new Date(d+'T00:00:00').getDay() !== 0);
+  const nonSunDates = gridDates.filter(d => !isNonEffective(d));
 
   // Hitung rekap tiap siswa
   const rows = students.map(s => {
@@ -3654,7 +3862,7 @@ function toggleDarkMode(){
  localStorage.setItem(DARKMODE_KEY,on?'0':'1');
  applyDarkMode();
 }
-function init(){ensureSchool();ensureTrash();ensureTheme();applyTheme();applyDarkMode();updateBrandLogo();$('schoolHeaderName').textContent=db.school.name||'SMK NEGERI 1 SIKUR';let d=today();$('attendanceDate').value=d;$('weeklyDate').value=d;$('monthlyDate').value=d.slice(0,7);if($('gridMonth'))$('gridMonth').value=d.slice(0,7);$('yearlyDate').value=d.slice(0,4);refreshFilters();if($('semesterYear'))initSemesterYears();renderDashboard();updateTrashBadge();initCloudFromStorage();setInterval(()=>{$('clock').textContent=new Date().toLocaleString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'})},1000)}
+function init(){ensureSchool();ensureTrash();ensureTheme();ensureHolidays();applyTheme();applyDarkMode();updateBrandLogo();$('schoolHeaderName').textContent=db.school.name||'SMK NEGERI 1 SIKUR';let d=today();$('attendanceDate').value=d;$('weeklyDate').value=d;$('monthlyDate').value=d.slice(0,7);if($('gridMonth'))$('gridMonth').value=d.slice(0,7);$('yearlyDate').value=d.slice(0,4);refreshFilters();if($('semesterYear'))initSemesterYears();renderDashboard();updateTrashBadge();initCloudFromStorage();setInterval(()=>{$('clock').textContent=new Date().toLocaleString('id-ID',{weekday:'long',day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'})},1000)}
 init();
 checkLogin();
 initSidebar();
@@ -3848,8 +4056,7 @@ initSidebar();
     if(e&&e.preventDefault)e.preventDefault();
     var btn=$$('loginBtn'),card=$$('loginCard');
     if(btn.disabled)return;
-    var a=(typeof getAuth==='function')?getAuth():{user:'',pass:''};
-    var ok=$$('loginUsername').value.trim()===a.user&&$$('loginPassword').value===a.pass;
+    var ok=authCheck($$('loginUsername').value.trim(),$$('loginPassword').value);
     btn.classList.add('loading');btn.disabled=true;
     setTimeout(function(){
       btn.classList.remove('loading');btn.disabled=false;
