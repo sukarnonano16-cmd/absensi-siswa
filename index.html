@@ -1356,6 +1356,42 @@ function out(o) {
 <form onsubmit="saveClass(event)"><input type="hidden" id="classId"><div class="form-grid"><div class="field"><label>Nama Kelas *</label><input id="className" required placeholder="Contoh: VII A"></div><div class="field"><label>Wali Kelas</label><input id="homeroom"></div><div class="field"><label>No. WhatsApp Wali Kelas</label><input id="homeroomPhone" placeholder="Contoh: 081234567890" inputmode="tel"></div></div><div class="actions"><button type="button" class="btn btn-secondary" onclick="closeModal('classModal')">Batal</button><button class="btn btn-primary">Simpan</button></div></form></div></div>
 
 <div id="syncPill" onclick="kickSync()" style="display:none;position:fixed;right:12px;bottom:12px;z-index:60;max-width:70vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#fff;border:1px solid var(--border,#e2e8f0);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.15);cursor:pointer" title="Status sinkron cloud"></div>
+<script>
+/* Pemuat modul PDF (jsPDF + AutoTable) — dengan cadangan CDN */
+var _pdfP;
+function _loadScriptOnce(urls){
+  return new Promise(function(ok,no){
+    var i=0;
+    (function next(){
+      if(i>=urls.length)return no(new Error('gagal'));
+      var t=document.createElement('script');
+      t.src=urls[i++];
+      t.onload=ok;
+      t.onerror=function(){t.remove();next()};
+      document.head.appendChild(t);
+    })();
+  });
+}
+function loadPDF(){
+  if(window.jspdf&&window.jspdf.jsPDF&&window.jspdf.jsPDF.API&&window.jspdf.jsPDF.API.autoTable)return Promise.resolve();
+  if(_pdfP)return _pdfP;
+  _pdfP=_loadScriptOnce([
+    'lib/jspdf.umd.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js',
+    'https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js'
+  ]).then(function(){
+    return _loadScriptOnce([
+      'lib/jspdf.plugin.autotable.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js',
+      'https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js',
+      'https://unpkg.com/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js'
+    ]);
+  }).catch(function(e){_pdfP=null;throw e});
+  return _pdfP;
+}
+(function(){var g=function(){loadPDF().catch(function(){})};window.addEventListener("load",function(){setTimeout(g,1500)});document.addEventListener("pointerdown",g,{once:true,passive:true})})();
+</script>
 <script>var _xl;function loadXLSX(){return _xl||(_xl=new Promise(function(ok,no){var t=document.createElement("script");t.src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js";t.onload=ok;t.onerror=function(){_xl=null;no()};document.head.appendChild(t)}))}
 (function(){var g=function(){if(!window.XLSX)loadXLSX().catch(function(){})};window.addEventListener("load",function(){setTimeout(g,2500)});document.addEventListener("pointerdown",g,{once:true,passive:true})})();</script>
 <script>
@@ -2274,7 +2310,7 @@ async function shareOrDownloadPdf(file, phoneNumber, captionText) {
   showWaInstructionDialog(file.name, waUrl);
 }
 async function buildNoticeDoc(title,bodyText){
-  const doc=newJsPDF('portrait','a4');
+  const doc=await newJsPDF('portrait','a4');
   if(!doc)return null;
   const pageWidth=doc.internal.pageSize.getWidth(),pageHeight=doc.internal.pageSize.getHeight();
   const marginLeft=20,marginRight=20;
@@ -2816,7 +2852,7 @@ async function buildIndividualDoc(){
   {const _c=indivCount(dates,s);x.H=_c.H;x.S=_c.S;x.I=_c.I;x.A=_c.A;x.B=_c.B}
   const total=x.H+x.S+x.I+x.A+x.B, pct=total?Math.round(100-((x.A+x.B)/total*100)):0;
   const periodName=_individualReportData?.periodName||'';
-  const doc=newJsPDF('portrait','a4');
+  const doc=await newJsPDF('portrait','a4');
   if(!doc)return null;
   const pageWidth=doc.internal.pageSize.getWidth(),pageHeight=doc.internal.pageSize.getHeight();
   const marginLeft=15,marginRight=15;
@@ -3128,8 +3164,9 @@ function exportSemesterExcel(){
    dan Laporan Individu. Hasilnya langsung terunduh sebagai
    file .pdf, tidak lagi lewat dialog print browser.
    ============================================================ */
-function newJsPDF(orientation,format){
-  if(!window.jspdf||!window.jspdf.jsPDF){alert('Modul PDF belum termuat. Pastikan koneksi internet aktif, lalu coba lagi.');return null;}
+async function newJsPDF(orientation,format){
+  try{await loadPDF()}catch(e){}
+  if(!window.jspdf||!window.jspdf.jsPDF||!window.jspdf.jsPDF.API||!window.jspdf.jsPDF.API.autoTable){alert('Modul PDF belum termuat. Pastikan koneksi internet aktif, lalu coba lagi.');return null;}
   const {jsPDF}=window.jspdf;
   return new jsPDF({orientation,unit:'mm',format});
 }
@@ -3232,7 +3269,7 @@ async function buildRecapDoc(type){
     rows=[['No','NIS','Nama','Kelas','Hadir','Sakit','Izin','Alpa','Bolos','Total','Skor Ketidak hadiran','Persentase Hadir','No. WA Wali Kelas'],...semesterRowsForExport().map((r,i)=>[i+1,...r])];
     fileBase=`rekap_semester_${term}_${y}`;
   }
-  const doc=newJsPDF('landscape','a4');
+  const doc=await newJsPDF('landscape','a4');
   if(!doc)return null;
   const pageWidth=doc.internal.pageSize.getWidth(),pageHeight=doc.internal.pageSize.getHeight();
   const marginLeft=12,marginRight=12;
@@ -3687,7 +3724,7 @@ async function printGridReport() {
     return row;
   });
   const fmt = nonSunDates.length>20?'a3':'a4';
-  const doc = newJsPDF('landscape', fmt);
+  const doc = await newJsPDF('landscape', fmt);
   if(!doc)return;
   const pageWidth=doc.internal.pageSize.getWidth(), pageHeight=doc.internal.pageSize.getHeight();
   const marginLeft=10, marginRight=10;
@@ -3781,7 +3818,7 @@ async function sendWaGridRecapClass() {
 
   // ===== BUAT PDF GRID =====
   const fmt = nonSunDates.length > 20 ? 'a3' : 'a4';
-  const doc = newJsPDF('landscape', fmt);
+  const doc = await newJsPDF('landscape', fmt);
   if (!doc) return;
 
   const pageWidth = doc.internal.pageSize.getWidth();
