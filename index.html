@@ -721,10 +721,46 @@ body.grid-full #monthlyGrid .grid-wrap{max-height:calc(100vh - 170px)}
       <h1>Absensi kehadiran siswa.</h1>
       <p>Absensi harian dan bulanan, rekap otomatis, dari HP maupun laptop.</p>
     </div>
-    <div class="lg-sheet lg-in" style="--i:2" aria-hidden="true">
-      <div class="lg-sheet-head"><span>Absensi bulan ini</span><span class="lg-live"><i class="lg-dot"></i>Rekap otomatis</span></div>
-      <div class="lg-grid"><div class="lg-row r0"><span></span><span class="lg-d">1</span><span class="lg-d">2</span><span class="lg-d">3</span><span class="lg-d">4</span><span class="lg-d">5</span><span class="lg-d">6</span><span class="lg-d">7</span><span class="lg-d">8</span></div><div class="lg-row r1"><span class="lg-n" style="--w:68%"></span><i class="lg-c lg-h" style="--d:1.0s"></i><i class="lg-c lg-h" style="--d:1.17s"></i><i class="lg-c lg-h" style="--d:1.34s"></i><i class="lg-c lg-h" style="--d:1.51s"></i><i class="lg-c lg-s" style="--d:1.68s"></i><i class="lg-c lg-h" style="--d:1.85s"></i><i class="lg-c lg-h" style="--d:2.02s"></i><i class="lg-c lg-h" style="--d:2.19s"></i></div><div class="lg-row r2"><span class="lg-n" style="--w:82%"></span><i class="lg-c lg-h" style="--d:1.3s"></i><i class="lg-c lg-h" style="--d:1.47s"></i><i class="lg-c lg-i" style="--d:1.64s"></i><i class="lg-c lg-h" style="--d:1.81s"></i><i class="lg-c lg-h" style="--d:1.98s"></i><i class="lg-c lg-h" style="--d:2.15s"></i><i class="lg-c lg-h" style="--d:2.32s"></i><i class="lg-c lg-a" style="--d:2.49s"></i></div><div class="lg-row r3"><span class="lg-n" style="--w:58%"></span><i class="lg-c lg-h" style="--d:1.6s"></i><i class="lg-c lg-s" style="--d:1.77s"></i><i class="lg-c lg-h" style="--d:1.94s"></i><i class="lg-c lg-h" style="--d:2.11s"></i><i class="lg-c lg-h" style="--d:2.28s"></i><i class="lg-c lg-h" style="--d:2.45s"></i><i class="lg-c lg-i" style="--d:2.62s"></i><i class="lg-c lg-h" style="--d:2.79s"></i></div><div class="lg-row r4"><span class="lg-n" style="--w:76%"></span><i class="lg-c lg-h" style="--d:1.9s"></i><i class="lg-c lg-h" style="--d:2.07s"></i><i class="lg-c lg-h" style="--d:2.24s"></i><i class="lg-c lg-a" style="--d:2.41s"></i><i class="lg-c lg-h" style="--d:2.58s"></i><i class="lg-c lg-h" style="--d:2.75s"></i><i class="lg-c lg-h" style="--d:2.92s"></i><i class="lg-c lg-h" style="--d:3.09s"></i></div><div class="lg-row r5"><span class="lg-n" style="--w:64%"></span><i class="lg-c lg-h" style="--d:2.2s"></i><i class="lg-c lg-h" style="--d:2.37s"></i><i class="lg-c lg-h" style="--d:2.54s"></i><i class="lg-c lg-h" style="--d:2.71s"></i><i class="lg-c lg-h" style="--d:2.88s"></i><i class="lg-c lg-s" style="--d:3.05s"></i><i class="lg-c lg-h" style="--d:3.22s"></i><i class="lg-c lg-h" style="--d:3.39s"></i></div></div>
-      <div class="lg-legend"><span><i class="lg-k" style="--cb:#dcfce7;--cf:#166534">H</i>Hadir</span><span><i class="lg-k" style="--cb:#fef3c7;--cf:#92400e">S</i>Sakit</span><span><i class="lg-k" style="--cb:#dbeafe;--cf:#1e40af">I</i>Izin</span><span><i class="lg-k" style="--cb:#fee2e2;--cf:#991b1b">A</i>Alpa</span></div>
+    <div class="lg-stage lg-in" id="lgStage" style="--i:2" aria-hidden="true">
+      <div class="lg-clouds"></div><div class="lg-hills"></div><div class="lg-trees"></div>
+      <div class="lg-school" id="lgSchool"><div class="lg-school-in"><svg viewBox="0 0 140 120" aria-hidden="true">
+<line x1="70" y1="2" x2="70" y2="14" stroke="#64748b" stroke-width="1.6"/><path d="M70 2h13l-3 3.5 3 3.5H70z" fill="#dc2626"/>
+<polygon points="8,42 70,12 132,42" fill="#c2410c"/><polygon points="8,42 70,12 132,42" fill="none" stroke="#9a3412" stroke-width="1.4"/>
+<rect x="14" y="42" width="112" height="76" fill="#fef3c7" stroke="#e5d9a8"/>
+<rect x="44" y="46" width="52" height="11" rx="2" fill="#0284c7"/><text x="70" y="54.6" text-anchor="middle" font-size="7" font-weight="800" fill="#fff" font-family="Arial,sans-serif">SEKOLAH</text>
+<g fill="#7dd3fc" stroke="#0369a1" stroke-width="1.2"><rect x="24" y="64" width="22" height="22"/><rect x="94" y="64" width="22" height="22"/></g>
+<g stroke="#0369a1" stroke-width="1"><path d="M35 64V86M24 75H46M105 64V86M94 75H116"/></g>
+<defs><linearGradient id="lgGlow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fef08a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs>
+<rect x="55" y="68" width="30" height="50" fill="url(#lgGlow)"/>
+<g class="lg-leaf"><rect x="55" y="68" width="30" height="50" fill="#92400e" stroke="#5b2a0a" stroke-width="1.2"/><rect x="60" y="74" width="20" height="16" rx="1.5" fill="#a85a1c"/><circle cx="80" cy="95" r="1.8" fill="#fbbf24"/></g>
+<rect x="50" y="116" width="40" height="4" fill="#cbd5e1"/></svg></div></div>
+      <div class="lg-ground"><div class="lg-grass"></div><div class="lg-walk"></div></div>
+      <div class="lg-teacher" id="lgTeacher"><span class="lg-bubble ok">Selamat datang!</span><span class="lg-bubble bad">Coba lagi ya…</span><svg class="lg-walker" viewBox="0 0 120 214" aria-hidden="true">
+<ellipse cx="62" cy="208" rx="30" ry="4.5" fill="rgba(15,23,42,.22)"/>
+<g class="lg-body">
+ <g class="lg-arm far"><rect x="55.5" y="64" width="9" height="52" rx="4.5" fill="#141d38"/><rect x="56" y="111.5" width="8" height="4.5" fill="#e2e8f0"/><circle cx="60" cy="122" r="4.8" fill="#cf9a70"/></g>
+ <g class="lg-thigh far"><rect x="52" y="114" width="15" height="48" rx="7" fill="#121a30"/><g class="lg-shin"><rect x="53.5" y="154" width="12" height="44" rx="5.5" fill="#121a30"/><path d="M51 196H66Q76 197 79 203Q80 207 76 207H51Q49 207 49 204Z" fill="#05070d"/></g></g>
+ <g class="lg-thigh near"><rect x="52" y="114" width="15" height="48" rx="7" fill="#1f2d54"/><g class="lg-shin"><rect x="53.5" y="154" width="12" height="44" rx="5.5" fill="#1f2d54"/><path d="M51 196H66Q76 197 79 203Q80 207 76 207H51Q49 207 49 204Z" fill="#0b0f1a"/><path d="M60 198Q70 199 75 203" stroke="#4b5563" stroke-width="1.2" fill="none" stroke-linecap="round"/></g></g>
+ <rect x="55" y="42" width="11" height="18" rx="4" fill="#d9a77c"/>
+ <path d="M44 62Q44 56 52 55H70Q78 56 78 62L77 124Q60 130 43 124Z" fill="#26376a"/>
+ <path d="M64 55L75 56L77 63L71 96L62 78Z" fill="#f8fafc"/>
+ <path d="M63 55L56 80L70 98L72 82L66 62Z" fill="#1a2750"/>
+ <path d="M68.5 62L73 62.5L72 66L74.5 86L70 92L65.5 86L68 66Z" fill="#c81e1e"/>
+ <path d="M49 77l7-1.5v3.5h-7z" fill="#fff"/>
+ <circle cx="60" cy="104" r="1.8" fill="#0f1a3a"/><circle cx="60" cy="114" r="1.8" fill="#0f1a3a"/>
+ <ellipse cx="62" cy="30" rx="15" ry="17" fill="#e7b98f"/>
+ <path d="M47 29Q45 9 62 10Q79 10 77 25Q72 17 62 18Q54 18 52 30Q51 34 47 29Z" fill="#1b1410"/>
+ <ellipse cx="55" cy="32" rx="3" ry="4" fill="#d39a6e"/>
+ <circle cx="70" cy="29" r="5.2" fill="rgba(255,255,255,.4)" stroke="#111827" stroke-width="1.4"/>
+ <path d="M64.8 28.5L56 27" stroke="#111827" stroke-width="1.3" fill="none"/>
+ <circle cx="71" cy="29" r="1.4" fill="#111827"/>
+ <path d="M66 22.5Q70 20.5 74 22.5" stroke="#1b1410" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+ <path d="M77 31Q81 34 77 36" stroke="#c98d63" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+ <path d="M68 40Q72 43 76 40" stroke="#8a3f30" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+ <g class="lg-arm near"><rect x="55.5" y="64" width="9" height="52" rx="4.5" fill="#2d4180"/><rect x="56" y="111.5" width="8" height="4.5" fill="#f8fafc"/>
+  <g class="lg-case"><path d="M52 134V130Q52 124 60 124Q68 124 68 130V134" stroke="#4a2c12" stroke-width="2.6" fill="none"/><rect x="38" y="134" width="44" height="28" rx="3.5" fill="#8a5126" stroke="#4a2c12" stroke-width="1.5"/><path d="M38 143H82" stroke="#4a2c12" stroke-width="1.2"/><rect x="56" y="140.5" width="8" height="5" rx="1" fill="#fbbf24"/><rect x="42" y="148" width="5" height="10" rx="1" fill="#a2672f" opacity=".6"/></g>
+  <circle cx="60" cy="122" r="4.8" fill="#e7b98f"/></g>
+</g></svg></div>
     </div>
   </section>
   <main class="lg-panel">
@@ -746,6 +782,69 @@ body.grid-full #monthlyGrid .grid-wrap{max-height:calc(100vh - 170px)}
   </main>
 </div>
 
+
+<style id="lgTeacherCSS">
+/* ===== LOGIN: guru berjas membawa koper berjalan, lalu masuk ke aplikasi ===== */
+#loginScreen .lg-stage{--sh:clamp(190px,30vh,250px);position:relative;width:min(100%,560px);height:var(--sh);border-radius:22px;overflow:hidden;background:linear-gradient(#a9dcfb,#e3f4ff 62%,#f4fbff);box-shadow:0 30px 60px -24px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.5)}
+#loginScreen .lg-clouds,#loginScreen .lg-hills,#loginScreen .lg-trees{position:absolute;left:0;right:0;background-repeat:repeat-x}
+#loginScreen .lg-clouds{top:8px;height:90px;background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22420%22 height=%2290%22%3E%3Cg fill=%22%23fff%22 opacity=%22.92%22%3E%3Cellipse cx=%2260%22 cy=%2240%22 rx=%2230%22 ry=%2211%22/%3E%3Cellipse cx=%2282%22 cy=%2233%22 rx=%2220%22 ry=%2211%22/%3E%3Cellipse cx=%22190%22 cy=%2258%22 rx=%2226%22 ry=%229%22/%3E%3Cellipse cx=%22208%22 cy=%2252%22 rx=%2216%22 ry=%229%22/%3E%3Cellipse cx=%22330%22 cy=%2230%22 rx=%2232%22 ry=%2211%22/%3E%3Cellipse cx=%22352%22 cy=%2224%22 rx=%2220%22 ry=%2210%22/%3E%3C/g%3E%3C/svg%3E");background-size:420px 90px;animation:lgScroll420 60s linear infinite}
+#loginScreen .lg-hills{bottom:44px;height:70px;background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22360%22 height=%2270%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 70V40Q45 8 90 36T180 30T270 38T360 34V70Z%22 fill=%22%23cfe9fb%22/%3E%3Cpath d=%22M0 70V54Q60 28 120 50T240 46T360 52V70Z%22 fill=%22%23b6dcf6%22/%3E%3C/svg%3E");background-size:360px 70px;background-position:bottom;animation:lgScroll360 14s linear infinite}
+#loginScreen .lg-trees{bottom:40px;height:64px;background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22240%22 height=%2264%22%3E%3Cg%3E%3Crect x=%2238%22 y=%2236%22 width=%225%22 height=%2228%22 fill=%22%2392643a%22/%3E%3Ccircle cx=%2240%22 cy=%2228%22 r=%2216%22 fill=%22%2334d399%22/%3E%3Ccircle cx=%2230%22 cy=%2236%22 r=%2210%22 fill=%22%236ee7b7%22/%3E%3Crect x=%22150%22 y=%2230%22 width=%225%22 height=%2234%22 fill=%22%2392643a%22/%3E%3Ccircle cx=%22152%22 cy=%2222%22 r=%2219%22 fill=%22%2334d399%22/%3E%3Ccircle cx=%22162%22 cy=%2232%22 r=%2211%22 fill=%22%236ee7b7%22/%3E%3Cellipse cx=%22100%22 cy=%2260%22 rx=%2216%22 ry=%228%22 fill=%22%234ade80%22/%3E%3Cellipse cx=%22206%22 cy=%2261%22 rx=%2212%22 ry=%226%22 fill=%22%234ade80%22/%3E%3C/g%3E%3C/svg%3E");background-size:240px 64px;background-position:bottom;animation:lgScroll240 4.2s linear infinite}
+#loginScreen .lg-ground{position:absolute;left:0;right:0;bottom:0;height:44px;background:#cbd5e1;z-index:2}
+#loginScreen .lg-grass{position:absolute;left:0;right:0;top:0;height:9px;background:#86efac;border-bottom:2px solid #4ade80}
+#loginScreen .lg-walk{position:absolute;left:0;right:0;top:11px;bottom:0;background-image:linear-gradient(90deg,#94a3b8 0 2px,transparent 2px);background-size:96px 100%;animation:lgScroll96 .9s linear infinite}
+#loginScreen .lg-school{position:absolute;right:3%;bottom:34px;height:calc(var(--sh)*.6);aspect-ratio:140/120;z-index:1}
+#loginScreen .lg-school-in{width:100%;height:100%;transform:translateX(170%)}
+#loginScreen .lg-school svg{width:100%;height:100%;display:block;overflow:visible}
+#loginScreen .lg-leaf{transform-origin:55px 68px}
+#loginScreen .lg-teacher{--step:1s;position:absolute;left:12%;bottom:15px;height:74%;aspect-ratio:120/214;z-index:3;transform-origin:50% 100%}
+#loginScreen .lg-walker{width:100%;height:100%;display:block;overflow:visible}
+#loginScreen .lg-body{animation:lgBob calc(var(--step)/2) ease-in-out infinite}
+#loginScreen .lg-thigh{transform-origin:60px 118px;animation:lgThigh var(--step) ease-in-out infinite}
+#loginScreen .lg-thigh.far{animation-delay:calc(var(--step)/-2)}
+#loginScreen .lg-shin{transform-origin:60px 158px;animation:lgShin var(--step) ease-in-out infinite}
+#loginScreen .lg-thigh.far .lg-shin{animation-delay:calc(var(--step)/-2)}
+#loginScreen .lg-arm{transform-origin:60px 66px}
+#loginScreen .lg-arm.far{animation:lgArmFar var(--step) ease-in-out infinite}
+#loginScreen .lg-arm.near{animation:lgArmNear var(--step) ease-in-out infinite}
+#loginScreen .lg-case{transform-origin:60px 122px;animation:lgCase var(--step) ease-in-out infinite}
+#loginScreen .lg-bubble{position:absolute;left:46%;bottom:96%;white-space:nowrap;padding:5px 11px;border-radius:12px 12px 12px 3px;background:#fff;color:#0f172a;font-size:11.5px;font-weight:800;box-shadow:0 6px 14px -6px rgba(0,0,0,.4);opacity:0;pointer-events:none}
+#loginScreen .lg-bubble.bad{color:#991b1b}
+@keyframes lgBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes lgThigh{0%,100%{transform:rotate(-26deg)}50%{transform:rotate(26deg)}}
+@keyframes lgShin{0%{transform:rotate(0)}40%{transform:rotate(3deg)}52%{transform:rotate(30deg)}75%{transform:rotate(62deg)}90%{transform:rotate(20deg)}100%{transform:rotate(0)}}
+@keyframes lgArmFar{0%,100%{transform:rotate(-22deg)}50%{transform:rotate(22deg)}}
+@keyframes lgArmNear{0%,100%{transform:rotate(9deg)}50%{transform:rotate(-9deg)}}
+@keyframes lgCase{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@keyframes lgScroll420{to{background-position-x:-420px}}
+@keyframes lgScroll360{to{background-position-x:-360px}}
+@keyframes lgScroll240{to{background-position-x:-240px}}
+@keyframes lgScroll96{to{background-position-x:-96px}}
+
+/* guru masuk ke aplikasi: sekolah datang, pintu terbuka, guru masuk, layar zoom ke pintu */
+#loginScreen.entering .lg-school-in{animation:lgSchoolIn 1s cubic-bezier(.2,.7,.2,1) both}
+#loginScreen.entering .lg-leaf{animation:lgDoorOpen .45s ease-out 1.25s both}
+#loginScreen.entering .lg-teacher{animation:lgGoDoor 1.65s linear .7s both}
+#loginScreen.entering .lg-bubble.ok{animation:lgBubble 1.7s ease .15s both}
+#loginScreen.arrived .lg-clouds,#loginScreen.arrived .lg-hills,#loginScreen.arrived .lg-trees,#loginScreen.arrived .lg-walk{animation-play-state:paused}
+#loginScreen.oops .lg-bubble.bad{animation:lgBubble 1.5s ease both}
+#loginScreen.leaving.zoom{animation:lgZoomOut .5s cubic-bezier(.5,0,.8,.4) both}
+@keyframes lgSchoolIn{from{transform:translateX(170%)}to{transform:translateX(0)}}
+@keyframes lgDoorOpen{to{transform:scaleX(.12)}}
+@keyframes lgGoDoor{0%{transform:translateX(0) scale(1);opacity:1}72%{transform:translateX(var(--dx,0px)) scale(1);opacity:1}100%{transform:translateX(var(--dx,0px)) scale(.55);opacity:0}}
+@keyframes lgBubble{0%{opacity:0;transform:translateY(6px) scale(.9)}12%,78%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-4px)}}
+@keyframes lgZoomOut{to{opacity:0;transform:scale(2.6)}}
+@media(prefers-reduced-motion:reduce){
+  #loginScreen .lg-stage *{animation:none!important}
+  #loginScreen .lg-school-in{transform:none}
+}
+@media(max-width:860px){
+  #loginScreen .lg-stage{--sh:168px;width:100%}
+  #loginScreen .lg-teacher{height:66%;left:10%}
+  #loginScreen .lg-bubble{font-size:10.5px;padding:4px 9px}
+}
+@media(max-width:860px) and (max-height:620px){#loginScreen .lg-stage{--sh:132px}}
+</style>
 <div class="app-topbar" id="appTopbar">
   <button class="hamburger" id="drawerBtn" onclick="toggleDrawer()" aria-label="Buka menu"><span></span><span></span><span></span></button>
   <span class="topbar-logo" id="topbarLogoBadge"><svg class="ic" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-.18em" aria-hidden="true"><path d="M12 6.8c-1.7-1.3-3.9-1.9-6.5-1.7v12.6c2.6-.2 4.8.4 6.5 1.7 1.7-1.3 3.9-1.9 6.5-1.7V5.1c-2.6-.2-4.8.4-6.5 1.7Z"/><path d="M12 6.8v12.6"/></svg></span>
@@ -4655,16 +4754,41 @@ initSidebar();
     var ok=authCheck($$('loginUsername').value.trim(),$$('loginPassword').value);
     btn.classList.add('loading');btn.disabled=true;
     setTimeout(function(){
-      btn.classList.remove('loading');btn.disabled=false;
+      btn.classList.remove('loading');
       if(ok){
-        scr.classList.add('leaving');
-        setTimeout(function(){_la(fake);scr.classList.remove('leaving')},380);
+        enterApp(btn);
       }else{
+        btn.disabled=false;
         _la(fake);
         card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');
+        scr.classList.remove('oops');void scr.offsetWidth;scr.classList.add('oops');
+        setTimeout(function(){scr.classList.remove('oops')},1600);
       }
     },480);
   };
+  /* guru berjas membawa koper berjalan ke pintu sekolah, masuk, lalu layar zoom ke pintu = masuk aplikasi */
+  function enterApp(btn){
+    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var teacher=$$('lgTeacher'),school=$$('lgSchool');
+    function finish(zoom){
+      scr.classList.add('leaving');if(zoom)scr.classList.add('zoom');
+      setTimeout(function(){
+        _la(fake);
+        scr.classList.remove('leaving','zoom','entering','arrived','oops');
+        scr.style.transformOrigin='';
+        if(teacher)teacher.style.removeProperty('--dx');
+        btn.disabled=false;
+      },zoom?520:380);
+    }
+    if(reduce||!teacher||!school||getComputedStyle(scr).display==='none'){finish(false);return}
+    var tr=teacher.getBoundingClientRect(),sr=school.getBoundingClientRect();
+    var dx=(sr.left+sr.width*0.5)-(tr.left+tr.width*0.5);
+    teacher.style.setProperty('--dx',dx+'px');
+    scr.style.transformOrigin=(sr.left+sr.width*0.5)+'px '+(sr.top+sr.height*0.8)+'px';
+    scr.classList.add('entering');
+    setTimeout(function(){scr.classList.add('arrived')},1000);
+    setTimeout(function(){finish(true)},2420);
+  }
   var pw=$$('loginPassword'),caps=$$('loginCaps');
   function capsCheck(ev){if(!ev.getModifierState)return;caps.classList.toggle('show',ev.getModifierState('CapsLock'))}
   pw.addEventListener('keydown',capsCheck);pw.addEventListener('keyup',capsCheck);
